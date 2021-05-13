@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	  <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <link rel="stylesheet" href="/css/styles5.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+    <script src="/js/lgres.js" defer></script>
+    <script src="/js/product.js" defer></script>
+    <script src="/js/slider.js" defer></script>
+    <script src="/js/index.js" defer></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script> 
+    <title>Account</title>
+</head>
+<body>
+  <nav class="navi"> 
+    <!--menu-bar----------------------------------------->
+    <div class="navigation">
+      <!--logo------------>
+      <a href="/" class="logo"><img src="/images/logo12.png"></a>
+      <!--menu-icon------------->
+      <div class="toggle"></div>
+      <!--menu----------------->
+      <ul class="menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/allproduct" class="nav-link">Store</a>
+        </li>
+
+      </ul>
+      <!--right-menu----------->
+      <div class="right-menu">
+       
+        <a href=""><%= name %></a>
+        <a href="/account" class="user">
+          <i class="far fa-user"></i>
+        </a>
+        <a href="javascript:void(0);" class="search">
+         <i class="fas fa-search"></i>
+       </a>
+        <a href="/totalproduct">
+          <i class="fas fa-shopping-cart">
+            <span class="num-cart-product"><%= amountcart %></span>
+          </i>
+        </a>
+      </div>
+      </div>
+    </nav>
+    <!--search-bar----------------------------------->
+   
+  <form action="/search" method="POST">
+    <div class="search-bar">
+       
+      <!--search-input------->
+      <div class="search-input">
+      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <button class="btnsearch" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+      <!--cancel-btn--->
+      <a href="javascript:void(0);" class="search-cancel">
+        <i class="fas fa-times"></i>
+      </a>
+    
+    </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-2">
+      <img style="width: 600px; margin-top: 100px;" src="/images/account2.png" alt="">
+
+    </div>
+    <div class="col-2">
+      <div style="margin-right: 250px; " class="wrapper">
+        <div style="margin-bottom: -45px;">
+          <h3 style="margin-top: -20px;">Register</h3>
+        </div>
+        <form action="/register" method="POST">
+        <div class="login is-active">
+          <div class="form-element">
+            <span><i class="fas fa-user"></i></span><input type="text" name="username" placeholder="username" required/>
+          </div>
+          <div class="form-element">
+            <span><i class="fas fa-envelope"></i></span><input type="email" name="email" placeholder="email" required/>
+          </div>
+          <div class="form-element">
+            <span><i class="fa fa-lock"></i></span><input type="password" name="password" placeholder="password" required/>
+          </div>
+          <button style="margin-bottom: 20px;" class="btn-login purchase">register</button>
+          <p style="margin-top: -15px; margin-bottom: 20px; color: black; font-size: 10px; letter-spacing: 1px;">Your already have an account <a style="color: blue" class="account" href="/account/login">Login</a> </p>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

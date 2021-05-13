@@ -1,0 +1,450 @@
+
+.card-wrapper{
+    font-family: 'Cabin', sans-serif;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border: #D6D3D3 solid 1px;
+    background: linear-gradient(45deg,white 82%,transparent 18%),url(https://img5.goodfon.com/wallpaper/nbig/5/36/vino-probki-bokaly-butylki.jpg);
+    max-width: 1100px;
+    max-height: 500px;
+    margin: 40px auto;
+}
+.card-wrapper1{
+    padding: 5px 10px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border: #D6D3D3 solid 1px;
+      max-width: 1200px;
+      max-height: 650px;
+      margin-top: -10px;
+      margin: 30px 170px;
+  }
+.img-display{
+    overflow: hidden;
+}
+.img-showcase{
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    height: 400px;
+    transition: all 0.5s ease;
+}
+.img-showcase img{
+    min-width: 100%;
+}
+.img-select{
+    display: flex;
+}
+.img-item{
+    margin: 0.3rem;
+}
+.img-item:nth-child(1),
+.img-item:nth-child(2),
+.img-item:nth-child(3){
+    margin-right: 0;
+}
+.img-item:hover{
+    opacity: 0.8;
+}
+.product-content{
+    margin-top: 0px;
+    padding: 5rem 1rem;
+}
+.product-title{
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+    color: #12263a;
+    margin-bottom: 20px;
+    margin-top: 80px;
+}
+
+.product-link{
+    margin-top: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: black;
+    text-decoration:underline;
+    padding: 0 0.3rem;
+    transition: all 0.5s ease;
+}
+.product-link:hover{
+    color: red;
+    opacity: 0.9;
+}
+.product-rating{
+    color: #ffc107;
+}
+.product-rating span{
+    font-weight: 200;
+    color: #252525;
+}
+.product-price{
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.product-price span{
+    font-weight: 400;
+}
+.last-price span{
+    color: #f64749;
+    text-decoration: line-through;
+}
+.new-price span{
+    color: #256eff;
+}
+
+.product-detail{
+
+    max-width: 400px;
+}
+
+.product-detail h2{
+    text-transform: capitalize;
+    color: #12263a;
+    font-size: 18px;
+}
+
+.product-detail h3{
+    text-transform: capitalize;
+    color: #6E6C6C;
+    font-size: 18px;
+}
+
+.product-detail h4{
+    text-transform: capitalize;
+    color: #6E6C6C;
+    font-size: 18px;
+}
+
+.product-detail p{
+    color: black;
+    font-size: 1.3rem;
+    padding: 0.3rem;
+    opacity: 0.8;
+}
+.product-detail ul{
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+.product-detail ul li{
+    margin: 0;
+    list-style: none;
+    background: url(shoes_images/checked.png) left center no-repeat;
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+.product-detail ul li span{
+    font-weight: 400;
+}
+.product-detail .price{
+    font-size: 25px;
+
+}
+.purchase-info{
+    margin-top: 0px;
+}
+.purchase-info input
+{
+    display: block;
+    border: 1.5px solid #ddd;
+    text-align: center;
+    padding: 0.5rem 0.3rem;
+    outline: 0;
+    margin-right: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.purchase-info input{
+    width: 60px;
+    height: 30px;
+}
+
+
+  .search-container1{
+      margin-top: -25px;
+
+  }
+
+.card1{
+    margin-top: -35%;
+    margin-bottom: -30%;
+}
+
+@media screen and (min-width: 992px){
+    .card1{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5rem;
+    }
+    .card-wrapper{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-imgs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .product-content{
+        padding-top: 0;
+    }
+}
+/*comment*/
+
+.comment-form{  
+    margin-top: 20px;
+    max-width: 1000px;
+    margin-left: 65px;
+}
+
+
+.comment-form .form{ margin-left: 100px; }
+
+.comment-form .form .form-row{ 
+    margin-bottom: 10px; 
+    font-size: 10px;
+ }
+.comment-form .form .form-row:last-child{ margin-bottom: 0; }
+
+.comment-form .form .input{
+  background-color: #fcfcfc;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+  color: #555f77;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 5px 10px;
+  outline: none;
+  width: 100%;
+
+  -webkit-transition: 350ms box-shadow;
+  -moz-transition: 350ms box-shadow;
+  -ms-transition: 350ms box-shadow;
+  -o-transition: 350ms box-shadow;
+  transition: 350ms box-shadow;
+}
+
+.comment-form .form textarea.input{
+  height: 100px;
+  padding: 15px;
+}
+
+.comment-form .form label{
+  color: #555f77;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.comment-form .form input[type=submit]{
+  background-color: #555f77;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  outline: none;
+  padding: 6px 15px;
+
+  -webkit-transition: 350ms box-shadow;
+  -moz-transition: 350ms box-shadow;
+  -ms-transition: 350ms box-shadow;
+  -o-transition: 350ms box-shadow;
+  transition: 350ms box-shadow;
+}
+
+.comment-form .form .input:focus,
+.comment-form .form input[type=submit]:focus,
+.comment-form .form input[type=submit]:hover{
+  box-shadow: 0 2px 6px rgba(121, 137, 148, .55);
+}
+
+.comment-form .form.ng-submitted .input.ng-invalid,
+.comment-form .form .input.ng-dirty.ng-invalid{
+  box-shadow: 0 2px 6px rgba(212, 47, 47, .55) !important;
+}
+
+.comment-form .form .input.disabled {
+    background-color: #E8E8E8;
+}
+
+.comment{
+    width: 60%;
+    margin-top: 20px;
+}
+
+.comment-box1{
+    margin-left: -500px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    width: 500px;
+}
+
+.comment-box1 textarea{
+    width: 200%;
+    height: 50px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border: #D6D3D3 solid 1px;
+    border-radius: 10px;
+  
+}
+.comment-box1 textarea:focus{
+    border: #D6D3D3 solid 1px;
+    border-radius: 10px;
+    outline: 0;
+
+}
+
+.comment-box1 button{
+    border: 0;
+    padding: 10px 30px;
+    background: rgb(202, 179, 134);
+    font-size: 10px;
+    color: black;
+    max-height: 25px;
+}
+
+.comment-box1 button:hover{
+    box-shadow: 0 0 12px rgba(22, 22, 22, 2.7) inset;
+    
+  }
+
+  .comment-box{
+    background-color: #fcfcfc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+    margin-left: 170px;
+    min-height: 60px;
+    max-width: 800px;
+    position: relative;
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+
+.comment-box:before,
+.comment-box:after{
+  /* border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent #FCFCFC;
+  content: "";
+  left: -10px;
+  position: absolute;
+  top: 20px; */
+}
+
+.comment-box:before{
+  border-color: transparent rgba(0, 0, 0, .05);
+   top: 22px;
+}
+
+.comment-text{
+  color: #555f77;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.comment-footer{
+    color: #acb4c2;
+    font-size: 13px;
+  }
+  
+.comment-footer:after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+ .comment-footer a{
+    color: #acb4c2;
+    text-decoration: none;
+  
+    -webkit-transition: 350ms color;
+    -moz-transition: 350ms color;
+    -ms-transition: 350ms color;
+    -o-transition: 350ms color;
+    transition: 350ms color;
+  }
+  
+ .comment-footer a:hover{
+    color: #555f77;
+    text-decoration: underline;
+  }
+  
+  .comment-info{
+      color: black;
+    float: left;
+    width: 85%;
+  }
+  
+  
+  .comment-date:before{
+    content: "|";
+    margin: 0 10px;
+  }
+  
+  .comment-actions{
+    float: left;
+    text-align: right;
+    width: 15%;
+  }
+
+  .comment{
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 0;
+  }
+  
+  .comment-form .comment-avatar,
+  .comment .comment-avatar{
+    border: 2px solid #fff;
+    border-radius: 0%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    height: 50px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    margin-left: 170px;
+  }
+  
+  .comment-form .comment-avatar img,
+  .comment .comment-avatar img{
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .no-comment{
+      margin-left: 500px;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin-bottom: 30px;
+      margin-top: 20px;
+      color: gray;
+  }
+
+  .no-stock{
+      margin-top: 10px;
+      color: rgb(114, 6, 6);
+      margin-left: 10px;
+  }
+  
+  

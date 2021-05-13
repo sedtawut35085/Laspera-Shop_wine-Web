@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+   
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles1.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+    <script src="./js/product.js" defer></script>
+    <script src="./js/slider.js" defer></script>
+    <script src="./js/index.js" defer></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
+    <title><%= product.name %> - Laespela</title>
+</head>
+<body>
+  <nav class="navi"> 
+    <!--menu-bar----------------------------------------->
+    <div class="navigation">
+      <!--logo------------>
+      <a href="/" class="logo"><img src="/images/logo12.png"></a>
+      <!--menu-icon------------->
+      <div class="toggle"></div>
+      <!--menu----------------->
+      <% if(name == '') { %> 
+        <ul style="margin-left: -5%;" class="menu">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/allproduct" class="nav-link">Store</a>
+          </li>
+        </ul>
+        <%  }else{ %> 
+        <ul class="menu">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/allproduct" class="nav-link">Store</a>
+          </li>
+        </ul>
+        
+        <%  } %> 
+      
+      <!--right-menu----------->
+      <div class="right-menu">
+       
+        <a href=""><%= name %></a>
+        <a href="/account" class="user">
+          <i class="far fa-user"></i>
+        </a>
+        <a href="javascript:void(0);" class="search">
+         <i class="fas fa-search"></i>
+       </a>
+        <a href="/totalproduct">
+          <i class="fas fa-shopping-cart">
+            <span class="num-cart-product"><%= amountcart %></span>
+          </i>
+        </a>
+      </div>
+      </div>
+    </nav>
+    <!--search-bar----------------------------------->
+   
+  <form action="/search" method="POST">
+    <div class="search-bar">
+       
+      <!--search-input------->
+      <div class="search-input">
+      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <!--cancel-btn--->
+      <button class="btnsearch" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+      <a href="javascript:void(0);" class="search-cancel">
+        <i class="fas fa-times"></i>
+      </a>
+    
+    </div>
+    </div>
+  </form>
+
+      <main>
+        <!-- <section class="home" id="home">
+            <div class="home-slider owl-carousel">
+
+                <div class="item">
+                    <img src="images/bg42.jpeg" alt="">
+                    <div class="content">
+                        <h3>WINE PRODUCTS</h3>
+                        <p>"Choose what's right for you or for a gift to someone"</p>
+                
+                    </div>
+                </div>
+            </div>
+            </section> -->
+            <section style="margin-top: 10px; margin-bottom: -20px;" class="services">
+                <div class="services-box">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Free Shipping</span>
+                    <p>For all order over 100$</p>
+                </div>
+                <div class="services-box">
+                    <i class="fas fa-headphones-alt"></i>
+                    <span>Support 24/7</span>
+                    <p>We support 24h a day</p>
+                </div>
+                <div class="services-box">
+                    <i class="fas fa-sync"></i>
+                    <span>100% Money Back</span>
+                    <p>You have 30 days to Return</p>
+                </div>              
+            </section>
+            
+              <!-- <div class="ui small stackable images "> -->
+              
+                  <form action="/addcart?id=<%= product.name %>" method="POST">
+                    <div class = "card-wrapper">
+                      <div class = "card1">
+                        <div class = "product-imgs">
+                          <div class = "img-display">
+                            <div class = "img-showcase">
+                              <img class="shop-item-image" src = "<%= product.coverImagePath %>" alt = "shoe image">
+                            </div>
+                          </div>
+                        </div>
+                      <div style="margin-left: -8%; font-size: 28px;" class = "product-content">
+                          <h2 style="margin-left: -6px;" class = "shop-item-title"><%= product.name %></h2>
+                          <div class = "product-detail">
+                           
+                            <div style="margin-bottom: 13px; font-size: 16px; margin-left: -5px;" class = "product-rating">
+                              <i class = "fas fa-star"></i>
+                              <i class = "fas fa-star"></i>
+                              <i class = "fas fa-star"></i>
+                              <i class = "fas fa-star"></i>
+                              <i class = "fas fa-star"></i>
+                            </div>
+                            <div class="row">
+                              <div style="margin-left: -82px;">
+                                <h4>Category <span style="font-size: 12px; color: #0a0a0a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h4>
+                              </div>                       
+                            </div>
+                          </div>
+                            <div style="margin-left: -12%;" class = "product-detail row">
+                              <div style="margin-top: 10px; margin-bottom: 15px;">
+                                <h3>Price <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.price %> $</span></h3>
+                              </div>
+                           
+                            </div>
+                        <% if(product.quantity != 0){ %>
+                        <div style="margin-left: -10%;" class="row">
+                          <div class = "purchase-info col">
+                            <input style="font-size: 15px; color: black;" name="quantity" type = "number" min = "1" max = "<%= product.quantity %>" value = "1">                           
+                          </div>
+                          <div class = "product-detail col">
+                            <h5 style="margin-left: -55%; color: rgb(114, 112, 112); margin-bottom: 10px; font-size: 12px;">Number of stock : <%= product.quantity %></h5>       
+                          </div>
+                         </div>
+                          <div style="margin-top: 10px;">
+                              <button type = "submit" class = "btn3 shop-item-button">
+                                <i class = "fas fa-shopping-cart"></i> &nbsp; Add to Cart 
+                                </button>
+                          </div>
+                          <% }else{ %>
+                            <div>
+                              <p class="no-stock"> Out of stock &nbsp; <i style="font-size: 30px;" class="far fa-grin-tears"></i> </p>
+                            </div>
+                          <% } %>
+                          <a style="text-decoration: none;" href = "/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> visit all store click &nbsp;</span></a>
+                        </div>
+                      </div>
+                   </div> 
+                  </form>
+       
+      <div>
+        <div class="card-wrapper1">
+          <p>
+            <h4>Detail <i class="fas fa-info-circle"></i></h4>
+            <p style="font-size: 13px; padding: 10px 0px;"><%= product.detail %></p>  
+            <% if(product.aging != ''){ %>
+              <h5>Aging </h5>
+              <p style="font-size: 13px; padding: 10px 0px;"> <%= product.aging %></p>  
+            <% } %>
+            <h5>Brands </h5>
+            <p style="font-size: 13px; padding: 10px 0px;"> <%= product.brand %></p>  
+            <h5>Alcohol </h5>
+            <p style="font-size: 13px; padding: 10px 0px;"> <%= product.alcohol %> %</p>          
+            <% if(product.sweettaste != '-'){ %>
+            <h5>Taste Characteristics </h5>
+              <% if(product.sweettaste >= '5'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.sweettaste == '4'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.sweettaste == '3'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.sweettaste == '2'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.sweettaste == '1'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else { %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% } %>          
+            <% } %>
+            <% if(product.aciditytaste != '-'){ %>
+              <% if(product.aciditytaste >= '5'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.aciditytaste == '4'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.aciditytaste == '3'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.aciditytaste == '2'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.aciditytaste == '1'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else { %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% } %>       
+            <% } %>
+            <% if(product.bodytaste != '-'){ %>
+              <% if(product.bodytaste >= '5'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.bodytaste == '4'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.bodytaste == '3'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.bodytaste == '2'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.bodytaste == '1'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else { %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% } %>          
+            <% } %>
+            <% if(product.finishtaste != '-'){ %>
+              <% if(product.finishtaste >= '5'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.finishtaste == '4'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.finishtaste == '3'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.finishtaste == '2'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else if(product.finishtaste == '1'){ %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: #8d7129; margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% }else { %>
+                <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+              <% } %>         
+            <% } %>
+          </p>
+
+        </div>
+
+
+      </div>
+      <div style="margin-top: 5%;" class="new-arrival2">
+        <div class="arrival-heading">
+          <div class="row">
+            <div class="col2">
+              <div class="titleallpr2">
+                <strong>Comments</strong>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div class="comment-form">
+    <form class="form" action="/addcomment?id=<%= product._id %>" method="POST">
+      <div class="form-row">
+        <textarea
+           class="input form-control"
+           type="text" 
+           name='comment'
+           ng-model="cmntCtrl.comment.text"
+           placeholder="Add comment..."
+           required></textarea>
+      </div>
+      <div class="form-row">
+        <input type="submit" value="Add Comment">
+      </div>
+    </form>
+  </div>
+  <% if(product.comments) { %>
+    <!-- <div class="ui small stackable images "> -->
+   <% product.comments.forEach(m => { %>
+      <!-- Comment Box -->
+      <!-- Comment - Dummy -->
+    <div class="comment">   
+      <!-- Comment Avatar -->
+      <!-- <div class="comment-avatar">
+        <% if(m.img == ""){ %>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvQEQCcjYH7AtTrajxOamNGbhLdHKohvYrid1g0EOSZEmhjWJpLZu4WKzRNVGl03y4aDc&usqp=CAU">
+        <% }else{ %>
+          <img src="<%= m.coverImagePath %>">
+          <% } %>
+      </div> -->
+      <!-- Comment Box -->
+      <div class="comment-box">
+        <div class="comment-text"><%= m.text %></div>
+        <div class="comment-footer">
+          <div class="comment-info">
+            <span class="comment-author">
+              <%= m.author.username %>
+            </span>
+            <span class="comment-date"><%= m.date %></span>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <% }) %>
+    <!-- </div> -->
+   <% } %> 
+
+
+   <% if(!product.comments.length) { %>
+    <p class="no-comment">No Comments &nbsp; <i style="font-size: 30px;" class="far fa-comments"></i> </p>
+   <% } %>
+      <section style="margin-top: 8%;" class="new-arrival">
+          <div class="arrival-heading">
+            <div class="row">
+              <div class="col2">
+                <div class="titleallpr2">
+                  <strong>Related Products</strong>
+                </div>              
+              </div>
+            </div>
+          </div>
+          <div class="product-container">
+            <% for(let i = 0; i < 4; i++){ %>
+            <form action="/oneproduct?id=<%= relateproduct[i]._id %>" method="GET">
+              <a href="/oneproduct?id=<%= relateproduct[i]._id%>">
+              <div class="product-box">
+                <div class="product-img">
+                  <!-- <a href="" class="add-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a> -->
+                  <img src="<%= relateproduct[i].coverImagePath %>" alt="" class="ui image" width="20%">
+                </div>
+                <div class="product-details">       
+                  <p class="product-name"><%=  relateproduct[i].name %></p>
+                  <span name="price" class="p-price">price : <%= relateproduct[i].price %> $</span>
+              </div>  
+              </div>    
+              </a> 
+            </form> 
+            <% } %>
+          </div>
+        </section>
+      </main>
+
+        
+
+          
+      <footer id="footer" class="section footer">
+        <div class="container">
+          <div class="footer-container">
+            <div class="footer-center">
+              <h3>EXTRAS</h3>
+              <a href="#">Brands</a>
+              <a href="#">Gift Certificates</a>
+              <a href="#">Specials</a>
+              <a href="#">Site Map</a>
+            </div>
+            <div class="footer-center">
+              <h3>INFORMATION</h3>
+              <a href="#">About Us</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms & Conditions</a>
+              <a href="#">Contact Us</a>
+              <a href="#">Site Map</a>
+            </div>
+            <div class="footer-center">
+              <h3>MY PROFILE</h3>
+              <a href="#">FB : Sedtawut chalothornnarumit</a>
+              <a href="#">IG : Aoystwr</a>
+              <a href="#">Twitter : Aoystwr</a>
+              <a href="#">LineID : aoybcc</a>
+            </div>
+            <div class="footer-center">
+              <h3>CONTACT US</h3>
+              <div>
+                <span>
+                  <i class="fas fa-map-marker-alt"></i>
+                </span>
+                123 Aoy House, Aoy street, Bangkok
+              </div>
+              <div>
+                <span>
+                  <i class="far fa-envelope"></i>
+                </span>
+                aoy35085@hotmail.com
+              </div>
+              <div>
+                <span>
+                  <i class="fas fa-phone"></i>
+                </span>
+                095-291-1766
+              </div>
+              <div>
+                <span>
+                  <i class="far fa-paper-plane"></i>
+                </span>
+                Aoy City, Bangkok
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </footer>
+    
+</body>
+</html>

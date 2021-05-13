@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+<link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/account.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+
+<script src="/js/product.js" defer></script>
+<script src="/js/slider.js" defer></script>
+<script src="/js/index.js" defer></script>
+  <!-- add to document <head> -->
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+
+  <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+      FilePond.registerPlugin(
+          FilePondPluginImageResize,
+          FilePondPluginImagePreview,
+          FilePondPluginFileEncode
+          );
+          FilePond.setOptions({
+              stylePanelAspectRatio: 150/100,
+              imageResizeTargetWidth: 100,
+              imageResizeTargetHeight: 150
+          })
+          FilePond.parse(document.body)
+  })
+</script>
+  <script
+    src="https://kit.fontawesome.com/64d58efce2.js"
+    crossorigin="anonymous"
+  ></script>   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+  <script src="js/lgres.js" defer></script>
+  <script src="js/product.js" defer></script>
+  <script src="js/slider.js" defer></script>
+  <script src="js/index.js" defer></script>
+  <script src="store.js" defer></script>
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script> 
+    <title>orders</title>
+</head>
+<body>
+  <nav class="navi"> 
+    <!--menu-bar----------------------------------------->
+    <div class="navigation">
+      <!--logo------------>
+      <a href="/" class="logo"><img src="/images/logo12.png"></a>
+      <!--menu-icon------------->
+      <div class="toggle"></div>
+      <!--menu----------------->
+      <ul class="menu">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/allproduct" class="nav-link">Store</a>
+        </li>
+       
+       
+        <!-- <li class="nav-item">
+          <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
+        </li> -->
+      </ul>
+      <!--right-menu----------->
+      <div class="right-menu">
+       
+        <a href=""><%= name %></a>
+        <a href="/account" class="user">
+          <i class="far fa-user"></i>
+        </a>
+        <a href="javascript:void(0);" class="search">
+         <i class="fas fa-search"></i>
+       </a>
+        <a href="/totalproduct">
+          <i class="fas fa-shopping-cart">
+            <span class="num-cart-product"><%= amountcart %></span>
+          </i>
+        </a>
+      </div>
+      </div>
+    </nav>
+    <!--search-bar----------------------------------->
+   
+  <form action="/search" method="POST">
+    <div class="search-bar">
+       
+      <!--search-input------->
+      <div class="search-input">
+      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <button class="btnsearch" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+      <!--cancel-btn--->
+      <a href="javascript:void(0);" class="search-cancel">
+        <i class="fas fa-times"></i>
+      </a>
+    
+    </div>
+    </div>
+  </form>
+ 
+ 
+<div class="container-fluid">
+  <div class="row">   
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky">
+          <ul class="nav flex-column">
+              
+              <li style="margin-top: 90px; margin-bottom: 30px;" class="nav-item">
+                  <div class="row">
+                      <div  class="col">
+                        <div style="margin-top: 115px;"  class="comment-avatar">
+                          <% if(infouser[0].img == null ){ %>
+                           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvQEQCcjYH7AtTrajxOamNGbhLdHKohvYrid1g0EOSZEmhjWJpLZu4WKzRNVGl03y4aDc&usqp=CAU">
+                           <% }else{ %>
+                             <img src="<%= infouser[0].coverImagePath %>" alt="">
+                           <% } %>
+                         </div> 
+                      </div>
+                      <div style="font-family: 'Merriweather', serif;" class="col">
+                          <p style="margin-left: -25px; margin-top: -72px; font-size: 25px;"><%= infouser[0].username %></p>
+                          <small style="font-size: 12px; margin-top: -10px; margin-left: -24px; position: absolute; color: gray;" >Manage your personal information.</small>
+                      </div>
+                  </div>
+                                  
+              </li>
+              
+              <li class="nav-item">
+                  <a  style="margin-left: 50px; margin-bottom: 30px; margin-top: 20px;" class="nav-link" href="/account/accountinfo">
+                    <i class="far fa-user"></i>
+                    <span class="ml-2">Account</span>
+                  </a>                      
+              </li>
+              <li class="nav-item">
+                  <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" href="/account/email">
+                    <i class="far fa-envelope"></i>
+                    <span class="ml-2">Email</span>
+                  </a>
+                </li>
+              <li class="nav-item">
+                <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" href="/account/address">
+                  <i class="fas fa-map-pin"></i>
+                  <span class="ml-2">Address & Phone</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a style="margin-left: 50px; margin-bottom: 30px;"  class="nav-link" href="/account/creditcard">
+                  <i class="far fa-credit-card"></i>
+                  <span class="ml-2">Creditcard</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" aria-current="page" href="/account/historybuyer">
+                      <i class="fab fa-product-hunt"></i>
+                    <span class="ml-2">Order</span>
+                  </a>
+              </li>
+              <% if(name == 'admin') { %>
+                <li class="nav-item">
+                    <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link active" aria-current="page" href="/account/seller">
+                        <i class="fab fa-sellsy"></i>
+                      <span class="ml-2">Seller</span>
+                    </a>
+                </li>
+                <% } %>
+                <form action="/account/logout">
+                  <div style="margin-top: 50px; margin-left: 65px;">
+                    <button class="btn-secondary btn"> Log out &nbsp; <i class="fas fa-sign-out-alt"></i></button>
+                  </div>
+                </form>
+           
+            </ul>
+      </div>
+  </nav>
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+          <nav aria-label="breadcrumb">
+              <ol style="font-size: 20px;" class="breadcrumb">
+                  <li class="breadcrumb-item"><a style="color: black;"  href="/">Home</a></li>
+                  <li class="breadcrumb-item active" style="color: #8C7741;" aria-current="page">Customer Orders</li>
+              </ol>
+          </nav>
+          <h1 style="font-size: 24px;" class="h2">Customers Orders</h1>
+          <p style="font-size: 13px;">Manage orders.</p>
+          <hr>
+          <div class="row my-4">              
+             <div style="margin-left: 100px; margin-top: 0px;" class="col-12 col-md-6 col-lg-9 mb-4 mb-lg-0">
+                <div class="">
+                    <div class="">
+                      <i style="font-size: 25px;" class="fas fa-file-invoice"></i>&nbsp;&nbsp; <span style="font-size: 25px;">Customer Orders</span> 
+                    </div>
+                    <div style="margin-left: -20px; margin-top: -40px;" class="card-body">
+                      <div class="container" style="margin-top: 50px;">
+                        <a href="/account/seller" class="btn btn-info">back</a>
+                        <br><br>
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-pills w-100">
+                                    <li class="nav-link">Orders</li>
+                                    <!-- <li class="nav-link ml-auto">
+                                        <a href="/sellproduct" class="nav-link active">Add Product</a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <% if(order.length) { %>
+                                    <table class="table">
+                                        <thead>
+                                            <tr style="font-size: 10px;">
+                                                <th scope="col">Invoiceid</th>
+                                                <th scope="col">username</th>
+                                                <th scope="col">address</th>
+                                                <th scope="col">phone</th>
+                                                <th scope="col">productname</th>
+                                                <th scope="col">price</th>
+                                                <th scope="col">quantity</th>
+                                                <th scope="col">date</th>
+                                                <th style="margin-right: -50px;"  scope="col">Action</th>
+                                                <!-- <th width="200px">Action</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(let i = 0; i < order.length; i++) { %>
+                                                <tr>  
+                                                    <th scope="row"><%= order[i].invoiceid %></th>
+                                                    <td><%= order[i].username %></td>
+                                                    <td><%= order[i].useraddress %></td>
+                                                    <td><%= order[i].userphone %></td>
+                                                    <td><%= order[i].productname %></td>
+                                                    <td><%= order[i].productprice %></td>
+                                                    <td><%= order[i].productquantity %></td>
+                                                    <td><%= order[i].date %></td>
+                                                    <td class="row"> 
+                                                        <form style="margin-bottom: 13px; margin-top: 10px; " action="/account/removeorder?ids=<%= order[i].Id %>" method="POST">
+                                                          <button class="btn btn-danger delete" type="submit">Delete</button>
+                                                        </form>
+                                                      </td>                                                  
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                <% } %>
+                      
+                                <!-- if result is empty -->
+                                <% if(!order.length) { %>
+                                    <p class="text-center">No Orders  </p>
+                                <% } %>
+                            </div>
+                        </div>
+                      </div>
+              
+                    
+                   </div>
+               </div>
+           </div>
+         </div>         
+      </main>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script>
+      new Chartist.Line('#traffic-chart', {
+          labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+          series: [
+              [23000, 25000, 19000, 34000, 56000, 64000]
+          ]
+          }, {
+          low: 0,
+          showArea: true
+      });
+  </script>
+
+  
+
+    
+</body>
+</html>
