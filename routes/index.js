@@ -564,7 +564,7 @@ router.post('/addcomment', async(req,res)=>{
     infocomment.author.username = req.user.username;
     infocomment.save()
     comment12.comments.push(infocomment._id)
-    let wait5 = await comment12.save()
+    await comment12.save()
     comeagain = true
     res.redirect('/oneproduct')
   }
@@ -715,6 +715,9 @@ router.post('/addcart', async(req,res)=>{
       const newProduct = await cart.save();
       console.log('newproduct ' + newProduct);  
       comeagain= true
+      const infouser = await userss.findById(res.locals.currentUser._id)
+      infouser.cart.push(newProduct._id)
+      await infouser.save()
       alert(productname + ' is added to your cart.')
       res.redirect('/oneproduct')
 

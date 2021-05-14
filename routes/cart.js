@@ -89,26 +89,29 @@ router.post('/buy',async function(req,res){
     }else{
       m = check2[n-1].invoiceid         
       m = m+1
-    }  
-    let updateinfo = await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
-    let creditinfo  = await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
+    }
+    await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
+    await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
     const purchase  = await productcart.find({username: res.locals.currentUser.username});
-    const infouser = await userss.find({username: res.locals.currentUser.username})
+    // const infouser = await userss.find({username: res.locals.currentUser.username})
+    const infouser = await userss.findById(res.locals.currentUser._id)
     try{
       for(i=0;;i++){
         try{   
           const product  = await Product.find({name : purchase[i].productname});
           sum = product[0].quantity - purchase[i].productquantity
           console.log('sum ' + sum)
-          const updateproduct  = await Product.update({name: purchase[i].productname},{$set:{"quantity": sum}});
+          await Product.update({name: purchase[i].productname},{$set:{"quantity": sum}});
           let datetime = new Date().toLocaleString('en-US', {
             timeZone: 'Asia/Bangkok'
           });
-          const invoiceinfo = new invoice({invoiceid: m,username: res.locals.currentUser.username,useraddress: infouser[0].address,userphone: infouser[0].phone,productname: purchase[i].productname,productprice: purchase[i].productprice,productquantity: purchase[i].productquantity,productcategory: purchase[i].productcategory,date: datetime,productimg: purchase[i].productimg,productimgType: purchase[i].productimgType,sumofproduct: purchase[i].productquantity*purchase[i].productprice})
+          const invoiceinfo = new invoice({invoiceid: m,username: res.locals.currentUser.username,useraddress: infouser.address,userphone: infouser.phone,productname: purchase[i].productname,productprice: purchase[i].productprice,productquantity: purchase[i].productquantity,productcategory: purchase[i].productcategory,date: datetime,productimg: purchase[i].productimg,productimgType: purchase[i].productimgType,sumofproduct: purchase[i].productquantity*purchase[i].productprice})
           invoiceinfo.save();
+          infouser.invoice.push(invoiceinfo._id)
+          await infouser.save()
           console.log('save')
-        }catch{
-          console.log('error')
+        }catch(err){
+          console.log(err)
           break
         }
       } 
@@ -119,8 +122,11 @@ router.post('/buy',async function(req,res){
     let date2 = new Date().toLocaleString('en-US', {
       timeZone: 'Asia/Bangkok'
     });
-    let wait5 = await productcart.remove({username: res.locals.currentUser.username})
-        res.render('purchase.ejs',{
+    await productcart.remove({username: res.locals.currentUser.username})
+    await userss.findOneAndUpdate({username: res.locals.currentUser.username}, 
+      {"$set": { "cart": []}}, 
+       )
+    res.render('purchase.ejs',{
           invoiceid: m,
           subtotal: subtotal,
           total: total,
@@ -131,7 +137,7 @@ router.post('/buy',async function(req,res){
           date: date2,
           name: res.locals.currentUser.username.toUpperCase(),
           amountcart: amountcart,
-        })
+    })
 })
   
 router.post('/firstaddadress',async(req,res)=>{

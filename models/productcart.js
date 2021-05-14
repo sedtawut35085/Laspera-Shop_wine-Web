@@ -54,4 +54,4 @@ productSchema.virtual('coverImagePath').get(function (){
 
 
 
-module.exports = mongoose.model('cart', productSchema);
+module.exports = mongoose.model('carts', productSchema);

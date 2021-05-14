@@ -136,12 +136,13 @@ body {
 /* Product Section */
 thead {
     color: var(--white);
-    background:#020202;
-    font-size: 10px;
+    background:#414040;
+    font-size: 13px;
 }
 
 .table td,
 .table th {
+  padding: 4px 5px;
     text-align: center;
     vertical-align: middle;
 }

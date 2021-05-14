@@ -244,7 +244,7 @@
                                                     <td><%= order[i].productquantity %></td>
                                                     <td><%= order[i].date %></td>
                                                     <td class="row"> 
-                                                        <form style="margin-bottom: 13px; margin-top: 10px; " action="/account/removeorder?ids=<%= order[i]._id %>" method="POST">
+                                                        <form style="margin-bottom: 13px; margin-top: 10px; " action="/account/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
                                                           <button class="btn btn-danger delete" type="submit">Delete</button>
                                                         </form>
                                                       </td>                                                  

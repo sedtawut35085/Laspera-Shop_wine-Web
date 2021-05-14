@@ -38,6 +38,18 @@ const userSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'creditcards'
         }
+    ],
+    invoice: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'invoices'
+        }
+    ],
+    cart: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'carts'
+        }
     ]
 });
 

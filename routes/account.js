@@ -241,16 +241,19 @@ router.get('/register', async (req,res,next) => {
     })
   })
 
-  router.post('/addcard',async (req,res)=>{
-    
-    let creditinfo  = await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
+  router.post('/addcard',async (req,res)=>{ 
+    await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
     res.redirect('/account/creditcard')
   })
 
   router.post('/removeorder', async(req,res)=>{
     console.log('romove: ' + req.query.ids);
+    console.log('romove2: ' + req.query.idss);
     var removepros = req.query.ids
-    let wait3 = await invoice.findByIdAndRemove(removepros)
+    await userss.findOneAndUpdate({username: req.query.ids}, 
+      {$pull: {invoice: req.query.idss}}, 
+       )
+    await invoice.findByIdAndRemove(req.query.idss)
     alert("remove order id " + removepros + " finish.")
     res.redirect('/account/order')
   }) 
