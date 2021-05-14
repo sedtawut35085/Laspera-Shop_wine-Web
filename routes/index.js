@@ -8,6 +8,7 @@ var express = require('express'),
     passport = require("passport");
 
 let alert = require('alert'); 
+const e = require('express');
 let commentid;
 let checkpro;
 let nowproduct;
@@ -29,11 +30,22 @@ let con = '';
 let productsearch;
 let sortname = 'Sort by';
 let advance;
+let product ;
+let infoadvance;
+let checkadvance =false
+let filterbrand 
+let filtercategory 
+let filterprice 
+let filteralcohol 
 
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
 router.get('/',  async(req,res) => {
-
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
+  checkadvance = false
   allproduct = false
     var datetime = new Date().toLocaleString('en-US', {
       timeZone: 'Asia/Bangkok'
@@ -65,7 +77,7 @@ router.get('/',  async(req,res) => {
 });
 
 router.get('/productsearch',async (req,res,next) =>{
-  const product  = await Product.find({name: productsearch});
+  product  = await Product.find({name: productsearch});
   const commentinfo = await comment.find({productname: productsearch})
   console.log(product)
   try{
@@ -101,8 +113,7 @@ router.post('/search', async(req, res, next)=>{
 router.get('/redproduct' , async(req,res)=>{  
   allproduct = false
   page = 1;
-  const redproduct  = await Product.find({category: 'Red Wine'})
-  product = redproduct
+  product  = await Product.find({category: 'Red Wine'})
   checkcategory = 'Red Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
@@ -110,15 +121,18 @@ router.get('/redproduct' , async(req,res)=>{
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
 router.get('/whiteproduct' , async(req,res)=>{  
   allproduct = false
   page = 1;
-  const whiteproduct  = await Product.find({category: 'White Wine'})
-  product = whiteproduct
+  product = await Product.find({category: 'White Wine'})
   checkcategory = 'White Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
@@ -126,15 +140,18 @@ router.get('/whiteproduct' , async(req,res)=>{
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
 router.get('/dessertproduct' , async(req,res)=>{  
   allproduct = false
   page = 1;
-  const dessertproduct  = await Product.find({category: 'Dessert Wine'})
-  product = dessertproduct
+  product = await Product.find({category: 'Dessert Wine'})
   checkcategory = 'Dessert Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
@@ -142,15 +159,18 @@ router.get('/dessertproduct' , async(req,res)=>{
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
 router.get('/roseproduct' , async(req,res)=>{  
   allproduct = false
   page = 1;
-  const roseproduct  = await Product.find({category: 'Rose Wine'})
-  product = roseproduct
+  product = await Product.find({category: 'Rose Wine'})
   checkcategory = 'Rose Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
@@ -158,23 +178,30 @@ router.get('/roseproduct' , async(req,res)=>{
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
 router.get('/sparklingproduct' , async(req,res)=>{  
   allproduct = false
   page = 1;
-  const sparklingproduct  = await Product.find({category: 'Sparkling Wine'})
-  product = sparklingproduct
-  checkcategory = 'Rose Wine'
+  product = await Product.find({category: 'Sparkling Wine'})
+  checkcategory = 'Sparkling Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
     product,
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
@@ -186,7 +213,7 @@ router.get('/allproducts' , async(req,res)=>{
   }else{
     name = res.locals.currentUser.username
   }
-  const product  = await Product.find()
+  product  = await Product.find()
   checkcategory = 'Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
@@ -194,7 +221,11 @@ router.get('/allproducts' , async(req,res)=>{
     name: name,
     amountcart: amountcart,
     sortname: con,
-    page : page
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
   }); 
 })
 
@@ -202,7 +233,6 @@ router.get('/backpage', async(req,res)=>{
   page = page - 1
   res.redirect('/allproduct')
 })
-
 
 router.get('/nextpage', async(req,res)=>{
   page = page + 1
@@ -236,7 +266,12 @@ router.get('/allproduct', async (req,res) => {
   if(con == 'A-Z'){
     console.log('Find A-Z')
     try{
-      const product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"name":1});
+      if(checkadvance == true){
+        product  = await Product.find(infoadvance).sort({"name":1});
+      }else{
+        product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"name":1});
+      }
+     
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by A-Z'
       res.render("allproduct.ejs", {
@@ -244,7 +279,11 @@ router.get('/allproduct', async (req,res) => {
         name: name,
         amountcart: amountcart,
         sortname: sortname,
-        page : page  
+        page : page , 
+        filterbrand,
+        filtercategory,
+        filterprice,
+        filteralcohol
       });
     }catch (err){
       console.log("err: "+ err); 
@@ -252,7 +291,12 @@ router.get('/allproduct', async (req,res) => {
   }else if(con =='highprice'){
     console.log('find highprice')
     try{
-      const product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":-1});
+      if(checkadvance == true){
+        product = await Product.find(infoadvance).sort({"price":-1});
+      }else{
+        product = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":-1});
+      }
+    
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by highest price'
       res.render("allproduct.ejs", {
@@ -260,7 +304,11 @@ router.get('/allproduct', async (req,res) => {
         name: name,
         amountcart: amountcart,
         sortname: sortname,
-        page : page
+        page : page,
+        filterbrand,
+        filtercategory,
+        filterprice,
+        filteralcohol
       });
     }catch (err){
       console.log("err: "+ err); 
@@ -268,7 +316,11 @@ router.get('/allproduct', async (req,res) => {
   }else if(con == 'lowprice'){
     console.log('find lowprice');
     try{
-      const product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":1});
+      if(checkadvance == true){
+        product  = await Product.find(infoadvance).sort({"price":1});
+      }else{
+        product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":1});
+      }
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by lowest price'
       res.render("allproduct.ejs", {
@@ -276,7 +328,11 @@ router.get('/allproduct', async (req,res) => {
         name: name,
         amountcart: amountcart,
         sortname: sortname,
-        page : page
+        page : page,
+        filterbrand,
+        filtercategory,
+        filterprice,
+        filteralcohol
       });
     }catch (err){
       console.log("err: "+ err); 
@@ -284,7 +340,12 @@ router.get('/allproduct', async (req,res) => {
   }else if(con == 'newproduct'){
     console.log('Find newproduct')
     try{
-      const product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({_id:-1});
+      if(checkadvance == true){
+        product = await Product.find(infoadvance).sort({_id:-1});
+      }else{
+        product = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({_id:-1});
+      }
+    
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by New product'
       res.render("allproduct.ejs", {
@@ -292,7 +353,11 @@ router.get('/allproduct', async (req,res) => {
         name: name,
         amountcart: amountcart,
         sortname: sortname,
-        page : page
+        page : page,
+        filterbrand,
+        filtercategory,
+        filterprice,
+        filteralcohol
       });
     }catch (err){
       console.log("err: "+ err); 
@@ -301,164 +366,28 @@ router.get('/allproduct', async (req,res) => {
     console.log('Find normal')
     sortname = 'Sort by'
     try{
-      if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand')
-        product  = await Product.find({brand: advance.brand}).sort({brand: 1});
-      }
-      else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('price')
-        product  = await Product.find({price: {$gte: advance.price1, $lte: advance.price2}}).sort({price: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('category')
-        product  = await Product.find({category: advance.category}).sort({category: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
-        console.log('alcohol')
-        product  = await Product.find({alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}).sort({price: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste != '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('bodytaste')
-        product  = await Product.find({bodytaste: advance.bodytaste}).sort({bodytaste: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste != '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('aciditytaste')
-        product  = await Product.find({aciditytaste: advance.aciditytaste}).sort({aciditytaste: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste != '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('sweettaste')
-        product  = await Product.find({sweettaste: advance.sweettaste}).sort({sweettaste: 1});
-      }
-      else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste != '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('finishtaste')
-        product  = await Product.find({finishtaste: advance.finishtaste}).sort({finishtaste: 1});
-      }
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-' && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}}).sort({price: 1});
-      }
-      else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-' && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand category')
-        product  = await Product.find({brand: advance.brand,category: advance.category}).sort({category: 1});
-      }
-      else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-' && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
-        console.log('brand alcohol')
-        product  = await Product.find({brand: advance.brand,category: advance.category,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}).sort({category: 1});
-      }
-      else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.bodytaste != '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-' && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand bodytaste')
-        product  = await Product.find({brand: advance.brand,bodytaste: advance.bodytaste}).sort({category: 1});
-      }
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category}).sort({price: 1});
-      }
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category bodytaste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste}).sort({price: 1});
-      } 
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != '-' && advance.bodytaste == '-' && advance.aciditytaste != '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category aciditytaste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, aciditytaste: advance.aciditytaste}).sort({price: 1});
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste != '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category sweettaste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, sweettastetaste : advance.sweettastetaste }).sort({price: 1});
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste == '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste != '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category finishtaste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, finishtaste : advance.finishtaste }).sort({price: 1});
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste != '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category body acidity taste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, aciditytaste : advance.aciditytaste}).sort({price: 1});  
-      }  
-      
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste != '-' && advance.sweettaste != '-' && advance.finishtaste == '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category body acidity sweet taste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, aciditytaste : advance.aciditytaste,sweettaste: advance.sweettaste}).sort({price: 1});  
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste != '-' && advance.sweettaste != '-' && advance.finishtaste != '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category body acidity sweet finish taste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, aciditytaste : advance.aciditytaste, finishtaste:advance.finishtaste}).sort({price: 1});
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste != '-' && advance.sweettaste != '-' && advance.finishtaste != '-'  && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
-        console.log('brand price category aciditytaste')
-        product  = await Product.find({brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}, category: advance.category, bodytaste: advance.bodytaste, aciditytaste : advance.aciditytaste, finishtaste:advance.finishtaste}).sort({price: 1});
-      }  
-      else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.bodytaste != '-' && advance.aciditytaste == '-' && advance.sweettaste == '-' && advance.finishtaste == '-'  && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
-        if(advance.bodytaste){
+      if(checkadvance == true){
+        product = await Product.find(infoadvance);
 
-        }
-
-      }
-      else if(advance.price1 != '' && advance.price2 != ''){
-        console.log('price')
-        product  = await Product.find({price: {$gte: advance.price1, $lte: advance.price2}}).sort({price:1});
-        sortname = 'Sort by'
-      }else if(advance.category != null){
-        console.log('category')
-        product  = await Product.find({category: advance.category}).sort({category: 1});
-        sortname = 'Sort by'
-
-      }else if(advance.taste != null){
-        console.log('taste')
-        if(advance.taste.includes('bodytaste') && advance.taste.includes('aciditytaste') && advance.taste.includes('sweettaste') && advance.taste.includes('finishtaste')){
-           product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},aciditytaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }
-        else if(advance.taste.includes('bodytaste') && advance.taste.includes('aciditytaste') && advance.taste.includes('sweettaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},aciditytaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('bodytaste') && advance.taste.includes('aciditytaste') && advance.taste.includes('finishtaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},aciditytaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({aciditytaste: -1});
-        }else if(advance.taste.includes('bodytaste') && advance.taste.includes('sweettaste') && advance.taste.includes('sweettaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('aciditytaste') && advance.taste.includes('sweettaste') && advance.taste.includes('finishtaste')){
-          product  = await Product.find({aciditytaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }
-        else if(advance.taste.includes('bodytaste') && advance.taste.includes('aciditytaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},aciditytaste: {$gte: 4, $lte: 5}}).sort({bodytaste: -1});
-        }else if(advance.taste.includes('bodytaste') && advance.taste.includes('sweettaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('bodytaste') && advance.taste.includes('finishtaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({bodytaste: -1});
-        }else if(advance.taste.includes('aciditytaste') && advance.taste.includes('sweettaste')){
-          product  = await Product.find({sweettaste: {$gte: 4, $lte: 5},sweettaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('aciditytaste') && advance.taste.includes('finishtaste')){
-          product  = await Product.find({sweettaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('sweettaste') && advance.taste.includes('finishtaste')){
-          product  = await Product.find({sweettaste: {$gte: 4, $lte: 5},finishtaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }
-        else if(advance.taste.includes('bodytaste')){
-          product  = await Product.find({bodytaste: {$gte: 4, $lte: 5}}).sort({bodytaste: -1});
-        }else if(advance.taste.includes('aciditytaste')){
-          product  = await Product.find({aciditytaste: {$gte: 4, $lte: 5}}).sort({aciditytaste: -1});
-        }else if(advance.taste.includes('sweettaste')){
-          product  = await Product.find({sweettaste: {$gte: 4, $lte: 5}}).sort({sweettaste: -1});
-        }else if(advance.taste.includes('finishtaste')){
-          product  = await Product.find({finishtaste: {$gte: 4, $lte: 5}}).sort({finishtaste: -1});
-        }
-        sortname = 'Sort by'
       }else{
-         product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}});
-
+        product  = await Product.find();
       }
+    
       res.render("allproduct.ejs", {
         product,
         name: name,
         amountcart: amountcart,
         sortname: sortname,
-        page : page
+        page : page,
+        filterbrand,
+        filtercategory,
+        filterprice,
+        filteralcohol
       });
+      
     }catch (err){
+      
       console.log("err: "+ err); 
-      product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}});
-      res.render("allproduct.ejs", {
-        product,
-        name: name,
-        amountcart: amountcart,
-        sortname: sortname,
-        page : page
-      });
       
     }
 
@@ -468,10 +397,145 @@ router.get('/allproduct', async (req,res) => {
 
 router.post('/advance', async(req,res)=>{
   page =1
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
   advance = req.body
+  checkadvance = true
   console.log(advance)
-  console.log(advance)
-  res.redirect('allproduct')
+  sortname = 'Sort by'
+  if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('brand')
+    filterbrand = advance.brand
+    console.log('filterbrand ' + filterbrand)
+    infoadvance = {brand: advance.brand}
+    product  = await Product.find(infoadvance).sort({brand: 1});
+  }
+  else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('price')
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    console.log(filterprice)
+    infoadvance = {price: {$gte: advance.price1, $lte: advance.price2}}
+    product  = await Product.find(infoadvance).sort({price: 1});
+  }
+  else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('category')
+    filtercategory = advance.category
+    infoadvance = {category: advance.category}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('alcohol')
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    infoadvance = {alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({alcohol: 1});
+  }
+  else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category == null &&  advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('brand price')
+    filterbrand = advance.brand
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    infoadvance = {brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}}
+    product  = await Product.find(infoadvance).sort({price: 1});
+  }
+  else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('brand category') 
+    filterbrand = advance.brand
+    filtercategory = advance.category
+    infoadvance = {brand: advance.brand,category: advance.category}
+    console.log('advance : ' + infoadvance)
+    product  = await Product.find(infoadvance).sort({brand: 1});
+  }
+  else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('brand alcohol')
+    filterbrand = advance.brand
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    infoadvance = {brand: advance.brand,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({brand: 1});
+  }
+  else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('price category')
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    filtercategory = advance.category
+    infoadvance = {price: {$gte: advance.price1, $lte: advance.price2},category: advance.category}
+    product  = await Product.find(infoadvance).sort({price: 1});
+  }
+  else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('price alcohol')
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    infoadvance = {price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('category alcohol')
+    filtercategory = advance.category
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    infoadvance = {category: advance.category,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('brand alcohol category')
+    filtercategory = advance.category
+    filterbrand = advance.brand
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    infoadvance = {brand: advance.brand,category: advance.category,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('brand price category')
+    filterbrand = advance.brand
+    filtercategory = advance.category
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    infoadvance = {brand: advance.brand,category: advance.category,price: {$gte: advance.price1, $lte: advance.price2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    console.log('brand price alcohol')
+    filterbrand = advance.brand
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    infoadvance = {brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('price category alcohol')
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    filtercategory = advance.category
+    infoadvance = {category: advance.category,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    console.log('price category alcohol category')
+    filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
+    filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
+    filtercategory = advance.category
+    filterbrand = advance.brand
+    infoadvance = {brand: advance.brand,category: advance.category,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
+    product  = await Product.find(infoadvance).sort({category: 1});
+  }
+  res.render("allproduct.ejs", {
+    product,
+    name: name,
+    amountcart: amountcart,
+    sortname: sortname,
+    page : page,
+    filterbrand,
+    filtercategory,
+    filterprice,
+    filteralcohol
+  });
+})
+
+router.get('/clearfilter', (req,res)=>{
+  page =1
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
+  checkadvance = false
+  sortname = 'Sort by'
+  res.redirect('/allproduct')
 })
 
 router.post('/sort', async (req,res)=>{

@@ -614,7 +614,8 @@ nav{
     position: absolute;
     top: 35%;
     left: 10%;
-    color: var(--white);
+   
+    color: white;
   }
   
   .category-box1 .content h2 {
@@ -1444,7 +1445,7 @@ nav{
 
   .titleallpr{
     margin-top: 80px;
-    margin-right:770px;
+    margin-right:1090px;
   }
 
 
@@ -1455,6 +1456,7 @@ nav{
   }
 
   .sortty{
+    margin-left: -380px;
     margin-top: 80px;
   }
   
@@ -2746,7 +2748,7 @@ nav{
   z-index: 9999;
   background-color: white;
   width: 500px;
-  height: 540px;
+  height: 450px;
   max-width: 80%;
 }
 
@@ -2844,6 +2846,24 @@ nav{
   content: "";
   display: table;
   clear: both;
+}
+
+.filter{
+  border: rgb(119, 117, 117) 1px solid;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  
+}
+
+.clear{
+  color: red; font-size: 13px; position: absolute; margin-top: -11px;
+  text-decoration: underline;
+}
+
+.clear:hover{
+  color: purple;
+  transition: all 0.5s;
 }
 
 

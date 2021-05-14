@@ -154,7 +154,7 @@
          
         <section class="new-arrival">
           <div class="arrival-heading">
-            <div class="row">
+            <div style="margin-bottom: -10px;" class="row">
               <div class="col2">
                 <div class="titleallpr">
                   <strong>ALL Products</strong>
@@ -173,14 +173,42 @@
                 </form>   
                    
               </div>
-              <div style="position: absolute; margin-top: 80px; margin-left: 77%; background-color: white;" class="">
-                <button data-modal-target="#modal"><i class="fas fa-sort-amount-down-alt"></i> </button>
+              <div style="position: absolute; margin-top: 80px; margin-left: 76%; background-color: white;" class="">
+                <button style="background-color: white; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i class="fas fa-sort-amount-down-alt"></i> </button>
                 
               </div>
+              
             </div>
-            
-            
+           
          </div>
+         <div style="margin-top: 0px; margin-bottom: 0px;" class="row">
+          <% if(filterbrand){ %>
+          <div style="margin-right: 5px;">
+            <h5>Brands: <span style="color: gray;"> <%= filterbrand %></span> </h5>
+          </div>
+          <% } %>
+          <% if(filtercategory){ %>
+            <div style="margin-right: 5px;">
+              <h5>Category: <span style="color: gray;"> <%= filtercategory %></span> </h5>
+            </div>
+          <% } %>
+          <% if(filterprice){ %>
+            <div style="margin-right: 5px;">
+              <h5>Price: <span style="color: gray;"> <%= filterprice %></span> </h5>
+            </div>
+          <% } %>
+          <% if(filteralcohol){ %>
+              <div style="margin-right: 5px;">
+                <h5>Alcohol: <span style="color: gray;"> <%= filteralcohol %></span> </h5>
+              </div>
+           <% } %>
+           <% if(filterbrand || filtercategory || filterprice || filteralcohol){ %>
+            <div>
+              <a href="/clearfilter"><span class="clear">Clear</span></a>
+            </div>
+            <% } %>
+        </div>
+         
           <div class="product-container">
             <% let j=0;
             if(page == 1) { 
@@ -400,7 +428,7 @@
               <input type="checkbox" id="Sparkling Wine" name="category" value="Sparkling Wine">
               <label for="Rose Wine"> Sparkling Wine</label><br>          
             </div>
-            <p class="title" style="margin-left: 10px; margin-top: -5px; margin-bottom: 10px;">Taste</p>
+            <!-- <p class="title" style="margin-left: 10px; margin-top: -5px; margin-bottom: 10px;">Taste</p>
             <div style="margin-left: 20px; margin-bottom: 25px; font-size: 12px;">   
               
               <select style="margin-right: 5px; font-size: 10px; " class="form-control" id="sweettaste" name="sweettaste">
@@ -442,7 +470,7 @@
                 <option value="5">5</option>       
               </select>
               <label for="finishtaste"> finish taste</label><br>         
-            </div>
+            </div> -->
             <div>
               <p style="margin-left: 16px; margin-top: -5px; margin-bottom: 2px;">Price</p>
               <input style="font-size: 13px; width: 60px; color: black; margin-left: 7%;" name="price1" type = "number" placeholder="$ 0.00">
@@ -457,8 +485,8 @@
               <input style="font-size: 13px; width: 60px; color: black; margin-bottom: 10px; margin-left: 7%;" name="alcohol2" type = "number" placeholder="0.00">
               <br>
              </div>
-             <button style="margin-bottom: 30px; margin-left: 55%;" type = "submit" class = "btn4 shop-item-button">
-              Go
+             <button style="margin-bottom: 30px; margin-left: 24%; margin-top: 20px; padding: 5px 20px;" type = "submit" class = "btn4 shop-item-button">
+              <span style="color: rgb(88, 87, 87);">Search </span>
           </button>
           </div>
           
