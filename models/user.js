@@ -39,7 +39,6 @@ const userSchema = new Schema({
             ref: 'creditcards'
         }
     ]
-  
 });
 
 userSchema.virtual('coverImagePath').get(function (){

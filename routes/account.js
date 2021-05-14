@@ -249,10 +249,10 @@ router.get('/register', async (req,res,next) => {
 
   router.post('/removeorder', async(req,res)=>{
     console.log('romove: ' + req.query.ids);
-    var removepros = Number(req.query.ids)
-    let wait3 = await invoice.remove({Id:removepros})
+    var removepros = req.query.ids
+    let wait3 = await invoice.findByIdAndRemove(removepros)
     alert("remove order id " + removepros + " finish.")
-    res.redirect('/order')
+    res.redirect('/account/order')
   }) 
 
   router.post('/removestore', async(req,res)=>{
