@@ -37,7 +37,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul class="menu">
+        <ul style="margin-left: 10px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -50,11 +50,23 @@
       
       <!--right-menu----------->
       <div class="right-menu">
-       
-        <a href=""><%= name %></a>
-        <a href="/account" class="user">
+        <% if(name != '') { %> 
+          <% if(infouser.img == null) { %> 
+            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
+            <a href="/account" class="user">
+            <img class="avatar" src="/images/wine2.png" alt="">
+            </a>
+          <% }else{ %> 
+            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
+            <a href="/account" class="user">
+            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+            </a>
+          <% } %> 
+        <% }else{ %> 
+        <a style="margin-left: 50px;" href="/account" class="user">
           <i class="far fa-user"></i>
         </a>
+        <% }%> 
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>

@@ -16,8 +16,8 @@ crossorigin="anonymous">
     crossorigin="anonymous" defer
   ></script>
   <link rel="stylesheet" href="css/checkout.css">
-  <link rel="stylesheet" href="css/style3.css">
-  <link rel="stylesheet" href="css/style4.css">
+  <!-- <link rel="stylesheet" href="css/style3.css">
+  <link rel="stylesheet" href="css/style4.css"> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
   <script src="/js/product.js" defer></script>
   <script src="/js/slider.js" defer></script>
@@ -37,7 +37,7 @@ crossorigin="anonymous">
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul class="menu">
+      <ul style="margin-left: 90px;" class="menu">
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
@@ -51,11 +51,23 @@ crossorigin="anonymous">
       </ul>
       <!--right-menu----------->
       <div class="right-menu">
-       
-        <a href=""><%= name %></a>
-        <a href="/account" class="user">
+        <% if(name != '') { %> 
+          <% if(infouser.img == null) { %> 
+            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
+            <a href="/account" class="user">
+            <img class="avatar" src="/images/wine2.png" alt="">
+            </a>
+          <% }else{ %> 
+            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
+            <a href="/account" class="user">
+            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+            </a>
+          <% } %> 
+        <% }else{ %> 
+        <a style="margin-left: 50px;" href="/account" class="user">
           <i class="far fa-user"></i>
         </a>
+        <% }%> 
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>

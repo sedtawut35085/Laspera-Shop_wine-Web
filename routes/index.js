@@ -22,6 +22,7 @@ let countsparklingwine = 0;
 let countdessertwine = 0;
 let totalproduct = false
 let name;
+let infouser;
 let comeagain = false
 let nowproduct2 = false
 let checkcategory = 'Wine';
@@ -56,6 +57,7 @@ router.get('/',  async(req,res) => {
       name= ''
     }else{
       name = res.locals.currentUser.username
+      infouser = await userss.findById(res.locals.currentUser._id)
       amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     }
     countallwine = await Product.countDocuments();
@@ -66,6 +68,7 @@ router.get('/',  async(req,res) => {
     countsparklingwine = await Product.countDocuments({category: 'Sparkling Wine'});
       res.render('index.ejs',{
         name:  name,
+        infouser,
         amountcart: amountcart,
         countallwine: countallwine,
         countredwine: countredwine,
@@ -77,11 +80,12 @@ router.get('/',  async(req,res) => {
 });
 
 router.get('/productsearch',async (req,res,next) =>{
-  const productinfo  = await Product.find({name: productsearch});
-  console.log('productinfo: ' + productinfo)
-  console.log('productinfo._id: ' + productinfo[0]._id)
-  const product = await Product.findById(productinfo[0]._id).populate('comments').exec();
+  
   try{
+    const productinfo  = await Product.find({name: productsearch});
+    console.log('productinfo: ' + productinfo)
+    console.log('productinfo._id: ' + productinfo[0]._id)
+    const product = await Product.findById(productinfo[0]._id).populate('comments').exec();
     if(product.name != null){
       const relateproduct  = await Product.find({ category:product.category, name: { $ne: product.name} });
       res.render('eachproduct.ejs',{
@@ -89,6 +93,7 @@ router.get('/productsearch',async (req,res,next) =>{
         product,
         name: name,
         amountcart: amountcart,
+        infouser
         
       })      
     }
@@ -99,6 +104,7 @@ router.get('/productsearch',async (req,res,next) =>{
       amountcart: amountcart,
       error: productsearch,
       amountcart: amountcart,
+      infouser
       
     })
 }
@@ -213,12 +219,15 @@ router.get('/allproducts' , async(req,res)=>{
     name= ''
   }else{
     name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
   }
   product  = await Product.find()
   checkcategory = 'Wine'
   con = 'Sort by'
   res.render("allproduct.ejs", {
     product,
+    infouser,
     name: name,
     amountcart: amountcart,
     sortname: con,
@@ -262,6 +271,8 @@ router.get('/allproduct', async (req,res) => {
     name= ''
   }else{
     name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
   }
   amountcart = await productcart.countDocuments({username: name});
   if(con == 'A-Z'){
@@ -276,6 +287,7 @@ router.get('/allproduct', async (req,res) => {
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by A-Z'
       res.render("allproduct.ejs", {
+        infouser,
         product,
         name: name,
         amountcart: amountcart,
@@ -301,6 +313,7 @@ router.get('/allproduct', async (req,res) => {
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by highest price'
       res.render("allproduct.ejs", {
+        infouser,
         product,
         name: name,
         amountcart: amountcart,
@@ -325,6 +338,7 @@ router.get('/allproduct', async (req,res) => {
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by lowest price'
       res.render("allproduct.ejs", {
+        infouser,
         product,
         name: name,
         amountcart: amountcart,
@@ -350,6 +364,7 @@ router.get('/allproduct', async (req,res) => {
       // console.log('AllProduct : '+ product)
       sortname = 'Sort by New product'
       res.render("allproduct.ejs", {
+        infouser,
         product,
         name: name,
         amountcart: amountcart,
@@ -375,6 +390,7 @@ router.get('/allproduct', async (req,res) => {
       }
     
       res.render("allproduct.ejs", {
+        infouser,
         product,
         name: name,
         amountcart: amountcart,
@@ -516,6 +532,7 @@ router.post('/advance', async(req,res)=>{
     product  = await Product.find(infoadvance).sort({category: 1});
   }
   res.render("allproduct.ejs", {
+    infouser,
     product,
     name: name,
     amountcart: amountcart,
@@ -624,8 +641,9 @@ router.post('/register', function async (req,res){
 router.get('/oneproduct', async (req,res) => {
   console.log('id : ' + req.query.id)
     try{
-      amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
       name = res.locals.currentUser.username
+      infouser = await userss.findById(res.locals.currentUser._id)
+      amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     }catch{
       console.log('err')
     }
@@ -646,6 +664,7 @@ router.get('/oneproduct', async (req,res) => {
       res.render('eachproduct.ejs',{
         relateproduct,
         product,
+        infouser,
         name: name,
         amountcart: amountcart,
        })
@@ -658,6 +677,7 @@ router.get('/oneproduct', async (req,res) => {
       res.render('eachproduct.ejs',{
         relateproduct,
         product,
+        infouser,
         name: name,
         amountcart: amountcart,     
     })
@@ -744,8 +764,9 @@ router.post('/addcart', async(req,res)=>{
   
 router.get('/totalproduct', async(req,res) => {
   try{
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
   }catch{
     console.log('err')
   }
@@ -782,6 +803,7 @@ router.get('/totalproduct', async(req,res) => {
     }
     total = Number(total).toFixed(2)
     res.render('totalproduct.ejs',{
+      infouser,
         tax,
         subtotal,
         total,
