@@ -77,28 +77,29 @@ router.get('/',  async(req,res) => {
 });
 
 router.get('/productsearch',async (req,res,next) =>{
-  product  = await Product.find({name: productsearch});
-  const commentinfo = await comment.find({productname: productsearch})
-  console.log(product)
+  const productinfo  = await Product.find({name: productsearch});
+  console.log('productinfo: ' + productinfo)
+  console.log('productinfo._id: ' + productinfo[0]._id)
+  const product = await Product.findById(productinfo[0]._id).populate('comments').exec();
   try{
-    if(product[0].name != null){
-      const relateproduct  = await Product.find({ category:product[0].category, name: { $ne: product[0].name} });
+    if(product.name != null){
+      const relateproduct  = await Product.find({ category:product.category, name: { $ne: product.name} });
       res.render('eachproduct.ejs',{
         relateproduct ,
         product,
         name: name,
         amountcart: amountcart,
-        commentinfo
+        
       })      
     }
-}catch{
+  }catch{
     console.log('error')
     res.render('errorproduct.ejs',{
       name: name,
       amountcart: amountcart,
       error: productsearch,
       amountcart: amountcart,
-      commentinfo
+      
     })
 }
 })
@@ -535,6 +536,7 @@ router.get('/clearfilter', (req,res)=>{
   filteralcohol = null
   checkadvance = false
   sortname = 'Sort by'
+  con = ''
   res.redirect('/allproduct')
 })
 

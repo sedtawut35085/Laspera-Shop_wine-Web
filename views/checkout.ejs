@@ -67,7 +67,7 @@
     <div class="search-bar">   
       <!--search-input------->
       <div class="search-input">
-      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
       <button class="btnsearch" type="submit">
         <i class="fas fa-search"></i>
       </button>
@@ -127,9 +127,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td><%= m.productprice %> $</td>
+                        <td>$<%= m.productprice %></td>
                         <td><%= m.productquantity %></td>
-                        <td><%= (m.productprice*m.productquantity).toFixed(2) %> $</td>
+                        <td>$<%= (m.productprice*m.productquantity).toFixed(2) %></td>
                     </tr>
                     <% }) %> 
                 </tbody>
@@ -139,10 +139,10 @@
     <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
         <div class="row my-3 gy-3">
             <div style="margin-left: 825px;">
-                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp; <%= tax %> $</span></h4>
+                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
             </div>    
             <div style="margin-left: 770px; margin-top: 10px;">
-                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp; <%= total %> $</span></h4>
+                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
             </div>
         </div>
     </div>
@@ -177,10 +177,10 @@
     <div style="background: white; padding: 20px 20px; border-left: gray 1px dashed; border-right: gray 1px dashed; border-bottom: gray 1px dashed; margin-bottom: 80px;">
         <div class="row my-3 gy-3">
             <div style="margin-left: 825px;">
-                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp; <%= tax %> $</span></h4>
+                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
             </div>    
             <div style="margin-left: 770px; margin-top: 10px;">
-                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp; <%= total %> $</span></h4>
+                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
             </div>
             <div style="margin-left: 830px; margin-top: 20px; ">
                 <button class="purchase" type="submit" style="padding: 5px 20px; background: black; color: white;">purchaes</button>

@@ -126,6 +126,7 @@ router.post('/buy',async function(req,res){
     await userss.findOneAndUpdate({username: res.locals.currentUser.username}, 
       {"$set": { "cart": []}}, 
        )
+    alert('Thank for your purchase')
     res.render('purchase.ejs',{
           invoiceid: m,
           subtotal: subtotal,

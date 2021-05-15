@@ -74,7 +74,7 @@ crossorigin="anonymous">
        
       <!--search-input------->
       <div class="search-input">
-      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
       <button class="btnsearch" type="submit">
         <i class="fas fa-search"></i>
       </button>
@@ -104,7 +104,7 @@ crossorigin="anonymous">
                       <td>Item Description</td>
                       <td>Price</td>
                       <td>Quantity</td>
-                      <td>Subtotal</td>
+                      <td>Line total</td>
                   </tr>
               </thead>
               <tbody>
@@ -123,11 +123,11 @@ crossorigin="anonymous">
                               </div>
                           </div>
                       </td>
-                      <td><%= m.productprice %> $</td>
+                      <td>$ <%= m.productprice %></td>
                       <form action="/cart/updatecarts?idss=<%= m.productname %>" method="POST">
                         <td><input style="width: 50px; border-radius: 5px; border: 1px solid gray; padding: 0;text-align: center;" onChange="this.form.submit();" class="cart-quantity-input" type="number" name="quantity" min="1" max="<%= m.productmaxquantity %>" value="<%= m.productquantity %>"></td>
                       </form> 
-                      <td><%= (m.productprice*m.productquantity).toFixed(2) %> $</td>
+                      <td>$ <%= (m.productprice*m.productquantity).toFixed(2) %></td>
                   </tr>
                   <% }) %> 
                   <% } %> 
@@ -142,13 +142,13 @@ crossorigin="anonymous">
   <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
     <div class="row my-3 gy-3">
         <div style="margin-left:70%;">
-            <h4>Subtotal : <span style="font-size: 15px; margin-left: 30px;" class="cart-total-subtotal" > <%= subtotal %></span> $</h4>
+            <h4>Subtotal : <span style="font-size: 15px; margin-left: 30px;" class="cart-total-subtotal" >$ <%= subtotal %></span></h4>
         </div>    
         <div style="margin-left:70%; margin-top: 10px;"">
-            <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" class="cart-total-tax" > <%= tax %></span> $</h4>
+            <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" class="cart-total-tax" >$ <%= tax %></span></h4>
         </div>    
         <div style="margin-left:70%; margin-top: 10px;">
-            <h4>Total : <span style="font-size: 20px; color: rgb(182, 75, 75); margin-left: 50px;" class="cart-total-price">  <%= total %></span> $</h4>
+            <h4>Total : <span style="font-size: 20px; color: rgb(182, 75, 75); margin-left: 50px;" class="cart-total-price">$ <%= total %></span> </h4>
         </div>
         <div style="margin-left: 72%; margin-top: 20px; ">
            <a href="/cart/checkout">

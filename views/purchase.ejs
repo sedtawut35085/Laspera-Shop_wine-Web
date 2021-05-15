@@ -87,9 +87,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td><%= m.productprice %> $</td>
+                        <td>$ <%= m.productprice %></td>
                         <td><%= m.productquantity %></td>
-                        <td><%= ((m.productquantity)*(m.productprice)).toFixed(2) %> $</td>
+                        <td>$ <%= ((m.productquantity)*(m.productprice)).toFixed(2) %></td>
                     </tr>
                     <% }) %>
                     <% } %>
@@ -106,16 +106,16 @@
                     <table class="table border-0 table-hover">
                         <tr>
                             <td>Sub Total:</td>
-                            <td><%= subtotal %> $</td>
+                            <td>$ <%= subtotal %></td>
                         </tr>
                         <tr>
                             <td>Delivery :</td>
-                            <td class="tax"><%= tax %> $</td>
+                            <td class="tax">$ <%= tax %></td>
                         </tr>
                         <tfoot>
                             <tr>
                                 <td>Total:</td>
-                                <td><%= total %>$</td>
+                                <td>$ <%= total %></td>
                             </tr>
                         </tfoot>
                     </table>

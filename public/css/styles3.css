@@ -423,6 +423,9 @@ nav{
 .search-bar-active{
     display: flex;
 }
+.search-input input:focus{
+  color: white;
+}
 @keyframes search{
     0%{
         bottom: -300px;

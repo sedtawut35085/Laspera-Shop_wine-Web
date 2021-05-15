@@ -475,6 +475,9 @@ nav{
       font-size: 15px;
 
   }
+  .search-input input:focus{
+    color: white;
+  }
 
   .imgpro img{
       width: 40px ;

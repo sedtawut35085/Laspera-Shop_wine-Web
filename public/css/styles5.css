@@ -180,6 +180,7 @@ nav{
 .toggle{
   display: none;
 }
+
 @media(max-width:1010px){
 
   nav{
@@ -402,6 +403,10 @@ nav{
     align-items: center;
     height: 100px;
     margin-top: 20px;
+}
+.search-input input:focus{
+  color: white;
+  text-decoration: none;
 }
 .search-bar input{
   background-color: black;

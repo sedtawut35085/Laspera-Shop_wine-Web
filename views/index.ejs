@@ -27,27 +27,53 @@
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul style="margin-left: -40px;" class="menu">
-        <li class="nav-item">
-          <a href="#home" class="nav-link scroll-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="/allproducts" class="nav-link">Store</a>
-        </li>
-        <li class="nav-item">
-          <a href="#shop" class="nav-link scroll-link">Brands</a>
-        </li>
-        <li class="nav-item">
-          <a href="#blog" class="nav-link scroll-link">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a href="#category" class="nav-link scroll-link">Category</a>
-        </li>
+      <% if(name == '') { %> 
+        <ul style="margin-left: -40px;" class="menu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link scroll-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/allproducts" class="nav-link">Store</a>
+          </li>
+          <li class="nav-item">
+            <a href="#category" class="nav-link scroll-link">Category</a>
+          </li>
+          <li class="nav-item">
+            <a href="#blog" class="nav-link scroll-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="#shop" class="nav-link scroll-link">Brands</a>
+          </li>
+          
+          <!-- <li class="nav-item">
+            <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
+          </li> -->
+        </ul>
+        <%  }else{ %> 
+          <ul style="margin-left: 30px;" class="menu">
+            <li class="nav-item">
+              <a href="#home" class="nav-link scroll-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="/allproducts" class="nav-link">Store</a>
+            </li>
+            <li class="nav-item">
+              <a href="#category" class="nav-link scroll-link">Category</a>
+            </li>
+            <li class="nav-item">
+              <a href="#blog" class="nav-link scroll-link">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="#shop" class="nav-link scroll-link">Brands</a>
+            </li>
+            
+            <!-- <li class="nav-item">
+              <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
+            </li> -->
+          </ul>
         
-        <!-- <li class="nav-item">
-          <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
-        </li> -->
-      </ul>
+        <%  } %> 
+     
       <!--right-menu----------->
       <div class="right-menu">
        
@@ -67,13 +93,12 @@
       </div>
     </nav>
     <!--search-bar----------------------------------->
-   
   <form action="/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
       <div class="search-input">
-      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
       <button class="btnsearch" type="submit">
         <i class="fas fa-search"></i>
       </button>

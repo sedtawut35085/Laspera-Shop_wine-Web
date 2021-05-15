@@ -154,6 +154,9 @@ nav{
     color: red;
     transition: all ease 0.3s;
 }
+.search-input input:focus{
+  color: white;
+}
 .sale-lable{
     width:38px;
     height: 17px;

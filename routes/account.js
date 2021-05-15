@@ -85,13 +85,20 @@ router.get('/register', async (req,res,next) => {
   })
 
   router.get('/historybuyer', async (req,res)=>{
+    let checkorder = 0
     const order  = await invoice.find({username:res.locals.currentUser.username});
     const infouser  = await userss.find({username:res.locals.currentUser.username})
+    try{
+      checkorder = order[0].invoiceid
+    }catch{
+      
+    }
     res.render('historybuyer.ejs',{
       order,
       infouser,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
+      checkorder
     })
   })
 
@@ -111,13 +118,21 @@ router.get('/register', async (req,res,next) => {
   });
 
   router.get('/order' , async function(req,res){
+    let checkorder = 0
     const infouser = await userss.find({username: res.locals.currentUser.username})
     const order = await invoice.find();
+    try{
+      checkorder = order[0].invoiceid
+    }catch{
+      
+    }
+
     res.render('order.ejs',{
       order,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
-      infouser
+      infouser,
+      checkorder
     })
   })
   

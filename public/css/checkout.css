@@ -204,6 +204,9 @@ nav{
 .toggle{
   display: none;
 }
+.search-input input:focus{
+  color: white;
+}
 @media(max-width:1010px){
 
   nav{

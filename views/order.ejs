@@ -100,7 +100,7 @@
        
       <!--search-input------->
       <div class="search-input">
-      <input type="text" placeholder="Search For Product" name="productsearch" />
+      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
       <button class="btnsearch" type="submit">
         <i class="fas fa-search"></i>
       </button>
@@ -235,7 +235,15 @@
                                         <tbody>
                                             <% for(let i = 0; i < order.length; i++) { %>
                                                 <tr>  
-                                                    <th scope="row"><%= order[i].invoiceid %></th>
+                                                  <% if(order[i].invoiceid == checkorder && i == 0){ %>
+                                                    <td><%= checkorder %></td>  
+                                                    <% }else if(order[i].invoiceid == checkorder){ %>
+                                                      <td> </td>  
+                                                    <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
+                                                      <td> </td>  
+                                                    <% }else{ %>
+                                                      <td><%= order[i].invoiceid %></td>  
+                                                    <% } %>      
                                                     <td><%= order[i].username %></td>
                                                     <td><%= order[i].useraddress %></td>
                                                     <td><%= order[i].userphone %></td>
@@ -256,7 +264,7 @@
                       
                                 <!-- if result is empty -->
                                 <% if(!order.length) { %>
-                                    <p class="text-center">No Orders  </p>
+                                    <p style="font-size: 10px;" class="text-center">No Orders  </p>
                                 <% } %>
                             </div>
                         </div>

@@ -139,6 +139,9 @@ thead {
     background:#414040;
     font-size: 13px;
 }
+.search-input input:focus{
+  color: white;
+}
 
 .table td,
 .table th {

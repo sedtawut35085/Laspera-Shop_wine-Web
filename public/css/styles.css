@@ -388,6 +388,7 @@ nav{
     z-index: 101;
     animation: search 0.3s;
 }
+
 .search-input{
     width:90%;
     border-bottom: 1px solid #c5a75b;
@@ -396,6 +397,9 @@ nav{
     align-items: center;
     height: 100px;
     margin-top: 20px;
+}
+.search-input input:focus{
+  color: white;
 }
 .search-bar input{
   background-color: black;
