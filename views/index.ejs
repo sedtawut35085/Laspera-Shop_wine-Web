@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="/css/styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-
-  <script src="/js/product.js" defer></script>
   <script src="/js/slider.js" defer></script>
   <script src="/js/index.js" defer></script>
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
@@ -28,12 +26,12 @@
       <div class="toggle"></div>
       <!--menu----------------->
       <% if(name == '') { %> 
-        <ul style="margin-left: -40px;" class="menu">
+        <ul style="margin-left: -40px;" class="menu menu2">
           <li class="nav-item">
             <a href="#home" class="nav-link scroll-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/allproducts" class="nav-link">Store</a>
+            <a href="/store/allproduct" class="nav-link">Store</a>
           </li>
           <li class="nav-item">
             <a href="#category" class="nav-link scroll-link">Category</a>
@@ -55,7 +53,7 @@
               <a href="#home" class="nav-link scroll-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="/allproducts" class="nav-link">Store</a>
+              <a href="/store/allproduct" class="nav-link">Store</a>
             </li>
             <li class="nav-item">
               <a href="#category" class="nav-link scroll-link">Category</a>
@@ -65,8 +63,7 @@
             </li>
             <li class="nav-item">
               <a href="#shop" class="nav-link scroll-link">Brands</a>
-            </li>
-            
+            </li> 
             <!-- <li class="nav-item">
               <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
             </li> -->
@@ -79,12 +76,12 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
             <img class="avatar" src="/images/wine2.png" alt="">
             </a>
           <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
             <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
             </a>
@@ -97,7 +94,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="/totalproduct">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -106,7 +103,7 @@
       </div>
     </nav>
     <!--search-bar----------------------------------->
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -162,7 +159,7 @@
           <div class="content">
             <h2>Shop For Red Wine</h2>
             <span><%= countredwine %> &nbsp; Products</span>
-            <a href="/redproduct">shop now</a>
+            <a href="/store/redproduct">shop now</a>
           </div>
         </div>
         <div class="category-box">
@@ -170,7 +167,7 @@
           <div class="content">
             <h2>Shop For All Wine</h2>
             <span><%= countallwine %> &nbsp; Products</span>
-            <a href="/allproducts">shop now</a>
+            <a href="/store/allproducts">shop now</a>
           </div>
         </div>
         <div class="category-box">
@@ -178,7 +175,7 @@
           <div class="content">
             <h2>Shop For White Wine</h2>
             <span><%= countwhitewine %> &nbsp; Products</span>
-            <a href="/whiteproduct">shop now</a>
+            <a href="/store/whiteproduct">shop now</a>
           </div>
         </div>     
         <div class="category-box">
@@ -186,7 +183,7 @@
           <div class="content">
             <h2>Shop For Rose Wine</h2>
             <span><%= countrosewine %> &nbsp; Products</span>
-            <a href="/roseproduct">shop now</a>
+            <a href="/store/roseproduct">shop now</a>
           </div>
         </div>  
         <div class="category-box">
@@ -194,7 +191,7 @@
           <div class="content">
             <h2>Shop For Dessert Wine</h2>
             <span><%= countdessertwine %> &nbsp; Products</span>
-            <a href="/dessertproduct">shop now</a>
+            <a href="/store/dessertproduct">shop now</a>
           </div>
         </div>
         <div class="category-box">
@@ -202,7 +199,7 @@
           <div class="content">
             <h2>Shop For Sparkling Wine</h2>
             <span><%= countsparklingwine %> &nbsp; Products</span>
-            <a href="/sparklingproduct">shop now</a>
+            <a href="/store/sparklingproduct">shop now</a>
           </div>
         </div>   
       </div>
@@ -210,7 +207,6 @@
         
       </div> -->
     </section>
-
     <!-- story2 -->
     <section class="story2">
       <div class="row">
@@ -231,11 +227,8 @@
          </div>
         </div>
       </div>
-
     </section>
-
     <!-- food -->
-
     <section class="section food">
       <h2 class="title">Wine with Foods</h2>
       <p class="icon3 iconres"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines">&nbsp;<i class="fas fa-wine-glass-alt"></i>&nbsp;</i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
@@ -257,9 +250,7 @@
           <h2 class="title">Wild Scallop Cold Pasta</h2>
         </div>
       </div>
-
     </section>
-
     <section class="story3">
       <div class="column">
         <div class="infostory3">
@@ -277,15 +268,11 @@
         </div>
         <div class="column">
           <img class="imgstory6" src="https://images.unsplash.com/photo-1561461056-77634126673a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVkJTIwd2luZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt=""> 
-        </div>
-        
+        </div>     
       </div>
-
     </section>
-
     <!-- blog -->
-    <section class="section blog" id="blog">
-      
+    <section class="section blog" id="blog">  
       <h2 class="title1">Blogs </h2>
       <p style="font-size: 11px; margin-left: 570px;" class="icon6 iconress"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines">&nbsp; <i class="fas fa-wine-glass-alt"></i> &nbsp;</i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
       <div class="blog-container container">
@@ -313,14 +300,11 @@
             <div class="content">
               <h2 class="title">Tasting top La Conseillante and Figeac vintages</h2>
               <p class="copy">Jane Anson tastes La Conseillante wines back to 2005 plus several vintages of Château Figeac, and reports on recent developments at two Right Bank powerhouses.</p>
-       
             </div>
           </div>
       </div>    
       </div>
     </section>
-
-   
 
     <section class="section shop" id="shop">
       <h2 class="title">Brands</h2>
@@ -350,13 +334,8 @@
           </div>
         </div>
       </div>
-     </section>
-
-   
-
-    
+     </section>    
   </main>
-
   <!-- Footer -->
   <footer id="footer" class="section footer">
     <div class="container">

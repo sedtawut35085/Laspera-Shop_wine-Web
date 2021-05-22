@@ -15,12 +15,10 @@ crossorigin="anonymous">
     src="https://kit.fontawesome.com/64d58efce2.js"
     crossorigin="anonymous" defer
   ></script>
-  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="/css/checkout.css">
   <!-- <link rel="stylesheet" href="css/style3.css">
   <link rel="stylesheet" href="css/style4.css"> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-  <script src="/js/product.js" defer></script>
-  <script src="/js/slider.js" defer></script>
   <script src="/js/index.js" defer></script>
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
 
@@ -28,12 +26,11 @@ crossorigin="anonymous">
   <title>totalproduct</title>
 </head>
 <body>
-
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
       <!--logo------------>
-      <a href="/" class="logo"><img src="images/logo12.png"></a>
+      <a href="/" class="logo"><img src="/images/logo12.png"></a>
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
@@ -42,7 +39,7 @@ crossorigin="anonymous">
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/allproduct" class="nav-link">Store</a>
+          <a href="/store/allproduct" class="nav-link">Store</a>
         </li>
       
         <!-- <li class="nav-item">
@@ -71,7 +68,7 @@ crossorigin="anonymous">
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="#">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -81,7 +78,7 @@ crossorigin="anonymous">
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -230,18 +227,6 @@ crossorigin="anonymous">
     </div>
     </div>
   </footer>
-
-   
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-  crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-  crossorigin="anonymous"></script>
-  
-
-  
-
 </body>
  
 </html>

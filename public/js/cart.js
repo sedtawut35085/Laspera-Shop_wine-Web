@@ -33,11 +33,8 @@ function purchaseClicked() {
 function quantityChanged(event) {
 
     var input = event.target
-
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
-
-
     }
     updateCartTotal()
 }
@@ -63,8 +60,7 @@ function updateCartTotal() {
             tax = 10
         }else{
             tax = 0
-        }
-        
+        }       
     }
     total = Math.round(total * 100) / 100
     totals = total+tax

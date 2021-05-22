@@ -14,42 +14,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/account.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-  
-    <script src="/js/product.js" defer></script>
-    <script src="/js/slider.js" defer></script>
     <script src="/js/index.js" defer></script>
-      <!-- add to document <head> -->
-      <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-  
-      <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-      <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-      <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded',()=>{
-      FilePond.registerPlugin(
-          FilePondPluginImageResize,
-          FilePondPluginImagePreview,
-          FilePondPluginFileEncode
-          );
-          FilePond.setOptions({
-              stylePanelAspectRatio: 150/100,
-              imageResizeTargetWidth: 100,
-              imageResizeTargetHeight: 150
-          })
-          FilePond.parse(document.body)
-  })
-</script>
   <script
     src="https://kit.fontawesome.com/64d58efce2.js"
     crossorigin="anonymous"
   ></script>   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-  <script src="js/lgres.js" defer></script>
-  <script src="js/product.js" defer></script>
-  <script src="js/slider.js" defer></script>
-  <script src="js/index.js" defer></script>
-  <script src="store.js" defer></script>
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script> 
 </head>
 <body>
@@ -61,12 +31,12 @@
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul style="margin-left: 150px;" class="menu">
+      <ul style="margin-left: 70px;" class="menu">
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/allproduct" class="nav-link">Store</a>
+          <a href="/store/allproduct" class="nav-link">Store</a>
         </li>
        
        
@@ -96,7 +66,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="/totalproduct">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -106,7 +76,7 @@
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -198,7 +168,7 @@
       </div>
   </nav>
       <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-          <nav aria-label="breadcrumb">
+          <nav style="z-index: -100;" aria-label="breadcrumb">
               <ol style="font-size: 20px;" class="breadcrumb">
                   <li class="breadcrumb-item"><a style="color: black;"  href="/">Home</a></li>
                   <li class="breadcrumb-item active" style="color: #8C7741;" aria-current="page">Creditcard</li>
@@ -217,11 +187,11 @@
                          <form action="/account/addcard?id=<%= infocreditcard.creditcard[0]._id %>" method="post">
                                 <div style="margin-top: 0px;" class="row">         
                                     <div class="col">                                         
-                                     <div class="form-group">
+                                     <div class="form-group frame">
                                        <label style="font-size: 14px; margin-bottom: 10px; margin-top: 10px;">Name on card :</label>
                                        <input style="width: 500px; height: 40px; font-size: 12px; margin-bottom: 10px;" type="text" class="form-control" name="cardname" value="<%= infocreditcard.creditcard[0].NameCard %>" autocomplete="off">
                                      </div>
-                                     <div class="form-group">
+                                     <div class="form-group frame">
                                       <label style="font-size: 14px;  margin-bottom: 10px;">Credit card number :</label>
                                       <input style="width: 500px; height: 40px; font-size: 12px; margin-bottom: 10px;" type="text" class="form-control" name="cardnumber" value="<%= infocreditcard.creditcard[0].NumberCard %>" autocomplete="off">
                                     </div>
@@ -247,21 +217,5 @@
       </main>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script>
-      new Chartist.Line('#traffic-chart', {
-          labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-          series: [
-              [23000, 25000, 19000, 34000, 56000, 64000]
-          ]
-          }, {
-          low: 0,
-          showArea: true
-      });
-  </script>
 </body>
 </html>

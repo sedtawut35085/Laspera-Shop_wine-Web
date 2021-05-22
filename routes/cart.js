@@ -5,6 +5,7 @@ var express = require('express'),
     creditcards = require('../models/creditcard'),
     productcart = require("../models/productcart"),
     Product = require('../models/product');
+    middleware = require('../middleware');
   
 let alert = require('alert'); 
 let amountcart = 0;
@@ -17,12 +18,15 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 router.post('/updatecarts', async(req,res)=>{
     console.log('updatecarts')
     let checkproduct = await Product.find({name: req.query.idss})
+    if(req.body.quantity <= 0){
+      req.body.quantity = 1;
+    }
     if(req.body.quantity <= checkproduct[0].quantity){
       let updatepro  = await productcart.update({productname: req.query.idss , username: res.locals.currentUser.username},{$set:{"productquantity":req.body.quantity}})
     }else{
       alert('The inventory is not enough for your product requirements.')
     }
-    res.redirect('/totalproduct')
+    res.redirect('/cart/totalproduct')
 })
 
 router.post('/removecart', async(req,res)=>{
@@ -30,7 +34,7 @@ router.post('/removecart', async(req,res)=>{
     var removepro = req.query.ids
     re = await productcart.remove({username: res.locals.currentUser.username,productname: removepro})
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username}); 
-    res.redirect('/totalproduct') 
+    res.redirect('/cart/totalproduct') 
 })
 
 router.get('/checkout', async function(req,res){
@@ -39,11 +43,6 @@ router.get('/checkout', async function(req,res){
     subtotal = 0
     const infouser = await userss.findById(res.locals.currentUser._id).populate('creditcard').exec()
     const infocart = await productcart.find({username: res.locals.currentUser.username})
-    let checkcarts = await productcart.countDocuments({username: res.locals.currentUser.username});
-    if(checkcarts == 0){
-      alert("Don't have any products in your carts.")
-      res.redirect('/totalproduct')
-    }else{ 
       try{
         for(i=0;;i++){
           try{   
@@ -76,7 +75,6 @@ router.get('/checkout', async function(req,res){
         name: res.locals.currentUser.username,
         amountcart: amountcart
       })
-    }  
 })
   
 router.post('/buy',async function(req,res){
@@ -93,7 +91,6 @@ router.post('/buy',async function(req,res){
     await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
     await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
     const purchase  = await productcart.find({username: res.locals.currentUser.username});
-    // const infouser = await userss.find({username: res.locals.currentUser.username})
     const infouser = await userss.findById(res.locals.currentUser._id)
     try{
       for(i=0;;i++){
@@ -143,8 +140,65 @@ router.post('/buy',async function(req,res){
   
 router.post('/firstaddadress',async(req,res)=>{
     console.log('add address')
-    let O  = await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
+    await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
     res.redirect('/cart/checkout')
 })
+
+router.get('/totalproducts', async(req,res)=>{
+  req.session.fromUrl = '/cart/totalproduct'
+  res.redirect('/cart/totalproduct')
+})
+  
+router.get('/totalproduct', middleware.isLoggedIn, async(req,res) => {
+  try{
+    name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+  }catch{
+    console.log('err')
+  }
+  allproduct = false
+  total =0 
+  tax =0
+  subtotal = 0
+  console.log("totalproduct")
+  const cartproduct  = await productcart.find({username: res.locals.currentUser.username});
+  const info = await userss.find({username: res.locals.currentUser.username})
+  const creditcard = await creditcards.find({Username: res.locals.currentUser.username})
+  try{
+      for(i=0;;i++){
+        try{   
+          subtotal = Number(subtotal) + Number((cartproduct[i].productprice)*cartproduct[i].productquantity);     
+        }catch{
+          console.log('error')
+          console.log('subtotal : ' + subtotal) 
+          break 
+        }
+      } 
+    }catch{
+      console.log('subtotal : ' + subtotal)  
+    }
+    subtotal = subtotal.toFixed(2)
+    if(subtotal<=100){
+      tax = 10 
+      total = (Number(subtotal) + Number(tax))
+  
+    }else{
+      tax = 0;
+      total = subtotal
+    }
+    total = Number(total).toFixed(2)
+    res.render('totalproduct.ejs',{
+      infouser,
+        tax,
+        subtotal,
+        total,
+        cartproduct,
+        name: res.locals.currentUser.username,
+        amountcart: amountcart, 
+        info,
+        creditcard  
+  })
+});
   
 module.exports = router;

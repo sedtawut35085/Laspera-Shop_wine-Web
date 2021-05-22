@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="/css/styles5.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-    <script src="/js/lgres.js" defer></script>
-    <script src="/js/product.js" defer></script>
-    <script src="/js/slider.js" defer></script>
     <script src="/js/index.js" defer></script>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script> 
     <title>Account</title>
@@ -39,7 +36,7 @@
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/allproduct" class="nav-link">Store</a>
+          <a href="/store/allproduct" class="nav-link">Store</a>
         </li>
 
       </ul>
@@ -53,7 +50,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="/totalproduct">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -63,7 +60,7 @@
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -105,71 +102,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="cont">
-    <div class="form sign-in">
-      <h2>Sign In</h2>
-      <form action="/login" method="POST">
-        <label class="aoy">
-          <span>Username</span>
-          <input type="text" name="username" placeholder="username" required>
-        </label>
-        <label class="aoy">
-          <span>Password</span>
-          <input type="password" name="password" placeholder="password" required>
-        </label>
-        <div class="aoy">
-          <button class="submit" type="summit">Sign In</button>
-        </div>
-      </form>
-      <p class="forgot-pass">Forgot Password ?</p>   
-    </div>
-
-    <div class="sub-cont">
-      <div class="img">
-        <div class="img-text m-up">
-          <h2>Dont have account?</h2>
-          <p>Sign up and discover great amount of new opportunities!</p>
-        </div>
-        <div class="img-text m-in">
-          <h2>Login to enjoy?</h2>
-          <p>If you already has an account, just sign in. We've missed you!</p>
-        </div>
-        <div class="img-btn">
-          <span class="m-up">Sign Up</span>
-          <span class="m-in">Sign In</span>
-        </div>
-      </div>
-      <div class="form sign-up">
-       <form action="/register" method="POST">
-        <h2>Sign Up</h2>
-        <label class="aoy">
-          <span>Username</span>
-          <input type="username" placeholder="Username" name="username" required>
-          
-        </label>
-        <label class="aoy">
-          <span>Email</span>
-          <input type="email" placeholder="Email" name="email" required>
-        </label>
-        <label class="aoy">
-          <span>Password</span>
-          <input type="password" placeholder="Password" name="password" required>
-        </label>
-        <div class="aoy">
-          <button class="submit" type="summit">Sign Up</button>
-        </div>
-  
-      </form>
-      </div>
-    </div>
-  </div>
-
-  
-
-   -->
-
-
 </body>
 
 </html>

@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="/css/checkout.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-        <script src="/js/product.js" defer></script>
+        <script src="/js/modal.js" defer></script>
         <script src="/js/slider.js" defer></script>
         <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
     
@@ -40,7 +40,7 @@
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/allproduct" class="nav-link">Store</a>
+          <a href="/store/allproduct" class="nav-link">Store</a>
         </li>
       </ul>
       <!--right-menu----------->
@@ -65,7 +65,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="#">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -75,7 +75,7 @@
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">   
       <!--search-input------->
       <div class="search-input">
@@ -94,7 +94,7 @@
 
   <form action="/cart/buy?id=<%= infouser.creditcard[0]._id  %>" method="POST">
   <div style="margin-top: 50px; " class="container">
-    <a style="margin-bottom: 2%;" href="/totalproduct" class="btn btn-info">Back</a>
+    <a style="margin-bottom: 2%;" href="/cart/totalproduct" class="btn btn-info">Back</a>
     <div class="row" style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4); background: white; padding: 20px 20px; border-left: white 1px solid; border-right: white 1px solid; border-bottom: white 1px solid; border-top: white 2px dashed; margin-bottom: 30px;">
       <img style="width: 240px; height: 50px;" src="/images/logo12.png" alt="">
   </div>
@@ -201,10 +201,6 @@
     </div>
   </div>
 </form>
-
-
-  
-
   <footer id="footer" class="section footer">
     <div class="container">
       <div class="footer-container">
@@ -261,14 +257,13 @@
     </div>
     </div>
   </footer>
-
   <div style="top: 26%; border-radius: 25px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
         <form method="POST" action="/cart/firstaddadress">
             <div class="modal-header">
                 <h2 class="modal-title"><i class="fas fa-map-marker-alt"></i>&nbsp; location </h2>
-                <a href="/totalproduct">
+                <a href="/cart/totalproduct">
                     <button style="margin-top: -2px;" type="button" class="close">
                         <span>&times;</span>
                     </button>
@@ -289,31 +284,6 @@
         </div>
     </div>
 </div>
-  
-  
- 
-    <!-- <div class="modal" id="modal">
-      <div class="modal-header">
-        <div class="title"><i class="fas fa-map-marker-alt"></i>&nbsp; location </div>
-        <a href="/"><button data-close-button class="close-button">&times;</button></a>
-      </div>
-      <p style="margin-left: 15px; font-size: 10px;">
-        Please add your address before placing an order.
-      </p>
-      <form method="POST" action="/addaddress">
-          <textarea style="margin-top: 5px; margin-left: 13px; padding: 2px 5px;" name="address" id="" cols="68" rows="3" placeholder="Address" required></textarea>
-          <div class="title" style="margin-bottom: 5px; margin-left: 15px; margin-top: 5px;"><i class="fas fa-phone"></i>&nbsp; Phone  </div>
-          <textarea style="margin-top: 5px; margin-left: 13px; padding: 2px 5px; margin-bottom: 10px;" name="phone" id="" cols="68" rows="2" placeholder="Phone" required></textarea>
-          <div style="margin-bottom: 20px; margin-top: 0px; margin-left: 500px;" class="row1">
-            <div class="col2">
-              <button type="submit" class="confirm">CONFIRM</button>
-            </div>
-          </div>
-      </form>
-    </div>
-    <div id="overlay"></div> -->
-  
-    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -322,11 +292,9 @@
         crossorigin="anonymous"></script>
     <% if(infouser.address == "" || infouser.phone == "") { %>
      <script type="text/javascript">
-        $(document).ready(function (){
-            setTimeout(function(){
+         setTimeout(function(){
                 $("#myModal").modal('show');
-            },100);
-        })
+            },700);
     </script>
       <% } %>
   

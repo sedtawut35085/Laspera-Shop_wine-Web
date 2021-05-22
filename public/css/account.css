@@ -1,18 +1,6 @@
-/* 
-/* body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  }
-   */
-   a {
+a {
     color: #00B7FF;
   }
-
-  /* .container{
-      margin-top: 50px
-  } */
-
-
 
   @import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
 :root {
@@ -243,20 +231,21 @@ nav{
   .fix-nav{
       height: 80px;
   }
+  
   .menu{
-      position: absolute;
-      top: 110px;
-      left: 0px;
-      background-color: #ffffff;
-      border-bottom: 4px solid #0b9d8a;
-      width: 100%;
-      padding: 0px;
-      margin: 0px;
-      z-index: 102;
-      flex-direction: column;
-      display: none;
+    position: absolute;
+    top: 90px;
+    left: -150px;
+    background-color: #ffffff;
+    border-bottom: 4px solid #8C7741;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    z-index: 999;
+    flex-direction: column;
+    display: none;
 
-  }
+}
   .fix-nav .menu{
       top: 80px;
   }
@@ -403,6 +392,27 @@ nav{
       width:90%;
   }
 }
+
+@media(max-width:867px){
+.frame input{
+    max-width: 300px;
+}
+}
+
+@media(max-width:768px){
+    .frame input{
+        max-width: 200px;
+        
+    }
+    }
+
+@media(max-width:390px){
+    .nameuser{
+      display: none;
+    }
+  
+  }
+  
 
 /* <!--search-bar-----------------------------------> */
 
@@ -590,3 +600,21 @@ nav{
     box-shadow: 0 5px 10px 0px rgba(7, 7, 7, 0.4);
 
   }
+
+
+  .card{
+    margin-top: -40px; margin-left: -20px;
+}
+@media(max-width:1028px){
+    .card{
+        margin-left: -100px;
+    }
+}
+
+ @media(max-width:992px){
+        .card{
+            margin-left: -150px;
+        }
+ }
+        
+    

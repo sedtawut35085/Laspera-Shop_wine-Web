@@ -4,11 +4,14 @@ var   express = require('express'),
       invoice = require("../models/invoice"),
       creditcards = require('../models/creditcard'),
       productcart = require("../models/productcart"),
-      Product = require('../models/product');
+      Product = require('../models/product'),
+      middleware = require('../middleware');
 
 let alert = require('alert'); 
 let amountcart = 0
 let name ;
+var editpro;
+let editpros;
 
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
@@ -21,36 +24,10 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       }catch{
           console.log('error')
       }
-      res.redirect('/account/login')
+      res.redirect('/login')
     }else{    
         res.redirect('/account/accountinfo')
     }
-});
-
-router.get('/login', async (req,res,next) => {
-  try{
-    name = res.locals.currentUser.username
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }catch{
-    console.log('error')
-  }
-  res.render('login.ejs',{
-    name:  name,
-    amountcart: amountcart,
-  })
-});
-
-router.get('/register', async (req,res,next) => {
-  try{
-    name = res.locals.currentUser.username
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }catch{
-    console.log('error')
-  }
-  res.render('register.ejs',{
-    name:  name,
-    amountcart: amountcart,
-  })
 });
 
  router.get('/accountinfo', async (req,res) => {
@@ -136,7 +113,7 @@ router.get('/register', async (req,res,next) => {
     })
   })
   
-  router.get('/seller', async (req,res,next) => {
+  router.get('/seller', middleware.checkAdmin, async (req,res,next) => {
     try{
       const infouser = await userss.find({username: res.locals.currentUser.username})
         const product  = await Product.find();
@@ -168,7 +145,7 @@ router.get('/register', async (req,res,next) => {
       }
   });
 
-  router.post('/addaddress',async(req,res)=>{
+  router.post('/addaddress', async(req,res)=>{
     console.log('add address')
     let O  = await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
     res.redirect('/account/address')
@@ -206,54 +183,76 @@ router.get('/register', async (req,res,next) => {
         quantity,
         date,
       });
-      saveImage(product, img);
+     
       try{
+        saveImage(product, img);
          const newProduct = await product.save();
          console.log(newProduct);  
          alert("Product name " + req.body.name + " has been packed in store.")
          res.redirect('/account/seller');
       }catch (err){
-         console.log(err);    
+         console.log(err); 
+         res.redirect('/account/seller');   
     }
     }
   });
 
   router.post('/updateemail', async(req,res)=>{
     console.log('updateemail')
-    let O  = await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
+    await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
     alert("Update Done.")
     res.redirect('/account/email')
   })
 
   router.post('/updateprofile', async(req,res)=>{
     console.log('updateprofile')
-    const updateuser = new userss({})
-    if(req.body.img != ""){
-      saveImage(updateuser, req.body.img);
-      let e = await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
-    }
     alert("Update Done.")
     res.redirect('/account')
   })
 
-  router.post('/updateproduct', async(req,res)=>{
-    const updatepro1 = await Product.update({name: updatepro},{$set:{"name": req.body.name,"price": req.body.price,"category": req.body.category,"detail": req.body.detail,"quantity": req.body.quantity,"sweettaste": req.body.sweettaste,"aciditytaste": req.body.aciditytaste,"bodytaste": req.body.bodytaste,"finishtaste": req.body.finishtaste,"brand": req.body.brand,"aging": req.body.aging,"alcohol": req.body.alcohol}})
-    updatepro = ''
-    res.redirect('/account/seller') 
+  router.post('/updateimgprofile', async(req,res)=>{
+    console.log('updateimgprofile')
+    const updateuser = new userss({})
+    saveImage(updateuser, req.body.img);
+    await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
+    alert("Update Done.")
+    res.redirect('/account')
   })
 
-  router.post('/editproduct', async(req,res)=>{
-    const infouser = await userss.find({username: res.locals.currentUser.username})
-    var editpro = req.query.ids
-    const editpros = await Product.find({name : editpro })
-    console.log(editpros)
-    updatepro = editpros[0].name
+  router.get('/editproduct', async(req,res)=>{
+    infouser = await userss.find({username: res.locals.currentUser.username})
+    editpros = await Product.find({name : editpro })
     res.render('editproduct.ejs',{
       editpros,
       name: res.locals.currentUser.username,
       amountcart: amountcart,
       infouser
     })
+  })
+
+  router.post('/editproduct', async(req,res)=>{
+    editpro = req.query.ids
+    console.log(editpros)
+    res.redirect('/account/editproduct')
+    
+  })
+
+  router.post('/updateproduct', async(req,res)=>{
+    await Product.update({name: editpro},{$set:{"name": req.body.name,"price": req.body.price,"category": req.body.category,"detail": req.body.detail,"quantity": req.body.quantity,"sweettaste": req.body.sweettaste,"aciditytaste": req.body.aciditytaste,"bodytaste": req.body.bodytaste,"finishtaste": req.body.finishtaste,"brand": req.body.brand,"aging": req.body.aging,"alcohol": req.body.alcohol}})
+    alert('Update Done')
+    updatepro = ''
+    res.redirect('/account/seller') 
+  })
+
+  router.post('/updateimgproduct', async(req,res)=>{
+    console.log('update img')
+    const updateproduct = new Product({})
+    if(req.body.img != ""){
+      saveImage(updateproduct, req.body.img);
+      await Product.update({name: editpro},{$set:{"img":updateproduct.img,"imgType":updateproduct.imgType}})
+    }
+    alert('Update Img Done')
+    res.redirect('/account/editproduct') 
   })
 
   router.post('/addcard',async (req,res)=>{ 
@@ -287,9 +286,9 @@ router.get('/register', async (req,res,next) => {
     const infodelete = await userss.findById(req.query.id)
     console.log(infodelete)
     console.log(infodelete.creditcard[0]._id)
-    let wait = await userss.findByIdAndRemove(req.query.id)
-    let wait1 = await creditcards.findByIdAndRemove(infodelete.creditcard[0]._id)
-    let wait2 = await productcart.remove({username: res.locals.currentUser.username})
+    await userss.findByIdAndRemove(req.query.id)
+    await creditcards.findByIdAndRemove(infodelete.creditcard[0]._id)
+    await productcart.remove({username: res.locals.currentUser.username})
     alert('account name ' + res.locals.currentUser.username + ' is remove')
     req.logout();
     amountcart = 0
@@ -304,29 +303,17 @@ router.get('/register', async (req,res,next) => {
     allproduct = false
     name = ''
     amountcart = 0
-    res.redirect('/account/login')
+    res.redirect('/login')
   });
 
   function saveImage(product, imgEncoded) {
-    // CHECKING FOR IMAGE IS ALREADY ENCODED OR NOT
     if (imgEncoded == null) return;
-  
-    // ENCODING IMAGE BY JSON PARSE
-    // The JSON.parse() method parses a JSON string, constructing the JavaScript value or object described by the string
     const img = JSON.parse(imgEncoded);
     console.log( "JSON parse: "+ img);
-    
-    // CHECKING FOR JSON ENCODED IMAGE NOT NULL 
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-    // AND HAVE VALID IMAGE TYPES WITH IMAGE MIME TYPES
     if (img != null && imageMimeTypes.includes(img.type)) {
-  
-      // https://nodejs.org/api/buffer.html
-      // The Buffer class in Node.js is designed to handle raw binary data. 
-      // SETTING IMAGE AS BINARY DATA
       product.img = new Buffer.from(img.data, "base64");
       product.imgType = img.type;
     }
   }
-
+  
   module.exports = router;

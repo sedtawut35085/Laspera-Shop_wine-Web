@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/css/allproduct.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-    <script src="./js/product.js" defer></script>
-    <script src="./js/slider.js" defer></script>
-    <script src="./js/index.js" defer></script>
-    <script src="./js/modal.js" defer></script>
+    <script src="/js/index.js" defer></script>
+    <script src="/js/modal.js" defer></script>
      <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
     <title>Laespela</title>
 </head>
@@ -23,17 +21,17 @@
     <!--menu-bar----------------------------------------->
     <div class="navigation">
       <!--logo------------>
-      <a href="/" class="logo"><img src="images/logo12.png"></a>
+      <a href="/" class="logo"><img src="/images/logo12.png"></a>
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
       <% if(name == '') { %> 
-        <ul style="margin-left: -5%;" class="menu">
+        <ul style="margin-left: -5%;" class="menu menu2">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/allproduct" class="nav-link">Store</a>
+            <a href="/store/allproduct" class="nav-link">Store</a>
           </li>
         </ul>
         <%  }else{ %> 
@@ -42,7 +40,7 @@
             <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/allproduct" class="nav-link">Store</a>
+            <a href="/store/allproduct" class="nav-link">Store</a>
           </li>
         </ul>
         
@@ -52,12 +50,12 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
             <img class="avatar" src="/images/wine2.png" alt="">
             </a>
           <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
             <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
             </a>
@@ -70,7 +68,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="/totalproduct">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -80,7 +78,7 @@
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -97,7 +95,7 @@
         <section class="home" id="home">
             <div class="home-slider owl-carousel">
                 <div class="item">
-                    <img src="images/bg43.png" alt="">
+                    <img src="/images/bg43.png" alt="">
                     <div class="content">
                         <h3>WINE PRODUCTS</h3>
                         <p>"Choose what's right for you or for a gift to someone"</p>
@@ -106,62 +104,7 @@
                 </div>
             </div>
             </section>
-            <section class="section category1" id="category">
-              <!-- <p class="icon4"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines">&nbsp;<i class="fas fa-wine-glass-alt"></i>&nbsp;</i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p> -->
-              <div class="category-center1 container">
-                <a href="/redproduct">
-                  <div class="category-box1">
-                    <img src="https://th.wine-now.asia/media/blog/5-type-of-wine/BLOG_5-wine_1.jpg" alt="">
-                    <div class="content">
-                      <h2>Shop For Red Wine</h2>
-                    </div>
-                  </div>
-                </a>
-                <a href="/allproducts">
-                  <div class="category-box1">
-                    <img src="https://images.unsplash.com/photo-1511795267602-0424436b99c5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTc4fHx3aW5lfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="">
-                    <div class="content">
-                      <h2>Shop For All Wine</h2>
-                    </div>
-                  </div>
-                </a>
-               <a href="/whiteproduct">
-                <div class="category-box1">
-                  <img src="https://images.unsplash.com/photo-1602860210970-19d0f8c8f48d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTZ8fHdoaXRlJTIwd2luZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="">
-                  <div class="content">
-                    <h2>Shop For White Wine</h2>
-                  </div>
-                </div>    
-               </a> 
-               <a href="/roseproduct">
-                <div class="category-box1">
-                  <img src="https://th.wine-now.asia/media/blog/5-type-of-wine/BLOG_5-wine_3.jpg" alt="">
-                  <div class="content">
-                    <h2>Shop For Rose Wine</h2>
-                  </div>
-                </div>  
-               </a>
-                <a href="/dessertproduct">
-                  <div class="category-box1">
-                    <img src="https://th.wine-now.asia/media/blog/5-type-of-wine/BLOG_5-wine_4.jpg" alt="">
-                    <div class="content">
-                      <h2>Shop For Dessert Wine</h2>
-                    </div>
-                  </div>
-                </a>
-               <a href="/sparklingproduct">
-                <div class="category-box1">
-                  <img src="https://th.wine-now.asia/media/blog/5-type-of-wine/BLOG_5-wine_5.jpg" alt="">
-                  <div class="content">
-                    <h2>Shop For Sparkling Wine</h2>
-                  </div>
-                </div>   
-               </a>
-              </div>
-              <!-- <div class="category-center container category2">
-                
-              </div> -->
-            </section>
+           
         <br><br>
          
         <section class="new-arrival">
@@ -170,11 +113,10 @@
               <div class="col2">
                 <div class="titleallpr">
                   <strong>ALL Products</strong>
-                </div>
-                  
+                </div>  
               </div>
               <div class="col2 sortty">
-                <form action="/sort" method="POST">   
+                <form action="/store/sort" method="POST">   
                   <select onChange="this.form.submit();" class="example" name="example">
                     <option value="" ><%= sortname %></option>
                     <option value="highprice" name="highprice">Sort by highest price</option>
@@ -185,8 +127,8 @@
                 </form>   
                    
               </div>
-              <div style="position: absolute; margin-top: 80px; margin-left: 76%; background-color: white;" class="">
-                <button style="background-color: white; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
+              <div style="position: absolute; margin-top: 80px; margin-left: 76%; background-color: white;">
+                <button  class="filter"style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
                 
               </div>
               
@@ -216,7 +158,7 @@
            <% } %>
            <% if(filterbrand || filtercategory || filterprice || filteralcohol){ %>
             <div>
-              <a href="/clearfilter"><span class="clear">Clear</span></a>
+              <a href="/store/clearfilter"><span class="clear">Clear</span></a>
             </div>
             <% } %>
         </div>
@@ -251,8 +193,8 @@
             <% if(product) { %> 
               <!-- <div class="ui small stackable images "> -->
                  <% for(let i = j; i < n; i++){ %>
-                  <form action="/oneproduct?id=<%= product[i]._id %>" method="GET">
-                    <a href="/oneproduct?id=<%= product[i]._id %>">
+                  <form action="/store/oneproduct?id=<%= product[i]._id %>" method="GET">
+                    <a href="/store/oneproduct?id=<%= product[i]._id %>">
                     <div class="product-box">
                       <div class="product-img">
                         <!-- <a href="" class="add-cart">
@@ -286,25 +228,25 @@
        <% } %>
        <div class="page-btn">
           <% if(page != 1) { %> 
-            <a style="color: black;" href="/backpage"><span>&#8592;</span></a>          
+            <a style="color: black;" href="/store/backpage"><span>&#8592;</span></a>          
           <% } %> 
           <% if(page == 1) { %> 
-            <a href="/page1"><span style="color: brown;">1</span></a>
+            <a href="/store/page1"><span style="color: brown;">1</span></a>
           <% } %> 
           <% if(page != 1) { %> 
-            <a href="/page1"><span style="color: black;">1</span></a>
+            <a href="/store/page1"><span style="color: black;">1</span></a>
           <% } %> 
           <% if(page == 2) { %> 
-            <a href="/page2"><span style="color: brown;">2</span></a>
+            <a href="/store/page2"><span style="color: brown;">2</span></a>
           <% } %> 
           <% if(page != 2) { %> 
-            <a href="/page2"><span style="color: black;">2</span></a>
+            <a href="/store/page2"><span style="color: black;">2</span></a>
           <% } %> 
           <% if(page == 3) { %> 
-            <a href="/page3"><span style="color: brown;">3</span></a>
+            <a href="/store/page3"><span style="color: brown;">3</span></a>
           <% } %> 
           <% if(page != 3) { %> 
-            <a href="/page3"><span style="color: black;">3</span></a>
+            <a href="/store/page3"><span style="color: black;">3</span></a>
           <% } %> 
           <!-- <% if(page == 4) { %> 
             <a href="/allproduct"><span style="color: brown;">4</span></a>
@@ -313,7 +255,7 @@
             <a href="/allproduct"><span style="color: black;">4</span></a>
           <% } %>  -->
           <% if(page != 3) { %> 
-            <a style="color: black;" href="/nextpage"><span>&#8594;</span></a>
+            <a style="color: black;" href="/store/nextpage"><span>&#8594;</span></a>
           <% } %> 
           
          
@@ -385,7 +327,7 @@
           <div class="title"><i class="fas fa-sort-amount-down-alt"></i>&nbsp; Advance search </div>
           <button data-close-button class="close-button">&times;</button>
         </div>
-          <form action="/advance" method="POST">
+          <form action="/store/advance" method="POST">
             <div class="row3 advance">
               <div class="column2">
                 <p class="title" style="margin-left: 20px; margin-top: 15px; margin-bottom: 7px;">Brands</p>

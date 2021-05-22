@@ -14,44 +14,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/account.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-  
-    <script src="/js/product.js" defer></script>
-    <script src="/js/slider.js" defer></script>
     <script src="/js/index.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
       <!-- add to document <head> -->
-      <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
   
-      <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-      <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-      <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-       <!-- add before </body> -->
-      <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded',()=>{
-            FilePond.registerPlugin(
-                FilePondPluginImageResize,
-                FilePondPluginImagePreview,
-                FilePondPluginFileEncode
-                );
-                FilePond.setOptions({
-                    stylePanelAspectRatio: 150/100,
-                    imageResizeTargetWidth: 100,
-                    imageResizeTargetHeight: 150
-                })
-                FilePond.parse(document.body)
-        })
+      document.addEventListener('DOMContentLoaded',()=>{
+          FilePond.registerPlugin(
+              FilePondPluginImageResize,
+              FilePondPluginImagePreview,
+              FilePondPluginFileEncode
+              );
+              FilePond.setOptions({
+                  stylePanelAspectRatio: 150/100,
+                  imageResizeTargetWidth: 100,
+                  imageResizeTargetHeight: 150
+              })
+              FilePond.parse(document.body)
+      })
     </script>
-        <script
-          src="https://kit.fontawesome.com/64d58efce2.js"
-          crossorigin="anonymous"
-        ></script>   
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-        <script src="./js/product.js" defer></script>
-        <script src="./js/slider.js" defer></script>
-        <script src="js/index.js" defer></script>
-        <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
+    <style>
+      .filepond--credits {
+        display: none;
+      }
+     </style>
     </head>
-    
     <body>      
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
@@ -61,12 +58,12 @@
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul style="margin-left: 150px;"  class="menu">
+      <ul style="margin-left: 70px;"  class="menu">
         <li  class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/allproduct" class="nav-link">Store</a>
+          <a href="/store/allproduct" class="nav-link">Store</a>
         </li>
        
         <!-- <li class="nav-item">
@@ -77,12 +74,12 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser[0].img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></a>
             <a href="/account" class="user">
             <img class="avatar" src="/images/wine2.png" alt="">
             </a>
           <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
+            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></a>
             <a href="/account" class="user">
             <img class="avatar" src="<%= infouser[0].coverImagePath %>" alt="">
             </a>
@@ -95,7 +92,7 @@
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
-        <a href="/totalproduct">
+        <a href="/cart/totalproducts">
           <i class="fas fa-shopping-cart">
             <span class="num-cart-product"><%= amountcart %></span>
           </i>
@@ -105,7 +102,7 @@
     </nav>
     <!--search-bar----------------------------------->
    
-  <form action="/search" method="POST">
+  <form action="/store/search" method="POST">
     <div class="search-bar">
        
       <!--search-input------->
@@ -195,7 +192,7 @@
           </div>
       </nav>
           <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-              <nav aria-label="breadcrumb">
+              <nav style="z-index: -100;" aria-label="breadcrumb">
                   <ol style="font-size: 20px;" class="breadcrumb">
                       <li class="breadcrumb-item"><a style="color: black;"  href="/">Home</a></li>
                       <li class="breadcrumb-item active" style="color: #8C7741;" aria-current="page">Account</li>
@@ -219,25 +216,27 @@
                                                      <h4 style="margin-bottom: 20px; color: gray;"><%= infouser[0].username %></h4>
 
                                               </div>
-                                         <div class="form-group">
+                                         <div class="form-group frame">
                                            <label style="font-size: 17px;  margin-bottom: 15px;">Password:</label>
                                            <input style="width: 500px; height: 40px;" type="password" class="form-control" name="password" value="************" autocomplete="off">
                                          </div>
-                                     <div class="form-group" style="margin-top: 40px; " >
-                                         <input style="font-size: 13px;" type="submit" class="btn btn-info" value="Save">         
-                                    </div>
+                                         <div class="form-group" style="margin-top: 40px; " >
+                                          <input style="font-size: 13px;" type="submit" class="btn btn-info" value="Save">         
+                                     </div>
+                                    </form>
                                     </div>
                                          <div class="col">
-                                             <div style="margin-left: 70px;" class="col imgsell">
-                                                 <label style="margin-left: 0px; margin-bottom: 10px; font-size: 17px;" for="img" >Image : </label>
-                                                   <div style="margin-bottom: 30px; margin-left: 0px; width: 120px;" class="ui field">
-                                                     <input type="file" name="img" id="img" class="filepond filepond--item ui image small">
-                                                   </div>
+                                             <div style="margin-left: 70px; margin-top: 5px;" class="col imgsell">
+                                              <div style="margin-bottom: 10px;" class="form-group">
+                                                <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: blue; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
+                                                <div scope="row" class="imgpro"><img style="width: 130px; border: 2px solid rgb(179, 177, 177);
+                                                  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="<%= infouser[0].coverImagePath %>" alt="" class="ui image">          
+                                                </div>
+                                            </div>    
                                              </div>
-                                           </div>
-                                     </div>
-                              </form>
-            <div style="margin-top: 50px;" class="form-group">
+                                           </div>                                  
+                                     </div>               
+            <div style="margin-top: 30px;" class="form-group">
               <label style="font-size: 16px;  margin-bottom: 0px;">Delete Account</label>
           </div>
           <div style="margin-top: 15px;" class="form-group" >
@@ -255,29 +254,37 @@
             
           </main>
       </div>
-  </div>
- 
-      
-
-
-
-          
+  </div>   
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script>
-        new Chartist.Line('#traffic-chart', {
-            labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-            series: [
-                [23000, 25000, 19000, 34000, 56000, 64000]
-            ]
-            }, {
-            low: 0,
-            showArea: true
-        });
-    </script>
-      
+    <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade " id="myModal">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+          <form method="POST" action="/account/updateimgprofile">
+              <div class="modal-header">
+                  <h2 class="modal-title">&nbsp;Edit Image Profile</h2>
+                      <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
+                          <span>&times;</span>
+                      </button>
+              </div>
+              <div style="background-color: white;" class="modal-body">     
+                <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
+                  <label style="margin-left: -10px; margin-bottom: 10px; font-size: 12px;" for="img" >Image Profile</label>
+                  <div style="margin-bottom: -20px; margin-left: 19%; width: 200px; " class="ui field">
+                      <input style="height: 50px;" type="file" name="img" class="filepond filepond--item ui image small" required>    
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom: 5px;" class="modal-footer">
+                  <button type="submit" class="btn btn-secondary" >Save</button>
+              </div>
+          </form>
+          </div>
+      </div>
+    </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
 </html>

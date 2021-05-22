@@ -241,19 +241,19 @@ nav{
       height: 80px;
   }
   .menu{
-      position: absolute;
-      top: 110px;
-      left: 0px;
-      background-color: #ffffff;
-      border-bottom: 4px solid #0b9d8a;
-      width: 100%;
-      padding: 0px;
-      margin: 0px;
-      z-index: 102;
-      flex-direction: column;
-      display: none;
+    position: absolute;
+    top: 90px;
+    left: -90px;
+    background-color: #ffffff;
+    border-bottom: 4px solid #8C7741;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    z-index: 102;
+    flex-direction: column;
+    display: none;
 
-  }
+}
   .fix-nav .menu{
       top: 80px;
   }

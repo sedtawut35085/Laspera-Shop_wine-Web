@@ -9,7 +9,8 @@ const LocalStrategy = require("passport-local")
 var IndexRoutes = require('./routes/index')
 var AccountRoutes = require('./routes/account')
 var CartRoutes = require('./routes/cart')
-// var StoreRoutes = require('./routes/store')
+var StoreRoutes = require('./routes/store')
+var CommentRoutes = require('./routes/comment')
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }))
@@ -41,7 +42,8 @@ mongoose.connect("mongodb://localhost:27017/project",function(err,dbs){
 app.use('/',IndexRoutes)
 app.use('/account',AccountRoutes)
 app.use('/cart',CartRoutes)
-// app.use('/store',StoreRoutes)
+app.use('/store',StoreRoutes)
+app.use('/comment',CommentRoutes)
 
 app.listen(3000,()=>{
     console.log('server running')
