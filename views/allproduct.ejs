@@ -52,7 +52,7 @@
           <% if(infouser.img == null) { %> 
             <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
-            <img class="avatar" src="/images/wine2.png" alt="">
+            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
             </a>
           <% }else{ %> 
             <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
@@ -135,7 +135,7 @@
             </div>
            
          </div>
-         <div style="margin-top: 0px; margin-bottom: 0px;" class="row">
+         <div style="margin-top: 0px; margin-bottom: 0px; margin-left: -30px;" class="row">
           <% if(filterbrand){ %>
           <div style="margin-right: 5px;">
             <h5>Brands: <span style="color: gray;"> <%= filterbrand %></span> </h5>
@@ -158,7 +158,7 @@
            <% } %>
            <% if(filterbrand || filtercategory || filterprice || filteralcohol){ %>
             <div>
-              <a href="/store/clearfilter"><span class="clear">Clear</span></a>
+              <a href="/store/clearfilter"><span class="clear">clear</span></a>
             </div>
             <% } %>
         </div>

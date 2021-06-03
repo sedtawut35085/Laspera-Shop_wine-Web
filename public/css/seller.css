@@ -136,14 +136,26 @@ nav{
 }
 .right-menu a{
     margin: 0px 10px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #8C7741;
 }
-.menu a:hover,
+.nav-link::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #c7c1b2;
+  transition: width .3s;
+}
+.nav-link:hover::after{
+  width: 100%;
+  transition: width .3s;
+}
+
 .right-menu a:hover,
 .search-cancel:hover,
 .form-cancel:hover{
-    color: red;
+    color: #c7c1b2;
     transition: all ease 0.3s;
 }
 .sale-lable{

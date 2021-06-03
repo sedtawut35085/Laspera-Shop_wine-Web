@@ -142,11 +142,29 @@ nav{
     color: #8C7741;
 }
 .right-menu a{
-    margin: 0px 10px;
-    font-size: 1.6rem;
-    color: #8C7741;
+  margin: 0px 10px;
+  font-size: 1.5rem;
+  color: #8C7741;
+}
+.nav-link::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #c7c1b2;
+  transition: width .3s;
+}
+.nav-link:hover::after{
+  width: 100%;
+  transition: width .3s;
 }
 
+.right-menu a:hover,
+.search-cancel:hover,
+.form-cancel:hover{
+  color: #c7c1b2;
+  transition: all ease 0.3s;
+}
 .user .avatar{
   border: 1px solid rgb(73, 73, 73);
   background-color:  #b9ac88;
@@ -167,13 +185,6 @@ nav{
   display: block;
   height: auto;
   width: 100%;
-}
-.menu a:hover,
-.right-menu a:hover,
-.search-cancel:hover,
-.form-cancel:hover{
-    color: red;
-    transition: all ease 0.3s;
 }
 .sale-lable{
     width:38px;

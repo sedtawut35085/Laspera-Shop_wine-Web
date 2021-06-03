@@ -1,23 +1,32 @@
 const mongoose = require("mongoose");
-const express = require('express');
-const bodyParser = require("body-parser");
-const app = express();
-const userss = require('./models/user')
-const passport = require("passport")
-const LocalStrategy = require("passport-local")
+      express = require('express'),
+      bodyParser = require("body-parser"),
+      app = express(),
+      flash = require('connect-flash')
+      userss = require('./models/user'),
+      passport = require("passport"),
+      LocalStrategy = require("passport-local")
+      session = require('express-session');
+
 
 var IndexRoutes = require('./routes/index')
 var AccountRoutes = require('./routes/account')
 var CartRoutes = require('./routes/cart')
 var StoreRoutes = require('./routes/store')
-var CommentRoutes = require('./routes/comment')
-
+var CommentRoutes = require('./routes/comment');
+app.use(session({
+	secret:'happy dog',
+	saveUninitialized: true,
+	resave: true
+}));
 app.set('view-engine', 'ejs');
-app.use(express.urlencoded({ extended: false }))
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb' , extended: false}));
 app.use(express.static('public'));
 app.use(express.static(__dirname + 'public'))
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(flash());
 
 app.use(require('express-session')({
   secret: 'secret is always secret.',
@@ -32,6 +41,8 @@ passport.deserializeUser(userss.deserializeUser())
 
 app.use(async function(req,res,next){
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error')
+  res.locals.success = req.flash('success')
   next();
 });
 

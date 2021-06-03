@@ -9,7 +9,7 @@ var   express = require('express'),
 
 let alert = require('alert'); 
 let amountcart = 0
-let name ;
+let msg ;
 var editpro;
 let editpros;
 
@@ -31,6 +31,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 });
 
  router.get('/accountinfo', async (req,res) => {
+    
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     console.log('go account info')
     const infouser = await userss.find({username: res.locals.currentUser.username})
@@ -38,6 +39,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         name:  res.locals.currentUser.username,
         amountcart: amountcart,
         infouser,
+        msg
       })
   });
 
@@ -211,11 +213,16 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
   })
 
   router.post('/updateimgprofile', async(req,res)=>{
+    req.flash('success','Update Img Profile Done!!')
+    req.flash('error','Update Img Profile Done!!')
+    msg = req.flash('success')
+    console.log('msg : '+ msg )
     console.log('updateimgprofile')
     const updateuser = new userss({})
     saveImage(updateuser, req.body.img);
     await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
-    alert("Update Done.")
+    alert("Change image profile success.")
+   
     res.redirect('/account')
   })
 

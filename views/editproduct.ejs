@@ -71,7 +71,7 @@
           <% if(infouser[0].img == null) { %> 
             <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
             <a href="/account" class="user">
-            <img class="avatar" src="/images/wine2.png" alt="">
+            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
             </a>
           <% }else{ %> 
             <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
@@ -126,7 +126,7 @@
                       <div  class="col">
                         <div style="margin-top: 115px;"  class="comment-avatar">
                           <% if(infouser[0].img == null ){ %>
-                           <img src="/images/wine2.png">
+                           <img src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg">
                            <% }else{ %>
                              <img src="<%= infouser[0].coverImagePath %>" alt="">
                            <% } %>
@@ -303,7 +303,7 @@
                                       <input type="text" class="form-control" name="quantity" value="<%= editpros[0].quantity %>" autocomplete="off">
                                   </div>
                                   <div style="margin-bottom: 10px;" class="form-group">
-                                    <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: blue; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
+                                    <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: #8C7741; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
                                     <div scope="row" class="imgpro"><img style="width: 80px;" src="<%= editpros[0].coverImagePath %>" alt="" class="ui image">     
                                    
                                     </div>
@@ -324,7 +324,7 @@
   </div>
 </div>
 <div style="top: 20%; border-radius: 25px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
       <div class="modal-content">
       <form method="POST" action="/account/updateimgproduct">
           <div class="modal-header">

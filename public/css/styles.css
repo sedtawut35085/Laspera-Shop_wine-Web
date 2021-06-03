@@ -123,11 +123,23 @@ nav{
     font-size: 1.5rem;
     color: #8C7741;
 }
-.menu a:hover,
+.nav-link::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #c7c1b2;
+  transition: width .3s;
+}
+.nav-link:hover::after{
+  width: 100%;
+  transition: width .3s;
+}
+
 .right-menu a:hover,
 .search-cancel:hover,
 .form-cancel:hover{
-    color: red;
+    color: #c7c1b2;
     transition: all ease 0.3s;
 }
 .sale-lable{
@@ -193,6 +205,7 @@ nav{
   .fix-nav{
       height: 80px;
   }
+
   .menu{
       position: absolute;
       top: 110px;
@@ -983,6 +996,15 @@ nav{
     font-family: 'Dancing Script', cursive;
   }
 
+  .card1 .title {
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    margin-left: -50px;
+    color: #8C7741;
+    font-family: 'Dancing Script', cursive;
+  }
+
   .info{
     font-size: 2rem;
     font-weight: 300;
@@ -992,12 +1014,13 @@ nav{
     color: #DAA520;
 
   }
-  @media only screen and (max-width: 1060px){
+  @media only screen and (max-width: 1404px){
     .iconress{
       display: none;
     }
 
   }
+
   
 
   .blog .container{
@@ -2597,68 +2620,6 @@ nav{
     margin-left: -250px;
   }
   /*end seller*/
-
-  /*food*/
-
-  .food{
-    margin-top: -20px;
-    text-align: center;
-    background-color: black;
-    margin-bottom: 50px;
-    
-  }
-
-  .food .title {
-    font-size: 2rem;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #8C7741;
-    font-family: 'Dancing Script', cursive;
-  }
-
-  .containerfood{
-    margin-top: 20px;
-    margin-right: 50px; 
-    margin-left: 40px;
-  }
-
-  .foodimg{
-    width: 80%;
-    padding: 20px -80px 0px 0px;
-  }
-
-  .col-3 img{
-    width: 80%;
-    padding: 1px;
-
-  }
-
-  .icon3{
-    color: #8C7741;
-    margin-top: 10px;
-    margin-left: -10px;
-    font-size: 11px;
-  }
-
-  .icon4{
-    color: #8C7741;
-    margin-top: -10px;
-    margin-left: 510px;
-    font-size: 15px;
-    margin-bottom: 30px;
-  }
-
-  @media (max-width: 1024px) {
-    .food3{
-      margin-left: 40px;
-    }
-    .food4{
-      margin-left: 100px;
-    }
-  }
-
-   /* end food*/
 
 /* blogs */
 

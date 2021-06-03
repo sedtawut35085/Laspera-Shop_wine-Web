@@ -126,21 +126,36 @@ nav{
     margin-bottom: -10px;
     margin-top: 0px;
     font-size: 16px;
-
 }
 .menu li a{
     color: #8C7741;
 }
 .right-menu a{
     margin: 0px 10px;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #8C7741;
 }
-.menu a:hover,
+.menu .nav-link::after{
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #c7c1b2;
+  transition: width .3s;
+}
+.menu .nav-link:hover::after{
+  width: 100%;
+  transition: width .3s;
+}
+
+.flex-column .nav-item a:hover{
+    color: #8C7741;
+}
+
 .right-menu a:hover,
 .search-cancel:hover,
 .form-cancel:hover{
-    color: red;
+    color: #c7c1b2;
     transition: all ease 0.3s;
 }
 .sale-lable{
@@ -235,7 +250,7 @@ nav{
   .menu{
     position: absolute;
     top: 90px;
-    left: -150px;
+    left: -70px;
     background-color: #ffffff;
     border-bottom: 4px solid #8C7741;
     width: 100%;
@@ -244,7 +259,6 @@ nav{
     z-index: 999;
     flex-direction: column;
     display: none;
-
 }
   .fix-nav .menu{
       top: 80px;
@@ -281,6 +295,7 @@ nav{
       content: '\f00d';
   }
   .navigation.active .menu{
+      
       display: block;
   }
   .full-slider-box,
@@ -544,7 +559,7 @@ nav{
   .comment-avatar img,
   .comment-avatar img{
     display: block;
-    height: auto;
+    height: 100%;
     width: 100%;
   }
 
@@ -615,6 +630,7 @@ nav{
         .card{
             margin-left: -150px;
         }
+
  }
         
     

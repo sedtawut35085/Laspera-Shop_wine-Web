@@ -76,7 +76,7 @@
           <% if(infouser[0].img == null) { %> 
             <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></a>
             <a href="/account" class="user">
-            <img class="avatar" src="/images/wine2.png" alt="">
+            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
             </a>
           <% }else{ %> 
             <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></a>
@@ -118,8 +118,6 @@
     </div>
     </div>
     </form>
-
-
     <div class="container-fluid">
       <div class="row">   
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -131,7 +129,7 @@
                           <div  class="col">
                               <div style="margin-top: 115px;"  class="comment-avatar">
                                  <% if(infouser[0].img == null ){ %>
-                                  <img src="/images/wine2.png">
+                                  <img src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg">
                                   <% }else{ %>
                                     <img src="<%= infouser[0].coverImagePath %>" alt="">
                                   <% } %>
@@ -201,6 +199,12 @@
               <h1 style="font-size: 24px;" class="h2">Account</h1>
               <p style="font-size: 13px;">Manage your personal information for the safety of this account.</p>
               <hr>
+              <!-- <% if(msg && msg.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                  <%= msg %>
+                </div>
+              <% } %>
+           -->
               <div class="row my-4">              
                  <div style="margin-left: 100px; margin-top: 40px;" class="col-12 col-md-6 col-lg-9 mb-4 mb-lg-0">
                     <div class="">
@@ -228,9 +232,21 @@
                                          <div class="col">
                                              <div style="margin-left: 70px; margin-top: 5px;" class="col imgsell">
                                               <div style="margin-bottom: 10px;" class="form-group">
-                                                <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: blue; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
-                                                <div scope="row" class="imgpro"><img style="width: 130px; border: 2px solid rgb(179, 177, 177);
-                                                  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="<%= infouser[0].coverImagePath %>" alt="" class="ui image">          
+                                                <label style="margin-bottom: 10px;">Image:    
+                                                  <a style="font-size: 10px; margin-left: 10px; color: #8C7741; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">
+                                                  <% if(infouser[0].img == null ){ %>
+                                                    Add image
+                                                  <% }else{ %>
+                                                    Edit image
+                                                  <% } %>
+                                                  </a>
+                                                </label>
+                                                <div scope="row" class="imgpro">
+                                                  <% if(infouser[0].img == null ){ %>
+                                                    <img style="width: 130px; border: 2px solid rgb(179, 177, 177); box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="https://www.ormistonhospital.co.nz/wp-content/uploads/2016/05/No-Image.jpg" alt="" class="ui image">
+                                                    <% }else{ %>
+                                                      <img style="width: 130px; border: 2px solid rgb(179, 177, 177); box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="<%= infouser[0].coverImagePath %>" alt="" class="ui image">
+                                                    <% } %>        
                                                 </div>
                                             </div>    
                                              </div>
@@ -250,8 +266,7 @@
       </div>
   </div>
  </div>
-</div>
-            
+</div>      
           </main>
       </div>
   </div>   
@@ -261,14 +276,13 @@
           <div class="modal-content">
           <form method="POST" action="/account/updateimgprofile">
               <div class="modal-header">
-                  <h2 class="modal-title">&nbsp;Edit Image Profile</h2>
+                  <h2 class="modal-title">&nbsp;Image Profile</h2>
                       <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
                           <span>&times;</span>
                       </button>
               </div>
               <div style="background-color: white;" class="modal-body">     
                 <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
-                  <label style="margin-left: -10px; margin-bottom: 10px; font-size: 12px;" for="img" >Image Profile</label>
                   <div style="margin-bottom: -20px; margin-left: 19%; width: 200px; " class="ui field">
                       <input style="height: 50px;" type="file" name="img" class="filepond filepond--item ui image small" required>    
                   </div>

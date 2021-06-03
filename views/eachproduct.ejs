@@ -49,7 +49,7 @@
           <% if(infouser.img == null) { %> 
             <a class="user userimg" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
             <a href="/account" class="user">
-            <img class="avatar" src="/images/wine2.png" alt="">
+            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
             </a>
           <% }else{ %> 
             <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
@@ -90,7 +90,7 @@
     </div>
   </form>
       <main>
-            <section style="margin-top: 10px; margin-bottom: -20px;" class="services">
+            <section style="margin-top: 10px; margin-bottom: -60px;" class="services">
                 <div class="services-box">
                     <i class="fas fa-shipping-fast"></i>
                     <span>Free Shipping</span>
@@ -116,7 +116,8 @@
                   <div class="col-2">           
                    <div class="desc">
                     <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
-                    <h3>Price <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.price %> $</span></h3>
+                    <h3 style="margin-top: -3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp; <%= product.price %> $</span></h3>
+                    <h6 style="margin-top: 4%; font-size: 12px;">Category <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h6>
                     <div style="margin-top: 5%;" class = "product-rating">
                          <i class = "fas fa-star"></i>
                          <i class = "fas fa-star"></i>
@@ -290,7 +291,7 @@
      <div class="Related">
       <section class="">
         <div class="arrival-heading ">
-           <div style="margin-left: 180px; margin-top: 8%;" class="titleallpr">
+           <div style="margin-left: 180px; margin-top: 5%;" class="titleallpr">
               <strong>RelatedProduct</strong>
            </div>
         </div>

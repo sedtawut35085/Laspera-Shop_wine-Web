@@ -119,16 +119,29 @@ nav{
     color: #8C7741;
 }
 .right-menu a{
-    margin: 0px 10px;
-    font-size: 1.5rem;
-    color: #8C7741;
+  margin: 0px 10px;
+  font-size: 1.5rem;
+  color: #8C7741;
 }
-.menu a:hover,
+
+.nav-link::after{
+content: '';
+display: block;
+width: 0;
+height: 2px;
+background-color: #c7c1b2;
+transition: width .3s;
+}
+.nav-link:hover::after{
+width: 100%;
+transition: width .3s;
+}
+
 .right-menu a:hover,
 .search-cancel:hover,
 .form-cancel:hover{
-    color: red;
-    transition: all ease 0.3s;
+  color: #c7c1b2;
+  transition: all ease 0.3s;
 }
 .sale-lable{
     width:38px;
@@ -2853,14 +2866,15 @@ nav{
   border: black solid 0px;
   display: inline-block;
   background: rgb(202, 179, 134);
-  padding: 8px 20px;
+  padding: 10px 20px;
   margin: 5px 0;
   transition: all 0.7s;
 }
 
-.btn3:hover{
-  box-shadow: 0 0 12px rgba(22, 22, 22, 2.7) inset;
-  
+.btn3:hover,
+.btn3:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
 }
 
 .btn4{
@@ -3472,6 +3486,11 @@ nav{
       margin-top: -12%;
       margin-left: -90%;
     }
+    .no-comment{
+      
+      margin-bottom: 130px;
+
+  }
 
   }
   @media screen and (max-width: 1093px) {
