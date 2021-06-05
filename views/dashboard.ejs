@@ -58,7 +58,7 @@
     <!-- <div class="col-12 col-md-4 col-lg-2">
         <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
     </div> -->
-    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+    <div style="margin-right: 80px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
         <div class="dropdown">
             <button style="font-size: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
               <%= infouser[0].username %>
@@ -137,115 +137,98 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Products</li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
             </nav>
-            <h1 class="h2">Edit Products</h1>
-            <p>Manage Products</p>
+            <h1 class="h2">Dashboard</h1>
+            <p>Manage Dashboard</p>
+            <p>Latest Update : <%= datetime %></p>
           <div class="row my-4">
-                  <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                      <div class="card">
-                          <h5 class="card-header">Customers</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">345k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">18.2% increase since last month</p>
-                          </div>
+                  <div class="col-12 col-md-12 col-lg-4 mb-4 mb-lg-0 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <h5 class="card-header">Purchases</h5>
+                        <div class="card-body">
+                          <h5 class="card-title">Tutol Number of all invoices : <%= suminvoice %></h5>
+                          <p style="margin-bottom: 65px;" class="card-text text-success">Total revenue from purchases : $ <%= sumpurchase.toFixed(2) %></p>
                         </div>
+                      </div>           
                   </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Revenue</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">$2.4k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">4.6% increase since last month</p>
-                          </div>
+                  <div class="col-12 col-md-12 mb-4 mb-lg-0 col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header">Product</h5>
+                        <div class="card-body">
+                          <h5 class="card-title">Total number of products : <%= sumproduct %></h5>
+                          <p class="card-text text-info">Red Wine : <%= countredwine %> &nbsp;&nbsp;&nbsp;&nbsp; White Wine : <%= countwhitewine %></p>
+                          <p class="card-text text-info">Rose Wine : <%= countrosewine %> &nbsp;&nbsp;&nbsp;&nbsp; Dessert Wine : <%= countdessertwine %></p>
+                          <p class="card-text text-info">Sparkling Wine : <%= countsparklingwine %></p>
+                          <!-- <p class="card-text">Latest Update : <%= datetime %></p> -->
                         </div>
-                  </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Purchases</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">43</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-danger">2.6% decrease since last month</p>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Traffic</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">64k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">2.5% increase since last month</p>
-                          </div>
                       </div>
                   </div>
+                  <div class="col-12 col-md-12 mb-4 mb-lg-0 col-lg-3">
+                    <div class="card">
+                        <h5 class="card-header"> User</h5>
+                        <div class="card-body">
+                          <h5 class="card-title">Total number of users : <%= sumuser %></h5>                     
+                        </div>
+                      </div>      
+                  </div>
+                 
               </div>
               <div class="row">
-                <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-5">
+                <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-1">
                     <div class="card">
-                        <h5 class="card-header">History your order</h5>
-                        <% if(order.length) { %>
+                        <h5 class="card-header">List of all invoices</h5>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <% if(order.length) { %>
-                                    <table class="table">
-                                        <thead>
-                                            <tr style="font-size: 10px;">
-                                                <th scope="col">Invoiceid</th>
-                                                <th scope="col">username</th>
-                                                <th scope="col">address</th>
-                                                <th scope="col">phone</th>
-                                                <th scope="col">productname</th>
-                                                <th scope="col">price</th>
-                                                <th scope="col">quantity</th>
-                                                <th scope="col">date</th>
-                                                <th style="margin-right: -50px;"  scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% for(let i = 0; i < order.length; i++) { %>
-                                                <tr>  
-                                                  <% if(order[i].invoiceid == checkorder && i == 0){ %>
-                                                    <td><%= checkorder %></td>  
-                                                    <% }else if(order[i].invoiceid == checkorder){ %>
-                                                      <td> </td>  
-                                                    <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
-                                                      <td> </td>  
-                                                    <% }else{ %>
-                                                      <td><%= order[i].invoiceid %></td>  
-                                                    <% } %>      
-                                                    <td><%= order[i].username %></td>
-                                                    <td><%= order[i].useraddress %></td>
-                                                    <td><%= order[i].userphone %></td>
-                                                    <td><%= order[i].productname %></td>
-                                                    <td><%= order[i].productprice %></td>
-                                                    <td><%= order[i].productquantity %></td>
-                                                    <td><%= order[i].date %></td>
-                                                    <td class="row"> 
-                                                        <form style="margin-bottom: 13px; margin-top: 10px; " action="/account/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
-                                                          <button class="btn btn-danger delete" type="submit">Delete</button>
-                                                        </form>
-                                                      </td>                                                  
-                                                </tr>
-                                            <% } %>
-                                        </tbody>
-                                    </table>
-                                <% } %>
-                                <% if(!order.length) { %>
-                                    <p style="font-size: 10px;" class="text-center">No Orders  </p>
-                                <% } %>
+                              <% if(order.length) { %>
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Invoiceid</th>
+                                    <th scope="col">username</th>
+                                    <th scope="col">address</th>
+                                    <th scope="col">phone</th>
+                                    <th scope="col">productname</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">quantity</th>
+                                    <th scope="col">date</th>
+                                    <th scope="col">Action</th>     
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% for(let i = 0; i < order.length; i++) { %>
+                                    <tr>
+                                      <% if(order[i].invoiceid == checkorder && i == 0){ %>
+                                        <th scope="row"><%= checkorder %></th>
+                                        <% }else if(order[i].invoiceid == checkorder){ %>
+                                          <th scope="row"> </th> 
+                                        <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
+                                          <th scope="row"> </th> 
+                                        <% }else{ %>
+                                          <th scope="row"><%= order[i].invoiceid %></th> 
+                                        <% } %>      
+                                        <td><%= order[i].username %></td>
+                                        <td><%= order[i].useraddress %></td>
+                                        <td><%= order[i].userphone %></td>
+                                        <td><%= order[i].productname %></td>
+                                        <td><%= order[i].productprice %></td>
+                                        <td><%= order[i].productquantity %></td>
+                                        <td style="width: 100px;"><%= order[i].date %></td>
+                                        <td> 
+                                            <form action="/account/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
+                                              <button style="font-size: 8px;" class="btn btn-danger delete" type="submit">Delete</button>
+                                            </form>
+                                        </td>                                    
+                                    </tr>
+                                <% } %>            
+                                </tbody>
+                              </table>
+                              <% } %>
                         </div>
                     </div>
-                </div>
-              
-            </div>
-        
-        
+                </div>       
+            </div> 
         </main>
     </div>
 </div>

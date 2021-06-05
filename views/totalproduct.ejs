@@ -107,49 +107,58 @@ crossorigin="anonymous">
             <a href="/store/allproduct"><i class="fas fa-store"></i> &nbsp; Go to sopping </a>
           </div>
           <% }else{ %>
-          <table class="table table-hover">
-              <thead>
-                  <tr>
-                      <td>Item Description</td>
-                      <td>Price</td>
-                      <td>Quantity</td>
-                      <td>Line total</td>
-                  </tr>
-              </thead>
-              <tbody>
-                <% if(cartproduct) { %>
-                  <% cartproduct.forEach(m => { %> 
-                  <tr>
-                      <td>
-                          <div class="media">
-                              <img class="mr-3 img-fluid" src="<%= m.coverImagePath %>">
-                              <div class="media-body">
-                                  <p class="mt-0 title"><%= m.productname %></p>
-                                  <p class="title3"><%= m.productcategory %></p>
-                                  <form action="/cart/removecart?ids=<%= m.productname %>" method="POST">
-                                    <button style="padding: 0px 2px;" class="btn btn-danger" type="submit">REMOVE</button>
-                                  </form>
-                              </div>
-                          </div>
-                      </td>
-                      <td>$ <%= m.productprice %></td>
-                      <form action="/cart/updatecarts?idss=<%= m.productname %>" method="POST">
-                        <td><input style="width: 50px; border-radius: 5px; border: 1px solid gray; padding: 0;text-align: center;" onChange="this.form.submit();" class="cart-quantity-input" type="number" name="quantity" min="1" max="<%= m.productmaxquantity %>" value="<%= m.productquantity %>"></td>
-                      </form> 
-                      <td>$ <%= (m.productprice*m.productquantity).toFixed(2) %></td>
-                  </tr>
-                  <% }) %> 
-                  <% } %> 
-                
-              </tbody>
-          </table>
-          <% } %>
+        <div class="card">
+         
+          <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                        <td>Item Description</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Line total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% if(cartproduct) { %>
+                    <% cartproduct.forEach(m => { %> 
+                    <tr>
+                        <td>
+                            <div class="media">
+                                <img class="mr-3 img-fluid" src="<%= m.coverImagePath %>">
+                                <div class="media-body">
+                                    <p class="mt-0 title"><%= m.productname %></p>
+                                    <p class="title3"><%= m.productcategory %></p>
+                                    <form class="remove" action="/cart/removecart?ids=<%= m.productname %>" method="POST">
+                                      <button style="padding: 0px 2px;" class="btn btn-danger" type="submit">REMOVE</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                        <td>$ <%= m.productprice %></td>
+                        <form action="/cart/updatecarts?idss=<%= m.productname %>" method="POST">
+                          <td><input style="width: 50px; border-radius: 5px; border: 1px solid gray; padding: 0;text-align: center;" onChange="this.form.submit();" class="cart-quantity-input" type="number" name="quantity" min="1" max="<%= m.productmaxquantity %>" value="<%= m.productquantity %>"></td>
+                        </form> 
+                        <td>$ <%= (m.productprice*m.productquantity).toFixed(2) %></td>
+                    </tr>
+                    <% }) %> 
+                    <% } %> 
+                  
+                </tbody>
+                </table>
+                <% } %>
+              </div>
+            
+          </div>
+      </div>
       </section> 
   </div>
   <% if(!cartproduct.length) { %>
+   
   <% }else{ %>
   <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
-    <div class="row my-3 gy-3">
+    <div class="row total">
         <div style="margin-left:70%;">
             <h4>Subtotal : <span style="font-size: 15px; margin-left: 30px;" class="cart-total-subtotal" >$ <%= subtotal %></span></h4>
         </div>    

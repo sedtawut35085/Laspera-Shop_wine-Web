@@ -58,7 +58,7 @@
     <!-- <div class="col-12 col-md-4 col-lg-2">
         <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
     </div> -->
-    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+    <div style="margin-right: 80px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
         <div class="dropdown">
             <button style="font-size: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
               <%= infouser[0].username %>
@@ -247,7 +247,7 @@
                               </div>
                               <div style="margin-bottom: 10px;" class="form-group">
                                 <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: #8C7741; padding: 5px 0px; margin-top: -1px; position: absolute;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
-                                <div scope="row" class="imgpro"><img style="width: 80px;" src="<%= editpros[0].coverImagePath %>" alt="" class="ui image">     
+                                <div scope="row" class="imgpro"><img style="width: 120px;" src="<%= editpros[0].coverImagePath %>" alt="" class="ui image">     
                                
                                 </div>
                             </div>    
@@ -272,6 +272,30 @@
 <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+<div style="top: 20%; border-radius: 25px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      <form method="POST" action="/account/updateimgproduct">
+          <div class="modal-header">
+              <h2 class="modal-title">&nbsp;Edit Image </h2>
+                  <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
+                      <span>&times;</span>
+                  </button>
+          </div>
+          <div class="modal-body">     
+            <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
+              <label style="margin-left: -10px; margin-bottom: 10px; font-size: 12px;" for="img" >Image </label>
+              <div style="margin-bottom: 0px; margin-left: 40px; width: 200px; " class="ui field">
+                  <input type="file" name="img" class="filepond filepond--item ui image small" required>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 5px;" class="modal-footer">
+              <button type="submit" class="btn btn-secondary" >Save</button>
+          </div>
+      </form>
+      </div>
+  </div>
+</div>
 </body>
 </html>

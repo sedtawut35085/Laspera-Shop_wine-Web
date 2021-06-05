@@ -83,6 +83,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
   router.get('/creditcard', async (req,res,next) => {
     var infocreditcard = await userss.findById(res.locals.currentUser._id).populate('creditcard').exec()
+    const infouser  = await userss.find({username:res.locals.currentUser.username})
     console.log(infocreditcard)
     console.log(infocreditcard.creditcard[0]._id)
     try{
@@ -90,28 +91,60 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
           name: res.locals.currentUser.username,
           amountcart: amountcart,
           infocreditcard,
+          infouser
         });
       }catch (err){
         console.log("err: "+ err); 
       }
   });
 
-  router.get('/dashboard' , async function(req,res){
+  router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
     let checkorder = 0
+    let suminvoice = 0
+    let sumpurchase = 0
+    let sumuser = 0
+    let sumproduct = 0
+    let countredwine = await Product.countDocuments({category: 'Red Wine'});
+    let countwhitewine = await Product.countDocuments({category: 'White Wine'});
+    let countrosewine = await Product.countDocuments({category: 'Rose Wine'});
+    let countdessertwine = await Product.countDocuments({category: 'Dessert Wine'});
+    let countsparklingwine = await Product.countDocuments({category: 'Sparkling Wine'});
     const infouser = await userss.find({username: res.locals.currentUser.username})
     const order = await invoice.find();
+    sumuser = await userss.countDocuments();
+    sumproduct = await Product.countDocuments();
     try{
       checkorder = order[0].invoiceid
     }catch{
       
     }
-
+    var datetime = new Date().toLocaleString('en-US', {
+      timeZone: 'Asia/Bangkok'
+    });
+    try{
+      for(let i=0;;i++){
+        sumpurchase += order[i].sumofproduct
+        suminvoice = order[i].invoiceid
+      }
+    }catch(err){
+      console.log('err: ' + err)
+    }
     res.render('dashboard.ejs',{
       order,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
       infouser,
-      checkorder
+      checkorder,
+      datetime,
+      sumpurchase,
+      suminvoice,
+      sumuser,
+      sumproduct,
+      countredwine,
+      countwhitewine,
+      countrosewine,
+      countdessertwine,
+      countsparklingwine
     })
   })
   
@@ -119,7 +152,6 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     try{
       const infouser = await userss.find({username: res.locals.currentUser.username})
         const product  = await Product.find();
-        console.log('Product : '+ product)
         res.render("seller.ejs", {
           product,
           name: res.locals.currentUser.username,
@@ -132,14 +164,14 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
   });
   
 
-  // router.get('/dashboard', async (req,res,next) => {
-  //   const infouser = await userss.find({username: res.locals.currentUser.username})
-  //   res.render("dashboard.ejs", {
-  //     name: res.locals.currentUser.username,
-  //     amountcart: amountcart,
-  //     infouser
-  //   });
-  // });
+  router.get('/sellproduct', async (req,res,next) => {
+    const infouser = await userss.find({username: res.locals.currentUser.username})
+    res.render("sellproduct.ejs", {
+      name: res.locals.currentUser.username,
+      amountcart: amountcart,
+      infouser
+    });
+  });
 
   router.post('/addaddress', async(req,res)=>{
     console.log('add address')
@@ -179,9 +211,11 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         quantity,
         date,
       });
-     
       try{
-        saveImage(product, img);
+        console.log('req.body.img: ' + req.body.img)
+        console.log('req.body.name: ' + req.body.name)
+        saveImage(product, req.body.img);
+        console.log('succes save image')
          const newProduct = await product.save();
          console.log(newProduct);  
          alert("Product name " + req.body.name + " has been packed in store.")
@@ -213,6 +247,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     console.log('msg : '+ msg )
     console.log('updateimgprofile')
     const updateuser = new userss({})
+    console.log('req.body.img: ' + req.body.img)
     saveImage(updateuser, req.body.img);
     await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
     alert("Change image profile success.")
@@ -270,7 +305,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
        )
     await invoice.findByIdAndRemove(req.query.idss)
     alert("remove order id " + removepros + " finish.")
-    res.redirect('/account/order')
+    res.redirect('/account/dashboard')
   }) 
 
   router.post('/removestore', async(req,res)=>{

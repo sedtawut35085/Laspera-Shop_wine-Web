@@ -1970,6 +1970,13 @@ nav{
     color: #8C7741;
     font-family: 'Dancing Script', cursive;
   }
+
+@media only screen and (min-width: 1446px) {
+  .icon6{
+    display: none;
+  }
+}
+
 /* ========= Footer ======== */
 .footer {
   background-color: var(--black);

@@ -69,7 +69,7 @@ display: none;
     <!-- <div class="col-12 col-md-4 col-lg-2">
         <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
     </div> -->
-    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+    <div style="margin-right: 80px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
         <div class="dropdown">
             <button style="font-size: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
               <%= infouser[0].username %>
@@ -148,7 +148,7 @@ display: none;
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
                 </ol>
             </nav>
@@ -167,50 +167,45 @@ display: none;
                         </h5>
                         <div class="card-body">
                             <div class="table-responsive">
-                              <% if(product.length) { %>
-                                <table class="table">
-                                    <thead>
-                                        <tr style="font-size: 10px;">
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th  scope="col">Selling Date</th>
-                                            <th style="margin-right: -50px;" scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for(let i = 0; i < product.length; i++) { %>
-                                            <tr>
-                                                <th scope="row" style="width: 8%;" class="imgpro"><img src="<%= product[i].coverImagePath %>" alt="" class="ui image"></th>
-                                                <td><%= product[i].name %></td>
-                                                <td><%= product[i].category %></td>
-                                                <td><%= product[i].price %> $</td>
-                                                <td><%= product[i].quantity %></td>
-                                                <td style="width: 100px;"><%= product[i].date %></td>
-                                                <td style="margin-left: 30px;" class="row">
-                                                 <div style="margin-left: -35px; margin-top: 10px;" class="col">
-                                                  <form action="/account/editproduct?ids=<%= product[i].name %>" method="POST">
-                                                    <button style="font-size: 10px;" class="btn btn-success edit" type="submit">Edit</button>
-                                                  </form>
-                                                 </div>
-                                                    <div style="margin-bottom: 22px; margin-top: 10px; margin-left: -20px;" class="col">
-                                                      <form action="/account/removestore?ids=<%= product[i].name %>" method="POST">
-                                                        <button  style="font-size: 10px;" class="btn btn-danger delete" type="submit">Delete</button>
-                                                      </form>
-                                                    </div>
-                                                  </td>                                                  
-                                            </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            <% } %>
-                  
-                            <!-- if result is empty -->
-                            <% if(!product.length) { %>
-                                <p class="text-center">No Products !! </p>
-                            <% } %>
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Selling Date</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% for(let i = 0; i < product.length; i++) { %>
+                                    <tr>
+                                        <th scope="row"><img style="max-width: 70px;" src="<%= product[i].coverImagePath %>" alt="" class="ui image"></th>
+                                        <td><%= product[i].name %></td>
+                                        <td><%= product[i].category %></td>
+                                        <td><%= product[i].price %> $</td>
+                                        <td><%= product[i].quantity %></td>
+                                        <td style="width: 100px;"><%= product[i].date %></td>
+                                        <td> 
+                                          <form action="/account/editproduct?ids=<%= product[i].name %>" method="POST">
+                                          <button style="font-size: 10px;" class="btn btn-success edit" type="submit">Edit</button>
+                                        </form>
+                                      </td>
+                                        <td>
+                                          <form action="/account/removestore?ids=<%= product[i].name %>" method="POST">
+                                            <button  style="font-size: 10px;" class="btn btn-danger delete" type="submit">Delete</button>
+                                          </form>
+                                        </td>
+                                                                                    
+                                    </tr>
+                                <% } %>
+                                  
+                                </tbody>
+                              </table>
+                              
                             </div>
                           
                         </div>

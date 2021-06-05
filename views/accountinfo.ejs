@@ -42,14 +42,9 @@
               FilePond.parse(document.body)
       })
     </script>
-    <style>
-      .filepond--credits {
-        display: none;
-      }
-     </style>
+  
     </head>
     <body>      
-  
     <nav style="background-color: black;" class="navbar navbar-light p-3 ">
       <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
           <a class="navbar-brand logo" href="/">
@@ -62,7 +57,7 @@
       <!-- <div class="col-12 col-md-4 col-lg-2">
           <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
       </div> -->
-      <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+      <div style="margin-right: 80px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
           <div class="dropdown">
               <button style="font-size: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                 <%= infouser[0].username %>
@@ -70,7 +65,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <!-- <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li> -->
-                <li><a style="font-size: 10px;" class="dropdown-item" href="/account/logout">Sign out</a></li>
+                <li><a style="font-size: 10px; width: 10px;" class="dropdown-item" href="/account/logout">Sign out</a></li>
               </ul>
             </div>
       </div>
@@ -133,8 +128,6 @@
                           <span class="ml-2">Dashboard</span>
                         </a>
                     </li>
-                    
-    
                     <% } %>
                 </ul>
               </div>
@@ -148,124 +141,60 @@
               </nav>
               <h1 class="h2">Account</h1>
               <p>Manage your personal information for the safety of this account</p>
-              <!-- <div class="row my-4">
-                  <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                      <div class="card">
-                          <h5 class="card-header">Customers</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">345k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">18.2% increase since last month</p>
+              <div class="row my-4">
+                <div class="col-12 col-md-8 col-lg-5 mb-4 mb-lg-0">
+                    <div style="border: 0px;" class="card">
+                        <div class="card-body">
+                          <form action="/account/updateprofile" method="post">
+                            <div class="form-group">
+                              <label style="font-size: 17px; margin-bottom: 15px;">Username:</label>
+                              <h4 style="margin-bottom: 20px; color: gray;"><%= infouser[0].username %></h4>
+                            </div>
+                            <div class="form-group frame">
+                              <label style="font-size: 17px;  margin-bottom: 15px;">Password:</label>
+                              <input type="password" class="form-control box" name="password" value="************" autocomplete="off">
+                            </div>
+                            <div class="form-group" style="margin-top: 40px; " >
+                             <input style="font-size: 13px;" type="submit" class="btn btn-info" value="Save">   
+                            </form>
+                            <div style="margin-top: 30px;" class="form-group">
+                              <label style="font-size: 16px;  margin-bottom: 0px;">Delete Account</label>
+                          </div>
+                          <div style="margin-top: 15px;" class="form-group" >
+                            <form action="/account/deleteaccount?id=<%= infouser[0]._id %>" method="post">
+                              <div class="form-group" style="margin-top: 5px; " >
+                                  <input type="submit" style="margin-left: 0px; font-size: 12px;" class="btn btn-danger" value="Delete">        
+                            </div>
+                          </div>
                           </div>
                         </div>
-                  </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Revenue</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">$2.4k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">4.6% increase since last month</p>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Purchases</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">43</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-danger">2.6% decrease since last month</p>
-                          </div>
-                        </div>
-                  </div>
-                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
-                      <div class="card">
-                          <h5 class="card-header">Traffic</h5>
-                          <div class="card-body">
-                            <h5 class="card-title">64k</h5>
-                            <p class="card-text">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success">2.5% increase since last month</p>
-                          </div>
                       </div>
-                  </div>
-              </div> -->
-              <div class="row">
-                  <div class="col-12 col-xl-8 mb-4 mb-lg-0 mt-5">
-                      <div class="card">
-                          <h5 class="card-header">Latest transactions</h5>
-                          <div class="card-body">
-                              <div class="table-responsive">
-                                  <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col">Order</th>
-                                          <th scope="col">Product</th>
-                                          <th scope="col">Customer</th>
-                                          <th scope="col">Total</th>
-                                          <th scope="col">Date</th>
-                                          <th scope="col"></th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">17371705</th>
-                                          <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                          <td>johndoe@gmail.com</td>
-                                          <td>€61.11</td>
-                                          <td>Aug 31 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">17370540</th>
-                                          <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                          <td>jacob.monroe@company.com</td>
-                                          <td>$153.11</td>
-                                          <td>Aug 28 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">17371705</th>
-                                          <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                          <td>johndoe@gmail.com</td>
-                                          <td>€61.11</td>
-                                          <td>Aug 31 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">17370540</th>
-                                          <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                          <td>jacob.monroe@company.com</td>
-                                          <td>$153.11</td>
-                                          <td>Aug 28 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">17371705</th>
-                                          <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                          <td>johndoe@gmail.com</td>
-                                          <td>€61.11</td>
-                                          <td>Aug 31 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">17370540</th>
-                                          <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                          <td>jacob.monroe@company.com</td>
-                                          <td>$153.11</td>
-                                          <td>Aug 28 2020</td>
-                                          <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                              </div>
-                              <a href="#" class="btn btn-block btn-light">View all</a>
+                </div>
+                <div class="col-12 col-md-8 mb-4 mb-lg-0 col-lg-3">
+                    <div style="border: 0px;" class="card">
+                        <h5 class="mt-3" >Image:</h5>
+                        <div class="card-body">
+                          <a style="font-size: 10px;  color: #8C7741; padding: 5px 0px; margin-top: 1px;" href="#" data-toggle="modal" data-target="#myModal">
+                            <% if(infouser[0].img == null ){ %>
+                              Add image
+                            <% }else{ %>
+                              Edit image
+                            <% } %>
+                            </a>
+                          <div scope="row" class="mt-4">
+                            <% if(infouser[0].img == null ){ %>
+                              <img style="width: 130px; border: 2px solid rgb(179, 177, 177); box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="https://www.ormistonhospital.co.nz/wp-content/uploads/2016/05/No-Image.jpg" alt="" class="ui image">
+                              <% }else{ %>
+                                <img style="width: 130px; border: 2px solid rgb(179, 177, 177); box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" src="<%= infouser[0].coverImagePath %>" alt="" class="ui image">
+                              <% } %>        
                           </div>
+                        </div>
                       </div>
-                  </div>
+                </div>
                 
-              </div>
-          
+               
+            </div>
+             
           </main>
       </div>
   </div>
@@ -422,35 +351,36 @@
       </div>
   </div>   
  
-    <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade " id="myModal">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-          <form method="POST" action="/account/updateimgprofile">
-              <div class="modal-header">
-                  <h2 class="modal-title">&nbsp;Image Profile</h2>
-                      <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
-                          <span>&times;</span>
-                      </button>
-              </div>
-              <div style="background-color: white;" class="modal-body">     
-                <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
-                  <div style="margin-bottom: -20px; margin-left: 19%; width: 200px; " class="ui field">
-                      <input style="height: 50px;" type="file" name="img" class="filepond filepond--item ui image small" required>    
-                  </div>
-                </div>
-              </div>
-              <div style="margin-bottom: 5px;" class="modal-footer">
-                  <button type="submit" class="btn btn-secondary" >Save</button>
-              </div>
-          </form>
-          </div>
-      </div>
-    </div>
+   
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
           crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
           crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
           crossorigin="anonymous"></script> -->
+          <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade " id="myModal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <form method="POST" action="/account/updateimgprofile">
+                    <div class="modal-header">
+                        <h2 class="modal-title">&nbsp;Image Profile</h2>
+                            <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
+                                <span>&times;</span>
+                            </button>
+                    </div>
+                    <div style="background-color: white;" class="modal-body">     
+                      <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
+                        <div style="margin-bottom: -20px; margin-left: 19%; width: 200px; " class="ui field">
+                            <input style="height: 50px;" type="file" name="img" class="filepond filepond--item ui image small" required>    
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin-bottom: 5px;" class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" >Save</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+          </div>
         </body>
 </html>

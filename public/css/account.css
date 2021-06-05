@@ -10,7 +10,10 @@
 .nav-item .active{
     color: #8C7741;
 }
-
+.imgpro{
+    max-width: 100px;
+    max-height: 100px;
+}
 .sidebar {
     position: fixed;
     top: 0;
@@ -22,14 +25,29 @@
     z-index: 99;
 }
 
+.box{
+    width: 500px;
+    height: 40px;
+    font-size: 12px;
+}
+
 .breadcrumb-item a{
     color: #8C7741;
 }
+
+.nav-item a:hover{
+    color: #8C7741;
+}
+
 
 @media (max-width: 767.98px) {
     .sidebar {
         top: 11.5rem;
         padding: 0;
+        
+    }
+    .navbar-toggler{
+        background-color: #646463;
         
     }
 }
@@ -43,6 +61,33 @@
         top: 0;
         position: sticky;
         z-index: 999;
-       
     }
 }
+
+@media (max-width: 1532px) {
+    .box{
+        width: 420px;
+    }
+}
+@media (max-width: 1284px) {
+    .box{
+        width: 330px;
+    }
+}
+
+@media (max-width: 548px) {
+    .box{
+        width: 300px;
+    }
+}
+
+@media (max-width: 348px) {
+    .box{
+        width: 250px;
+    }
+}
+
+
+.filepond--credits {
+    display: none;
+  }
