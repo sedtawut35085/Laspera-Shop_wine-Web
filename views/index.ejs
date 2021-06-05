@@ -15,40 +15,20 @@
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
   <title>Laespela</title>
 </head>
-
 <body>
-  <nav class="navi"> 
-    <!--menu-bar----------------------------------------->
-    <div class="navigation">
-      <!--logo------------>
-      <a href="/" class="logo"><img src="images/logo12.png"></a>
-      <!--menu-icon------------->
-      <div class="toggle"></div>
-      <!--menu----------------->
-      <% if(name == '') { %> 
-        <ul style="margin-left: -40px;" class="menu menu2">
-          <li class="nav-item">
-            <a href="#home" class="nav-link scroll-link">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="/store/allproduct" class="nav-link">Store</a>
-          </li>
-          <li class="nav-item">
-            <a href="#category" class="nav-link scroll-link">Category</a>
-          </li>
-          <li class="nav-item">
-            <a href="#blogss" class="nav-link scroll-link">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a href="#shop" class="nav-link scroll-link">Brands</a>
-          </li>
-          
-          <!-- <li class="nav-item">
-            <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
-          </li> -->
-        </ul>
-        <%  }else{ %> 
-          <ul style="margin-left: 30px;" class="menu">
+  
+  <!-- Header -->
+  <header id="home" class="header">
+    <nav class="navi"> 
+      <!--menu-bar----------------------------------------->
+      <div class="navigation">
+        <!--logo------------>
+        <a href="/" class="logo"><img src="images/logo12.png"></a>
+        <!--menu-icon------------->
+        <div class="toggle"></div>
+        <!--menu----------------->
+        <% if(name == '') { %> 
+          <ul style="margin-left: -40px;" class="menu menu2">
             <li class="nav-item">
               <a href="#home" class="nav-link scroll-link">Home</a>
             </li>
@@ -62,90 +42,110 @@
               <a href="#blogss" class="nav-link scroll-link">Blog</a>
             </li>
             <li class="nav-item">
-              <a href="#shop" class="nav-link scroll-link">Brands</a>
-            </li> 
+              <a href="#brands" class="nav-link scroll-link">Brands</a>
+            </li>
+            
             <!-- <li class="nav-item">
               <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
             </li> -->
           </ul>
-        
-        <%  } %> 
-     
-      <!--right-menu----------->
-      
-      <div class="right-menu">
-        <% if(name != '') { %> 
-          <% if(infouser.img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
-            </a>
-          <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-            </a>
-          <% } %> 
-        <% }else{ %> 
-        <a style="margin-left: 50px;" href="/account" class="user">
-          <i class="far fa-user"></i>
-        </a>
-        <% }%> 
-        <a href="javascript:void(0);" class="search">
-         <i class="fas fa-search"></i>
-       </a>
-        <a href="/cart/totalproducts">
-          <i class="fas fa-shopping-cart">
-            <span class="num-cart-product"><%= amountcart %></span>
-          </i>
-        </a>
-      </div>
-      </div>
-    </nav>
-    <!--search-bar----------------------------------->
-  <form action="/store/search" method="POST">
-    <div class="search-bar">
+          <%  }else{ %> 
+            <ul style="margin-left: 30px;" class="menu">
+              <li class="nav-item">
+                <a href="#home" class="nav-link scroll-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="/store/allproduct" class="nav-link">Store</a>
+              </li>
+              <li class="nav-item">
+                <a href="#category" class="nav-link scroll-link">Category</a>
+              </li>
+              <li class="nav-item">
+                <a href="#blogss" class="nav-link scroll-link">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="#brands" class="nav-link scroll-link">Brands</a>
+              </li> 
+              <!-- <li class="nav-item">
+                <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
+              </li> -->
+            </ul>
+          
+          <%  } %> 
        
-      <!--search-input------->
-      <div class="search-input">
-      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
-      <button class="btnsearch" type="submit">
-        <i class="fas fa-search"></i>
-      </button>
-      <!--cancel-btn--->
-      <a href="javascript:void(0);" class="search-cancel">
-        <i class="fas fa-times"></i>
-      </a>
+        <!--right-menu----------->
+        
+        <div class="right-menu">
+          <% if(name != '') { %> 
+            <% if(infouser.img == null) { %> 
+              <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
+              <a href="/account" class="user">
+              <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
+              </a>
+            <% }else{ %> 
+              <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
+              <a href="/account" class="user">
+              <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+              </a>
+            <% } %> 
+          <% }else{ %> 
+          <a style="margin-left: 50px;" href="/account" class="user">
+            <i class="far fa-user"></i>
+          </a>
+          <% }%> 
+          <a href="javascript:void(0);" class="search">
+           <i class="fas fa-search"></i>
+         </a>
+          <a href="/cart/totalproducts">
+            <i class="fas fa-shopping-cart">
+              <span class="num-cart-product"><%= amountcart %></span>
+            </i>
+          </a>
+        </div>
+        </div>
+      </nav>
+      <!--search-bar----------------------------------->
+    <form action="/store/search" method="POST">
+      <div class="search-bar">
+         
+        <!--search-input------->
+        <div class="search-input">
+        <input type="text" placeholder="Search For Product By Name" name="productsearch" />
+        <button class="btnsearch" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+        <!--cancel-btn--->
+        <a href="javascript:void(0);" class="search-cancel">
+          <i class="fas fa-times"></i>
+        </a>
+      
+      </div>
+      </div>
+    </form>
     
-    </div>
-    </div>
-  </form>
-  
+  </header>
 
   <!-- Main -->
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="glide" id="">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides glide__hero">
+
             <li class="glide__slide">
-                <section class="home" id="home">
-                  <div class="home-slider owl-carousel">                
-                      <div class="item">
-                          <img src="images/bg39.jpeg" alt="">
-                          <div class="content">
-                              <h3>WINE</h3>
-                              <p>"You can choose to drink it or use it to cook. Our wines are imported from every country."</p>
-                              
-                              <!-- <a href="#"><button class="btn">discover</button></a> -->
-                          </div>
-                      </div>
-                  </div>                
-                  </section>
+              <div class="banner">
+                <div class="banner-content">
+                  <span>New Inspiration 2020</span>
+                  <h1>WINE!</h1>
+                  <h3>"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</h3>
+                  <div class="buttons-group">
+                    <a href="/store/allproducts"><button>SHOP NOW</button></a>
+                  </div>
+                </div>
             </li>
+ 
           </ul>
-        </div>
+
       </div>
     </section>
 
@@ -207,8 +207,9 @@
         
       </div> -->
     </section>
-    <!-- story2 -->
-    <section class="story2">
+
+     <!-- story2 -->
+     <section class="story2">
       <div class="row">
         <div class="column">
           <img class="imgstory3" src="https://images.unsplash.com/photo-1566213911111-2e52480e8e7e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt=""> 
@@ -309,37 +310,35 @@
       </div>
     </section>
 
-    <section class="section shop" id="shop">
+    <div class="section brands container" id="brands">
       <h2 class="title">Brands</h2>
-      <div class="section brands container">
-        <div class="glide" id="glide2">
-          <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides">
-              <li class="glide__slide">
-                <img src="./images/brand1.png.crdownload" alt="">
-              </li>
-              <li class="glide__slide">
-                <img src="./images/brand8.png" alt="">
-              </li>
-              <li class="glide__slide">
-                <img src="./images/brand3.png" alt="">
-              </li>
-              <li class="glide__slide">
-                <img src="./images/brand4.webp" alt="">
-              </li>
-              <li class="glide__slide">
-                <img src="./images/brand5.png" cla alt="">
-              </li>
-              <li class="glide__slide">
-                <img src="./images/brand6.png.crdownload" alt="">
-              </li>
-            </ul>
-          </div>
+      <div class="glide" id="glide2">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <img src="./images/brand1.png.crdownload" alt="">
+            </li>
+            <li class="glide__slide">
+              <img src="./images/brand8.png" alt="">
+            </li>
+            <li class="glide__slide">
+              <img src="./images/brand3.png" alt="">
+            </li>
+            <li class="glide__slide">
+              <img src="./images/brand4.webp" alt="">
+            </li>
+            <li class="glide__slide">
+              <img src="./images/brand5.png" cla alt="">
+            </li>
+            <li class="glide__slide">
+              <img src="./images/brand6.png.crdownload" alt="">
+            </li>
+          </ul>
         </div>
       </div>
-     </section>    
-  </main>
-  <!-- Footer -->
+
+    </div>
+    <!-- Footer -->
   <footer id="footer" class="section footer">
     <div class="container">
       <div class="footer-container">
@@ -396,6 +395,10 @@
     </div>
     </div>
   </footer>
+
+  <!-- Glidejs Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+
  
 </body>
 
