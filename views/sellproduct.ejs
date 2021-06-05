@@ -155,7 +155,6 @@
                         </h5>
                         <div class="card-body">
                             <div class="table-responsive">
-                              <% if(product.length) { %>
                                 <table class="table">
                                   <form action="/account/addproduct" method="post">
                                     <div style="margin-bottom: 10px;" class="form-group">
@@ -259,14 +258,7 @@
                                     </div>
                                 </form>
                                 </table>
-                            <% } %>
-                  
-                            <!-- if result is empty -->
-                            <% if(!product.length) { %>
-                                <p class="text-center">No Products !! </p>
-                            <% } %>
                             </div>
-                          
                         </div>
                     </div>
                 </div>
