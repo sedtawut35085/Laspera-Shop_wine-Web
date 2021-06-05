@@ -56,236 +56,177 @@ display: none;
     <title>seller</title>
 </head>
 <body>
-  <nav class="navi"> 
-    <!--menu-bar----------------------------------------->
-    <div class="navigation">
-      <!--logo------------>
-      <a href="/" class="logo"><img src="/images/logo12.png"></a>
-      <!--menu-icon------------->
-      <div class="toggle"></div>
-      <!--menu----------------->
-      <ul style="margin-left: 70px;" class="menu">
-        <li class="nav-item">
-          <a href="/" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="/store/allproduct" class="nav-link">Store</a>
-        </li>
-       
-      </ul>
-      <!--right-menu----------->
-      <div class="right-menu">
-        <% if(name != '') { %> 
-          <% if(infouser[0].img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
-            </a>
-          <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="<%= infouser[0].coverImagePath %>" alt="">
-            </a>
-          <% } %> 
-        <% }else{ %> 
-        <a style="margin-left: 50px;" href="/account" class="user">
-          <i class="far fa-user"></i>
-        </a>
-        <% }%> 
-        <a href="javascript:void(0);" class="search">
-         <i class="fas fa-search"></i>
-       </a>
-        <a href="/cart/totalproducts">
-          <i class="fas fa-shopping-cart">
-            <span class="num-cart-product"><%= amountcart %></span>
-          </i>
-        </a>
-      </div>
-      </div>
-    </nav>
-    <!--search-bar----------------------------------->
-   
-  <form action="/store/search" method="POST">
-    <div class="search-bar">
-       
-      <!--search-input------->
-      <div class="search-input">
-      <input type="text" placeholder="Search For Product By Name" name="productsearch" />
-      <button class="btnsearch" type="submit">
-        <i class="fas fa-search"></i>
-      </button>
-      <!--cancel-btn--->
-      <a href="javascript:void(0);" class="search-cancel">
-        <i class="fas fa-times"></i>
-      </a>
-    
-    </div>
-    </div>
-  </form>
 
-
+  <nav style="background-color: black;" class="navbar navbar-light p-3 ">
+    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <a class="navbar-brand logo" href="/">
+          <img src="/images/logo12.png">
+        </a>
+        <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <!-- <div class="col-12 col-md-4 col-lg-2">
+        <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+    </div> -->
+    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+        <div class="dropdown">
+            <button style="font-size: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              <%= infouser[0].username %>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <!-- <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Messages</a></li> -->
+              <li><a style="font-size: 10px;" class="dropdown-item" href="/account/logout">Sign out</a></li>
+            </ul>
+          </div>
+    </div>
+</nav>
 <div class="container-fluid">
-  <div class="row">   
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky">
-          <ul class="nav flex-column">
-              
-              <li style="margin-top: 90px; margin-bottom: 30px;" class="nav-item">
-                  <div class="row">
-                      <div  class="col">
-                        <div style="margin-top: 115px;"  class="comment-avatar">
-                          <% if(infouser[0].img == null ){ %>
-                           <img src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg">
-                           <% }else{ %>
-                             <img src="<%= infouser[0].coverImagePath %>" alt="">
-                           <% } %>
-                         </div> 
-                      </div>
-                      <div style="font-family: 'Merriweather', serif;" class="col">
-                          <p style="margin-left: -25px; margin-top: -72px; font-size: 25px;"><%= infouser[0].username %></p>
-                          <small style="font-size: 12px; margin-top: -10px; margin-left: -24px; position: absolute; color: gray;" >Manage your personal information.</small>
-                      </div>
-                  </div>
-                                  
-              </li>
-              
-              <li class="nav-item">
-                  <a  style="margin-left: 50px; margin-bottom: 30px; margin-top: 20px;" class="nav-link" href="/account/accountinfo">
-                    <i class="far fa-user"></i>
-                    <span class="ml-2">Account</span>
-                  </a>                      
-              </li>
-              <li class="nav-item">
-                  <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" href="/account/email">
-                    <i class="far fa-envelope"></i>
-                    <span class="ml-2">Email</span>
+    <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a style="margin-left: 20px; margin-top: 10px; font-size: 20px;" class="nav-link" aria-current="page" href="#">
+                    <% if(infouser[0].img == null ){ %>
+                      <img style="border: 2px solid #fff;border-radius: 50%; box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg">
+                      <% }else{ %>
+                        <img style="border: 2px solid #fff;border-radius: 50%; box-shadow: 0 1px 2px rgba(0, 0, 0, .2);" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+                      <% } %> 
+                    <span style="font-size: 20px;" class="ml-2"><%= infouser[0].username.toUpperCase() %></span>
                   </a>
                 </li>
-              <li class="nav-item">
-                <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" href="/account/address">
-                  <i class="fas fa-map-pin"></i>
-                  <span class="ml-2">Address & Phone</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a style="margin-left: 50px; margin-bottom: 30px;"  class="nav-link" href="/account/creditcard">
-                  <i class="far fa-credit-card"></i>
-                  <span class="ml-2">Creditcard</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a style="margin-left: 50px; margin-bottom: 30px;" class="nav-link" aria-current="page" href="/account/historybuyer">
-                      <i class="fab fa-product-hunt"></i>
-                    <span class="ml-2">Order</span>
-                  </a>
-              </li>
-              <% if(name == 'admin') { %>
                 <li class="nav-item">
-                    <a style="margin-left: 50px; margin-bottom: 30px; " class="nav-link active" aria-current="page" href="/account/seller">
-                        <i class="fab fa-sellsy"></i>
-                      <span class="ml-2">Seller</span>
+                    <a  style="margin-left: 30px; margin-bottom: 30px; margin-top: 30px; font-size: 15px;" class="nav-link" href="/account/accountinfo">
+                      <i class="far fa-user"></i>
+                      <span class="ml-2">Account</span>
+                    </a>                      
+                </li>
+                <li class="nav-item">
+                    <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px; " class="nav-link" href="/account/email">
+                      <i class="far fa-envelope"></i>
+                      <span class="ml-2">Email</span>
+                    </a>
+                  </li>
+                <li class="nav-item">
+                  <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link" href="/account/address">
+                    <i class="fas fa-map-pin"></i>
+                    <span class="ml-2">Address & Phone</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;"  class="nav-link" href="/account/creditcard">
+                    <i class="far fa-credit-card"></i>
+                    <span class="ml-2">Creditcard</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link" aria-current="page" href="/account/historybuyer">
+                      <i class="fas fa-history"></i>
+                      <span class="ml-2">History Purchase</span>
                     </a>
                 </li>
-                <% } %>
-                <form action="/account/logout">
-                  <div style="margin-top: 50px; margin-left: 65px;">
-                    <button class="btn-secondary btn"> Log out &nbsp; <i class="fas fa-sign-out-alt"></i></button>
-                  </div>
-                </form>
-           
-            </ul>
-      </div>
-  </nav>
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-          <nav style="z-index: -100;" aria-label="breadcrumb">
-              <ol style="font-size: 20px;" class="breadcrumb">
-                  <li class="breadcrumb-item"><a style="color: black;"  href="/">Home</a></li>
-                  <li class="breadcrumb-item active" style="color: #8C7741;" aria-current="page">Seller</li>
-              </ol>
-          </nav>
-          <h1 style="font-size: 24px;" class="h2">Seller</h1>
-          <p style="font-size: 13px;">Manage your products.</p>
-          <hr>
-          <div class="row my-4">              
-             <div style="margin-left: 100px; margin-top: 20px;" class="col-12 col-md-6 col-lg-9 mb-4 mb-lg-0">
-                <div class="">
-                    <div class="">
-                      <i style="font-size: 25px; margin-left: -20px;" class="fab fa-sellsy"></i>&nbsp;&nbsp; <span style="font-size: 25px;">Seller</span> 
-                    </div>
-                    <div class="card-body">        
-  <div class="container" style="margin-top: 0px; margin-left: -15px;">
-    <a style="margin-bottom: 30px; margin-left: -20px;" href="/account/order" class="btn btn-info">Customer Orders</a>
-    <br><br>
-    <div class="card">
-        <div class="card-header">
-            <ul class="nav nav-pills w-100">
-                <li class="nav-link">Sell Products</li>
-                <li class="nav-link ml-auto">
-                    <a style="font-size: 10px;" href="/account/sellproduct" class="nav-link active">Add Product</a>
+                <% if(name == 'admin') { %>
+                  <li class="nav-item">
+                    <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link active" aria-current="page" href="/account/seller">
+                      <i class="fas fa-store"></i>
+                      <span class="ml-2">Manage Products</span>
+                    </a>
                 </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            <% if(product.length) { %>
-                <table class="table">
-                    <thead>
-                        <tr style="font-size: 10px;">
-                            <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th  scope="col">Selling Date</th>
-                            <th style="margin-right: -50px;" scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(let i = 0; i < product.length; i++) { %>
-                            <tr>
-                                <th  scope="row" class="imgpro"><img src="<%= product[i].coverImagePath %>" alt="" class="ui image"></th>
-                                <td><%= product[i].name %></td>
-                                <td><%= product[i].category %></td>
-                                <td><%= product[i].price %> $</td>
-                                <td><%= product[i].quantity %></td>
-                                <td style="width: 100px;"><%= product[i].date %></td>
-                                <td style="margin-left: 30px;" class="row">
-                                 <div style="margin-left: -35px; margin-top: 10px;" class="col">
-                                  <form action="/account/editproduct?ids=<%= product[i].name %>" method="POST">
-                                    <button class="btn btn-success edit" type="submit">Edit</button>
-                                  </form>
-                                 </div>
-                                    <div style="margin-bottom: 22px; margin-top: 10px;" class="col">
-                                      <form action="/account/removestore?ids=<%= product[i].name %>" method="POST">
-                                        <button class="btn btn-danger delete" type="submit">Delete</button>
-                                      </form>
-                                    </div>
-                                  </td>                                                  
-                            </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-            <% } %>
+                  <li class="nav-item">
+                      <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link" aria-current="page" href="/account/dashboard">
+                          <i class="fab fa-sellsy"></i>
+                        <span class="ml-2">Dashboard</span>
+                      </a>
+                  </li>
   
-            <!-- if result is empty -->
-            <% if(!product.length) { %>
-                <p class="text-center">No Products !! </p>
-            <% } %>
-        </div>
-    </div>
-  </div>
-
-
+                  <% } %>
+              </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
+                </ol>
+            </nav>
+            <h1 class="h2">Manage</h1>
+            <p style="margin-bottom: -10px;">Manage All Products</p>
+            <div class="row">
+                <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-5">
+                    <div class="card">
+                        <h5 class="card-header">
+                          <ul class="nav nav-pills w-100">
+                            <li class="nav-link">Manage Products</li>
+                            <li class="nav-link ml-auto">
+                                <a style="font-size: 10px;" href="/account/sellproduct" class="nav-link active">Sell Product</a>
+                            </li>
+                        </ul>
+                        </h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                              <% if(product.length) { %>
+                                <table class="table">
+                                    <thead>
+                                        <tr style="font-size: 10px;">
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th  scope="col">Selling Date</th>
+                                            <th style="margin-right: -50px;" scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i = 0; i < product.length; i++) { %>
+                                            <tr>
+                                                <th scope="row" style="width: 8%;" class="imgpro"><img src="<%= product[i].coverImagePath %>" alt="" class="ui image"></th>
+                                                <td><%= product[i].name %></td>
+                                                <td><%= product[i].category %></td>
+                                                <td><%= product[i].price %> $</td>
+                                                <td><%= product[i].quantity %></td>
+                                                <td style="width: 100px;"><%= product[i].date %></td>
+                                                <td style="margin-left: 30px;" class="row">
+                                                 <div style="margin-left: -35px; margin-top: 10px;" class="col">
+                                                  <form action="/account/editproduct?ids=<%= product[i].name %>" method="POST">
+                                                    <button style="font-size: 10px;" class="btn btn-success edit" type="submit">Edit</button>
+                                                  </form>
+                                                 </div>
+                                                    <div style="margin-bottom: 22px; margin-top: 10px; margin-left: -20px;" class="col">
+                                                      <form action="/account/removestore?ids=<%= product[i].name %>" method="POST">
+                                                        <button  style="font-size: 10px;" class="btn btn-danger delete" type="submit">Delete</button>
+                                                      </form>
+                                                    </div>
+                                                  </td>                                                  
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            <% } %>
+                  
+                            <!-- if result is empty -->
+                            <% if(!product.length) { %>
+                                <p class="text-center">No Products !! </p>
+                            <% } %>
+                            </div>
+                          
+                        </div>
                     </div>
-               </div>
-           </div>
-         </div>         
-      </main>
-  </div>
+                </div>
+              
+            </div>
+        
+        </main>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
- 
-  <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 </html>

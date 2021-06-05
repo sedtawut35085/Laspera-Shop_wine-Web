@@ -96,7 +96,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       }
   });
 
-  router.get('/order' , async function(req,res){
+  router.get('/dashboard' , async function(req,res){
     let checkorder = 0
     const infouser = await userss.find({username: res.locals.currentUser.username})
     const order = await invoice.find();
@@ -106,7 +106,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       
     }
 
-    res.render('order.ejs',{
+    res.render('dashboard.ejs',{
       order,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
@@ -130,22 +130,16 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         console.log("err: "+ err); 
       }
   });
+  
 
-  router.get('/sellproduct', async (req,res,next) => {
-    try{
-      const infouser = await userss.find({username: res.locals.currentUser.username})
-        const product  = await Product.find();
-        console.log('Product : '+ product)
-        res.render("sellproduct.ejs", {
-          product,
-          name: res.locals.currentUser.username,
-          amountcart: amountcart,
-          infouser
-        });
-      }catch (err){
-        console.log("err: "+ err); 
-      }
-  });
+  // router.get('/dashboard', async (req,res,next) => {
+  //   const infouser = await userss.find({username: res.locals.currentUser.username})
+  //   res.render("dashboard.ejs", {
+  //     name: res.locals.currentUser.username,
+  //     amountcart: amountcart,
+  //     infouser
+  //   });
+  // });
 
   router.post('/addaddress', async(req,res)=>{
     console.log('add address')

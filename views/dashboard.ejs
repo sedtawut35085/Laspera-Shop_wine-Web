@@ -43,7 +43,7 @@
     display: none;
        }
     </style>
-    <title>add products</title>
+    <title>Dashboard</title>
 </head>
 <body>
   <nav style="background-color: black;" class="navbar navbar-light p-3 ">
@@ -118,18 +118,17 @@
                 </li>
                 <% if(name == 'admin') { %>
                   <li class="nav-item">
-                    <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link active" aria-current="page" href="/account/seller">
+                    <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link" aria-current="page" href="/account/seller">
                       <i class="fas fa-store"></i>
                       <span class="ml-2">Manage Products</span>
                     </a>
                 </li>
                   <li class="nav-item">
-                      <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link" aria-current="page" href="/account/dashboard">
+                      <a style="margin-left: 30px; margin-bottom: 30px; font-size: 15px;" class="nav-link active" aria-current="page" href="/account/dashboard">
                           <i class="fab fa-sellsy"></i>
                         <span class="ml-2">Dashboard</span>
                       </a>
                   </li>
-  
                   <% } %>
               </ul>
             </div>
@@ -139,139 +138,113 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
-                    <li class="breadcrumb-item active" aria-current="page">Sell Products</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Products</li>
                 </ol>
             </nav>
-            <h1 class="h2">Sell</h1>
-            <p>Sell All Products</p>
-            <div class="row">
+            <h1 class="h2">Edit Products</h1>
+            <p>Manage Products</p>
+          <div class="row my-4">
+                  <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                      <div class="card">
+                          <h5 class="card-header">Customers</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">345k</h5>
+                            <p class="card-text">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-success">18.2% increase since last month</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                      <div class="card">
+                          <h5 class="card-header">Revenue</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">$2.4k</h5>
+                            <p class="card-text">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-success">4.6% increase since last month</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                      <div class="card">
+                          <h5 class="card-header">Purchases</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">43</h5>
+                            <p class="card-text">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-danger">2.6% decrease since last month</p>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                      <div class="card">
+                          <h5 class="card-header">Traffic</h5>
+                          <div class="card-body">
+                            <h5 class="card-title">64k</h5>
+                            <p class="card-text">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-success">2.5% increase since last month</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
                 <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-5">
-                  <a style="margin-bottom: 10px; font-size: 10px; margin-top: -35px;"href="/account/seller" class="btn btn-info">Back</a>
                     <div class="card">
-                        <h5 class="card-header">
-                          <ul class="nav nav-pills w-100">
-                            <li class="nav-link">Sell Products</li> 
-                        </ul>
-                        </h5>
+                        <h5 class="card-header">History your order</h5>
+                        <% if(order.length) { %>
                         <div class="card-body">
                             <div class="table-responsive">
-                              <% if(product.length) { %>
-                                <table class="table">
-                                  <form action="/account/addproduct" method="post">
-                                    <div style="margin-bottom: 10px;" class="form-group">
-                                        <label style="font-size: 12px; margin-bottom: 10px;">Product Name</label>
-                                        <input type="text" class="form-control" name="name" autocomplete="off" required>
-                                    </div>
-                                    <div style="margin-bottom: 10px;" class="form-group">            
-                                      </textarea>  
-                                        <label style="font-size: 12px; margin-bottom: 10px;">Detail</label>
-                                        <textarea type="text" class="form-control" name="detail" required>
-                                        </textarea>
-                                    </div>
-                                    <div style="margin-bottom: 10px;" class="form-group">
-                                        <label style="font-size: 12px; margin-bottom: 10px;">Category</label>
-                                        <input type="text" class="form-control" name="category" required>
-                                    </div>
-                                    <div style="margin-bottom: 10px;" class="form-group">
-                                        <label style="font-size: 12px; margin-bottom: 10px;">Price</label>
-                                        <input type="text" class="form-control" name="price" required>
-                                    </div>
-                                    <div style="margin-bottom: 10px;" class="form-group">
-                                      <label style="font-size: 12px; margin-bottom: 10px;">Agign:</label>
-                                      <input type="text" class="form-control" name="aging" required>
-                                  </div>
-                                  <div style="margin-bottom: 10px;" class="form-group">
-                                    <label style="font-size: 12px; margin-bottom: 10px;">Alcohol:</label>
-                                    <input type="text" class="form-control" name="alcohol" required>
-                                </div>
-                                <div style="margin-bottom: 10px;" class="form-group">
-                                  <label style="font-size: 12px; margin-bottom: 10px;">Brand:</label>
-                                  <input type="text" class="form-control" name="brand" required>
-                              </div>
-                              <div style="margin-bottom: 10px;" class="form-group">
-                      
-                                <div class="row">
-                                  <div class="col-2">
-                                    <label style="font-size: 12px; margin-bottom: 10px;">sweet taste:</label>
-                                    <select class="form-control" name="sweettaste">
-                                      <option value="-">-</option>
-                                      <option value="0">0</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                     
-                                    </select>                                 
-                                  </div>
-                                  <div class="col-2">
-                                    <label style="font-size: 12px; margin-bottom: 10px;">acidity taste:</label>
-                                    <select class="form-control" name="aciditytaste">
-                                      <option value="-">-</option>
-                                      <option value="0">0</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                    </select>                                  
-                                  </div>
-                                  <div class="col-2">
-                                    <label style="font-size: 12px; margin-bottom: 10px;">body taste:</label>
-                                    <select class="form-control" name="bodytaste">
-                                      <option value="-">-</option>
-                                      <option value="0">0</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                    </select>  
-                                  </div>
-                                  <div class="col-2">
-                                    <label style="font-size: 12px; margin-bottom: 10px;">finish taste:</label>
-                                    <select class="form-control" name="finishtaste">
-                                      <option value="-">-</option>
-                                      <option value="0">0</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                    </select>  
-                                  </div>
-                                </div>
-                               
-                            </div>
-                                    <div style="margin-bottom: 10px;" class="form-group">
-                                      <label style="font-size: 12px; margin-bottom: 10px;">Quantity</label>
-                                      <input type="text" class="form-control" name="quantity" required>
-                                  </div>
-                                  <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
-                                    <label style="margin-left: -10px; margin-bottom: 10px; font-size: 12px;" for="img" >Image </label>
-                                    <div style="margin-bottom: 30px; margin-left: -15px; width: 200px; " class="ui field">
-                                        <input type="file" name="img" class="filepond filepond--item ui image small" required>
-                                    </div>
-                                  </div>
-                                   
-                                    <div style="margin-bottom: 20px; margin-top: 10px;" class="form-group">
-                                        <input type="submit" class="btn btn-info" value="Add product">
-                                    </div>
-                                </form>
-                                </table>
-                            <% } %>
-                  
-                            <!-- if result is empty -->
-                            <% if(!product.length) { %>
-                                <p class="text-center">No Products !! </p>
-                            <% } %>
-                            </div>
-                          
+                                <% if(order.length) { %>
+                                    <table class="table">
+                                        <thead>
+                                            <tr style="font-size: 10px;">
+                                                <th scope="col">Invoiceid</th>
+                                                <th scope="col">username</th>
+                                                <th scope="col">address</th>
+                                                <th scope="col">phone</th>
+                                                <th scope="col">productname</th>
+                                                <th scope="col">price</th>
+                                                <th scope="col">quantity</th>
+                                                <th scope="col">date</th>
+                                                <th style="margin-right: -50px;"  scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(let i = 0; i < order.length; i++) { %>
+                                                <tr>  
+                                                  <% if(order[i].invoiceid == checkorder && i == 0){ %>
+                                                    <td><%= checkorder %></td>  
+                                                    <% }else if(order[i].invoiceid == checkorder){ %>
+                                                      <td> </td>  
+                                                    <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
+                                                      <td> </td>  
+                                                    <% }else{ %>
+                                                      <td><%= order[i].invoiceid %></td>  
+                                                    <% } %>      
+                                                    <td><%= order[i].username %></td>
+                                                    <td><%= order[i].useraddress %></td>
+                                                    <td><%= order[i].userphone %></td>
+                                                    <td><%= order[i].productname %></td>
+                                                    <td><%= order[i].productprice %></td>
+                                                    <td><%= order[i].productquantity %></td>
+                                                    <td><%= order[i].date %></td>
+                                                    <td class="row"> 
+                                                        <form style="margin-bottom: 13px; margin-top: 10px; " action="/account/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
+                                                          <button class="btn btn-danger delete" type="submit">Delete</button>
+                                                        </form>
+                                                      </td>                                                  
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                <% } %>
+                                <% if(!order.length) { %>
+                                    <p style="font-size: 10px;" class="text-center">No Orders  </p>
+                                <% } %>
                         </div>
                     </div>
                 </div>
               
             </div>
+        
         
         </main>
     </div>
