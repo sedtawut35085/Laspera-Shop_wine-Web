@@ -52,11 +52,11 @@ router.get('/',  async(req,res) => {
 });
 
 router.get('/login', async (req,res,next) => {
-  try{
+  if(res.locals.currentUser){
     name = res.locals.currentUser.username
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }catch{
-    console.log('error')
+  }else{
+    name = ''
   }
   res.render('login.ejs',{
     name:  name,
@@ -112,5 +112,6 @@ router.post('/register', function async (req,res){
           res.redirect('/login');
       });
 });
+
 
 module.exports = router;

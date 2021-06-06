@@ -192,7 +192,7 @@ nav{
 .toggle{
   display: none;
 }
-@media(max-width:1010px){
+@media(max-width:1160px){
 
   nav{
       position: relative;
@@ -208,7 +208,7 @@ nav{
   .menu{
       position: absolute;
       top: 110px;
-      left: -30px;
+      left: -160px;
       background-color: #ffffff;
       border-bottom: 4px solid #8C7741;
       width: 100%;
@@ -389,6 +389,18 @@ nav{
   }
 
 }
+@media(max-width:548px){
+  .right-menu{
+    margin-left: -100px;
+  }
+
+}
+@media(max-width:424px){
+  .right-menu{
+    margin-left: -150px;
+  }
+
+}
 
 /* <!--search-bar-----------------------------------> */
 
@@ -431,7 +443,7 @@ nav{
 }
 
 .imgcenter{
-  width:3%; height: 18%;
+  width:3%; height: 22%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -544,7 +556,7 @@ nav{
     max-height: 100%;
   }
 
-  .user .avatar{
+  .avatar{
     border: 1px solid rgb(73, 73, 73);
     background-color:  #b9ac88;
     border-radius: 0%;
@@ -560,15 +572,12 @@ nav{
     margin-right: -5px;
   }
   
-  .user .avatar img{
+  .avatar img{
     display: block;
     height: auto;
     width: 100%;
   }
 
-
-
-  
 
 /* Hero Area */
 .hero,
@@ -627,7 +636,6 @@ nav{
 .buttons-group button:hover {
   background-color: rgb(51, 51, 51);
 }
-
 @media only screen and (max-width: 1260px) {
   .hero,
   .glide__hero,
@@ -2003,7 +2011,7 @@ nav{
 }
 
 .footer-center a:hover {
-  color: var(--pink);
+  color: #8C7741;
 }
 
 .footer-center div {
@@ -2029,4 +2037,54 @@ nav{
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
+}
+
+.dropbtn {
+  background-color: black;
+  color: #8C7741;
+  padding: 14px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  transition: 0.5s all;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  font-size: 12px;
+  transition: 0.5s all;
+  color: black;
+  padding: 10px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.fa-caret-down{
+  color: gray;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  transition: 0.5s all;
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+
+  background-color: black;
 }

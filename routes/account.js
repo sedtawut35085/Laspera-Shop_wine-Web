@@ -164,7 +164,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
   });
   
 
-  router.get('/sellproduct', async (req,res,next) => {
+  router.get('/sellproduct', middleware.checkAdmin, async (req,res,next) => {
     const infouser = await userss.find({username: res.locals.currentUser.username})
     res.render("sellproduct.ejs", {
       name: res.locals.currentUser.username,
@@ -329,7 +329,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     req.logout();
     amountcart = 0
     name = ''
-    res.redirect('/account/login')
+    res.redirect('/')
   });
 
   router.get('/logout', async (req,res) =>{
@@ -339,7 +339,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     allproduct = false
     name = ''
     amountcart = 0
-    res.redirect('/login')
+    res.redirect('/')
   });
 
   function saveImage(product, imgEncoded) {

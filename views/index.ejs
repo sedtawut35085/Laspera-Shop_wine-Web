@@ -16,14 +16,13 @@
   <title>Laespela</title>
 </head>
 <body>
-  
   <!-- Header -->
   <header id="home" class="header">
     <nav class="navi"> 
       <!--menu-bar----------------------------------------->
       <div class="navigation">
         <!--logo------------>
-        <a href="/" class="logo"><img src="images/logo12.png"></a>
+        <a href="/" class="logo"><img src="/images/logo12.png"></a>
         <!--menu-icon------------->
         <div class="toggle"></div>
         <!--menu----------------->
@@ -50,7 +49,7 @@
             </li> -->
           </ul>
           <%  }else{ %> 
-            <ul style="margin-left: 30px;" class="menu">
+            <ul style="margin-left: 160px;" class="menu">
               <li class="nav-item">
                 <a href="#home" class="nav-link scroll-link">Home</a>
               </li>
@@ -78,16 +77,18 @@
         <div class="right-menu">
           <% if(name != '') { %> 
             <% if(infouser.img == null) { %> 
-              <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-              <a href="/account" class="user">
               <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
-              </a>
             <% }else{ %> 
-              <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-              <a href="/account" class="user">
               <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-              </a>
             <% } %> 
+            <div class="dropdown">
+              <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
+            <div class="dropdown-content">
+              <a href="/account">Account</a>
+              <a href="/account/historybuyer">Purchase</a>
+              <a href="/account/logout">Log out</a>
+            </div>
+          </div>
           <% }else{ %> 
           <a style="margin-left: 50px;" href="/account" class="user">
             <i class="far fa-user"></i>

@@ -34,7 +34,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul style="margin-left: 10px;" class="menu">
+        <ul style="margin-left: 100px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -47,16 +47,18 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <a class="user userimg" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-            <a href="/account" class="user">
             <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
-            </a>
           <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><span class="nameuser"><%= name %></span></a>
-            <a href="/account" class="user">
             <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-            </a>
           <% } %> 
+          <div class="dropdown">
+            <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
+          <div class="dropdown-content">
+            <a href="/account">Account</a>
+            <a href="/account/historybuyer">Purchase</a>
+            <a href="/account/logout">Log out</a>
+          </div>
+        </div>
         <% }else{ %> 
         <a style="margin-left: 50px;" href="/account" class="user">
           <i class="far fa-user"></i>
@@ -133,7 +135,7 @@
                       <h5 style="color: rgb(114, 112, 112); margin-bottom: 20px; margin-top: -20px; font-size: 12px;">Number of stock : <%= product.quantity %></h5>       
                     </div>
                     <div>
-                      <button type = "submit" class = "btn3 shop-item-button">
+                      <button type = "submit" class = "btn3 shop-item-button btn-center">
                         <i class = "fas fa-shopping-cart"></i> &nbsp; Add to Cart 
                         </button>
                     </div>
@@ -314,88 +316,6 @@
         <% } %>
       </div>
      </div>
-      <!-- <div class="new-arrival2">
-        <div class="arrival-heading">
-          <div class="row">
-            <div class="col2">
-              <div class="titleallpr2">
-                <strong>Comments</strong>
-              </div>              
-            </div>
-          </div>
-        </div>
-      </div> -->
-<!-- <div class="comm">
-  <div class="comment-form">
-    <form class="form" action="/store/addcomment?id=<%= product._id %>" method="POST">
-      <div class="form-row">
-        <textarea
-           class="input form-control"
-           type="text" 
-           name='comment'
-           ng-model="cmntCtrl.comment.text"
-           placeholder="your comment here ..."
-           required></textarea>
-      </div>
-      <div class="form-row">
-        <input type="submit" value="Add Comment">
-      </div>
-    </form>
-  </div>
-  <div class="comment">   
-  <% if(product.comments) { %>
-   <% product.comments.forEach(m => { %>
-   
-      <div class="comment-box">
-        <div class="comment-text"><%= m.text %></div>
-        <div class="comment-footer">
-          <div class="comment-info">
-            <span class="comment-author">
-              <%= m.author.username %>
-            </span>
-            <span class="comment-date"><%= m.date %></span>
-          </div>
-        </div>
-      </div>
-
-    <% }) %>
-   <% } %> 
-  </div>  
-   <% if(!product.comments.length) { %>
-    <p class="no-comment">No Comments &nbsp; <i style="font-size: 30px;" class="far fa-comments"></i> </p>
-   <% } %>
-</div> -->
-      <!-- <section style="margin-top: 8%;" class="new-arrival">
-          <div class="arrival-heading">
-          <div class="new-arrival3">
-            <div class="row">
-              <div class="col2">
-                <div class="titleallpr2">
-                  <strong>Related Product</strong>
-                </div>              
-              </div>
-            </div>
-          </div>
-          </div>
-        </section>
-          <div class="product-container">
-            <% for(let i = 0; i < 4; i++){ %>
-            <form action="/store/oneproduct?id=<%= relateproduct[i]._id %>" method="GET">
-              <a href="/store/oneproduct?id=<%= relateproduct[i]._id%>">
-              <div class="product-box">
-                <div class="product-img">
-                  <img src="<%= relateproduct[i].coverImagePath %>" alt="" class="ui image" width="20%">
-                </div>
-                <div class="product-details">       
-                  <p class="product-name"><%=  relateproduct[i].name %></p>
-                  <span name="price" class="p-price">price : <%= relateproduct[i].price %> $</span>
-              </div>  
-              </div>    
-              </a> 
-            </form> 
-            <% } %>
-          </div>
-         -->
       </main>   
       <footer id="footer" class="section footer">
         <div class="container">

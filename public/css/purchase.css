@@ -13,7 +13,7 @@
 
 .homey a:hover{
   text-decoration: none;
-  color: red;
+  color: #8C7741;
 }
 
 
@@ -234,7 +234,7 @@ tfoot td {
   }
   
   .footer-center a:hover {
-    color: var(--pink);
+    color: #8C7741;
   }
   
   .footer-center div {
