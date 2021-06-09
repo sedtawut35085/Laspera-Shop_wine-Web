@@ -25,7 +25,7 @@
       <div class="toggle"></div>
       <!--menu----------------->
       <% if(name == '') { %> 
-        <ul style="margin-left: -5%;" class="menu menu2">
+        <ul style="margin-left: -6%;" class="menu menu2">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -34,7 +34,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul style="margin-left: 100px;" class="menu">
+        <ul style="margin-left: -110px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -47,10 +47,12 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
+            <div class="avatar1">
+              <span><%= infouser.username.substring(0, 1).toUpperCase() %></span>
+            </div>
           <% }else{ %> 
-            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-          <% } %> 
+            <img style="margin-left: -50px;" class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+          <% } %>
           <div class="dropdown">
             <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
           <div class="dropdown-content">
@@ -306,8 +308,13 @@
             <div class="product-img">
               <img src="<%= relateproduct[i].coverImagePath %>" alt="" class="ui image" width="20%">
             </div>
-            <div class="product-details">       
-              <p class="product-name"><%=  relateproduct[i].name %></p>
+            <div class="product-details">     
+              <% if(relateproduct[i].name.length > 32) { 
+                name2 = relateproduct[i].name.substring(0, 30) + '..';
+              }else{
+                name2 = relateproduct[i].name
+              } %>   
+              <p class="product-name"><%=  name2 %></p>
               <span name="price" class="p-price">price : <%= relateproduct[i].price %> $</span>
           </div>  
           </div>    

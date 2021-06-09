@@ -5,6 +5,7 @@ var   express = require('express'),
       creditcards = require('../models/creditcard'),
       productcart = require("../models/productcart"),
       Product = require('../models/product'),
+      comment = require("../models/comments"),
       middleware = require('../middleware');
 
 let alert = require('alert'); 
@@ -15,7 +16,7 @@ let editpros;
 
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
- router.get('/', async (req,res,next) => {
+ router.get('/',middleware.isLoggedIn, async (req,res,next) => {
     console.log(' +  ' +  res.locals.currentUser)
     if(res.locals.currentUser == null){
       console.log('no user')
@@ -30,8 +31,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     }
 });
 
- router.get('/accountinfo', async (req,res) => {
-    
+ router.get('/accountinfo',middleware.isLoggedIn, async (req,res) => {
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     console.log('go account info')
     const infouser = await userss.find({username: res.locals.currentUser.username})
@@ -43,7 +43,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       })
   });
 
- router.get('/email',async (req,res) =>{
+ router.get('/email',middleware.isLoggedIn,async (req,res) =>{
     const infouser  = await userss.find({username:res.locals.currentUser.username})
     res.render('accountemail.ejs',
     {
@@ -54,16 +54,16 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     )
   })
 
-  router.get('/address', async (req,res)=>{
+  router.get('/address',middleware.isLoggedIn, async (req,res)=>{
     const infouser  = await userss.find({username:res.locals.currentUser.username})
-    res.render('address.ejs',{
+    res.render('accountaddress.ejs',{
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
       infouser
     })
   })
 
-  router.get('/historybuyer', async (req,res)=>{
+  router.get('/historybuyer',middleware.isLoggedIn, async (req,res)=>{
     let checkorder = 0
     const order  = await invoice.find({username:res.locals.currentUser.username});
     const infouser  = await userss.find({username:res.locals.currentUser.username})
@@ -72,7 +72,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     }catch{
       
     }
-    res.render('historybuyer.ejs',{
+    res.render('accounthistorybuyer.ejs',{
       order,
       infouser,
       name:  res.locals.currentUser.username,
@@ -81,13 +81,13 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     })
   })
 
-  router.get('/creditcard', async (req,res,next) => {
+  router.get('/creditcard',middleware.isLoggedIn, async (req,res,next) => {
     var infocreditcard = await userss.findById(res.locals.currentUser._id).populate('creditcard').exec()
     const infouser  = await userss.find({username:res.locals.currentUser.username})
     console.log(infocreditcard)
     console.log(infocreditcard.creditcard[0]._id)
     try{
-        res.render("creditcard.ejs", {
+        res.render("accountcreditcard.ejs", {
           name: res.locals.currentUser.username,
           amountcart: amountcart,
           infocreditcard,
@@ -96,6 +96,18 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       }catch (err){
         console.log("err: "+ err); 
       }
+  });
+
+  router.get('/review',middleware.isLoggedIn, async (req,res,next) => {
+    req.session.fromUrl = req.originalUrl;
+    const infouser = await userss.find({username: res.locals.currentUser.username})
+    const product  = await Product.find().populate('comments').exec();
+    res.render("accountreview.ejs", {
+      name: res.locals.currentUser.username,
+      amountcart: amountcart,
+      infouser,
+      product
+    });
   });
 
   router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
@@ -129,7 +141,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     }catch(err){
       console.log('err: ' + err)
     }
-    res.render('dashboard.ejs',{
+    res.render('accountdashboard.ejs',{
       order,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
@@ -152,7 +164,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     try{
       const infouser = await userss.find({username: res.locals.currentUser.username})
         const product  = await Product.find();
-        res.render("seller.ejs", {
+        res.render("accountseller.ejs", {
           product,
           name: res.locals.currentUser.username,
           amountcart: amountcart,
@@ -163,13 +175,24 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       }
   });
   
-
   router.get('/sellproduct', middleware.checkAdmin, async (req,res,next) => {
     const infouser = await userss.find({username: res.locals.currentUser.username})
-    res.render("sellproduct.ejs", {
+    res.render("accountsellproduct.ejs", {
       name: res.locals.currentUser.username,
       amountcart: amountcart,
       infouser
+    });
+  });
+
+  router.get('/allreview',middleware.checkAdmin, async (req,res,next) => {
+    req.session.fromUrl = req.originalUrl;
+    const infouser = await userss.find({username: res.locals.currentUser.username})
+    const product  = await Product.find().populate('comments').exec();
+    res.render("accountallreview.ejs", {
+      name: res.locals.currentUser.username,
+      amountcart: amountcart,
+      infouser,
+      product
     });
   });
 
@@ -230,15 +253,40 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
   router.post('/updateemail', async(req,res)=>{
     console.log('updateemail')
     await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
-    alert("Update Done.")
+    alert("Your email has been changed successfully")
     res.redirect('/account/email')
   })
 
-  router.post('/updateprofile', async(req,res)=>{
-    console.log('updateprofile')
-    alert("Update Done.")
+  router.post('/changepassword', function(req, res) {
+    console.log('req.body.oldpassword: ' + req.body.oldpassword)
+    console.log('req.body.newpassword: ' + req.body.newpassword)
+    userss.findOne({ _id:  res.locals.currentUser._id},(err, user) => {
+      if (err) {
+        console.log('error')
+      } else {
+        if (!user) {
+          console.log('user not found')
+        } else {
+          user.changePassword(req.body.oldpassword, req.body.newpassword, function(err) {
+             if(err) {
+               console.log('err ' + err)
+                      if(err.name === 'IncorrectPasswordError'){
+                        console.log('Incorrect password')
+                        alert('Old Password is incorrect')
+                      }else {
+                        console.log('Something went wrong!! Please try again after sometimes.')
+                        alert('Something went wrong!! Please try again after sometimes.')
+                      }
+            } else {
+              alert('Your password has been changed successfully')
+              console.log('Your password has been changed successfully')
+             }
+           })
+        }
+      }
+    }); 
     res.redirect('/account')
-  })
+    });
 
   router.post('/updateimgprofile', async(req,res)=>{
     req.flash('success','Update Img Profile Done!!')
@@ -247,7 +295,6 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     console.log('msg : '+ msg )
     console.log('updateimgprofile')
     const updateuser = new userss({})
-    console.log('req.body.img: ' + req.body.img)
     saveImage(updateuser, req.body.img);
     await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
     alert("Change image profile success.")
@@ -255,10 +302,10 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     res.redirect('/account')
   })
 
-  router.get('/editproduct', async(req,res)=>{
+  router.get('/editproduct',middleware.isLoggedIn, async(req,res)=>{
     infouser = await userss.find({username: res.locals.currentUser.username})
     editpros = await Product.find({name : editpro })
-    res.render('editproduct.ejs',{
+    res.render('accounteditproduct.ejs',{
       editpros,
       name: res.locals.currentUser.username,
       amountcart: amountcart,
@@ -270,12 +317,11 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     editpro = req.query.ids
     console.log(editpros)
     res.redirect('/account/editproduct')
-    
   })
 
   router.post('/updateproduct', async(req,res)=>{
     await Product.update({name: editpro},{$set:{"name": req.body.name,"price": req.body.price,"category": req.body.category,"detail": req.body.detail,"quantity": req.body.quantity,"sweettaste": req.body.sweettaste,"aciditytaste": req.body.aciditytaste,"bodytaste": req.body.bodytaste,"finishtaste": req.body.finishtaste,"brand": req.body.brand,"aging": req.body.aging,"alcohol": req.body.alcohol}})
-    alert('Update Done')
+    alert("Your product has been changed successfully")
     updatepro = ''
     res.redirect('/account/seller') 
   })
@@ -287,12 +333,13 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       saveImage(updateproduct, req.body.img);
       await Product.update({name: editpro},{$set:{"img":updateproduct.img,"imgType":updateproduct.imgType}})
     }
-    alert('Update Img Done')
+    alert("Your Img product has been changed successfully")
     res.redirect('/account/editproduct') 
   })
 
-  router.post('/addcard',async (req,res)=>{ 
+  router.post('/updatecard',async (req,res)=>{ 
     await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
+    alert("Your creditcard has been changed successfully")
     res.redirect('/account/creditcard')
   })
 

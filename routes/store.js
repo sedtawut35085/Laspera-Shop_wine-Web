@@ -10,7 +10,6 @@ var express = require('express'),
 
 let alert = require('alert'); 
 let nowproductt
-let commentid;
 let amountcart = 0;
 let name;
 let infouser;
@@ -95,6 +94,7 @@ router.get('/redproduct' , async(req,res)=>{
       filterprice,
       filteralcohol,
       infouser,
+      checkcategory
     }); 
 })
 
@@ -122,6 +122,7 @@ router.get('/whiteproduct' , async(req,res)=>{
       filterprice,
       filteralcohol,
       infouser,
+      checkcategory
     }); 
 })
   
@@ -149,6 +150,7 @@ router.get('/dessertproduct' , async(req,res)=>{
       filterprice,
       filteralcohol,
       infouser,
+      checkcategory
     }); 
 })
   
@@ -176,6 +178,7 @@ router.get('/roseproduct' , async(req,res)=>{
       filterprice,
       filteralcohol,
       infouser,
+      checkcategory
     }); 
 })
   
@@ -203,6 +206,7 @@ router.get('/sparklingproduct' , async(req,res)=>{
       filterprice,
       filteralcohol,
       infouser,
+      checkcategory,
     }); 
 })
   
@@ -228,7 +232,8 @@ router.get('/allproducts' , async(req,res)=>{
       filterbrand,
       filtercategory,
       filterprice,
-      filteralcohol
+      filteralcohol,
+      checkcategory
     }); 
 })
   
@@ -285,7 +290,8 @@ router.get('/allproduct', async (req,res) => {
           filterbrand,
           filtercategory,
           filterprice,
-          filteralcohol
+          filteralcohol,
+          checkcategory
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -309,7 +315,8 @@ router.get('/allproduct', async (req,res) => {
           filterbrand,
           filtercategory,
           filterprice,
-          filteralcohol
+          filteralcohol,
+          checkcategory
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -333,7 +340,8 @@ router.get('/allproduct', async (req,res) => {
           filterbrand,
           filtercategory,
           filterprice,
-          filteralcohol
+          filteralcohol,
+          checkcategory
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -357,7 +365,8 @@ router.get('/allproduct', async (req,res) => {
           filterbrand,
           filtercategory,
           filterprice,
-          filteralcohol
+          filteralcohol,
+          checkcategory
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -369,7 +378,7 @@ router.get('/allproduct', async (req,res) => {
         if(checkadvance == true){
           product = await Product.find(infoadvance); 
         }else{
-          product  = await Product.find();
+          product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}});
         }  
         res.render("allproduct.ejs", {
           infouser,
@@ -381,7 +390,8 @@ router.get('/allproduct', async (req,res) => {
           filterbrand,
           filtercategory,
           filterprice,
-          filteralcohol
+          filteralcohol,
+          checkcategory
         });    
       }catch (err){
         console.log("err: "+ err);      
@@ -528,6 +538,7 @@ router.post('/advance', async(req,res)=>{
     filterprice = null
     filteralcohol = null
     checkadvance = false
+    checkcategory = 'Wine'
     sortname = 'Sort by'
     con = ''
     res.redirect('/store/allproduct')

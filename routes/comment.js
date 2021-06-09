@@ -37,6 +37,7 @@ router.post('/addcomment',middleware.isLoggedIn, async(req,res)=>{
         {$pull: {comments: req.query.idcomment}}, 
          )
     await comment.findByIdAndRemove(req.query.idcomment)
+    alert('remove comment success')
     res.redirect(req.session.fromUrl)
   })
 

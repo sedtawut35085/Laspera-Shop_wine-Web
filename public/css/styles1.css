@@ -209,7 +209,7 @@ transition: width .3s;
   .menu{
       position: absolute;
       top: 110px;
-      left: -10px;
+      left: 110px;
       background-color: #ffffff;
       border-bottom: 4px solid #8C7741;
       width: 100%;
@@ -223,7 +223,7 @@ transition: width .3s;
   .menu2{
     position: absolute;
     top: 110px;
-    left: 40px;
+    left: 35px;
     background-color: #ffffff;
     border-bottom: 4px solid #8C7741;
     width: 100%;
@@ -2940,7 +2940,7 @@ transition: width .3s;
 }
 
 .clear:hover{
-  color: purple;
+  color: #8C7741;
   transition: all 0.5s;
 }
   
@@ -3720,6 +3720,34 @@ transition: width .3s;
   display: block;
   height: auto;
   width: 100%;
+}
+
+
+.avatar1{
+  position: absolute;
+  border: 1px solid rgb(73, 73, 73);
+  background-color:  #b9ac88;
+  border-radius: 0%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+  height: 20px;
+  overflow: hidden;
+  border-radius: 40px;
+  margin-top: 11px;
+  margin-bottom: 0px;
+  width: 20px;
+  margin-left: -20px;
+  margin-right: -5px;
+}
+
+.avatar1 span{
+  position: absolute;
+    color: #fff;
+    font-size: 1.2rem;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 

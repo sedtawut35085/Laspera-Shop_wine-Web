@@ -20,13 +20,10 @@
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
-      <!--logo------------>
       <a href="/" class="logo"><img src="/images/logo12.png"></a>
-      <!--menu-icon------------->
       <div class="toggle"></div>
-      <!--menu----------------->
       <% if(name == '') { %> 
-        <ul style="margin-left: -5%;" class="menu menu2">
+        <ul style="margin-left: -4%;" class="menu menu2">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -35,7 +32,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul style="margin-left: 130px;" class="menu">
+        <ul style="margin-left: -80px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -43,17 +40,17 @@
             <a href="/store/allproduct" class="nav-link">Store</a>
           </li>
         </ul>
-        
         <%  } %> 
-      
       <!--right-menu----------->
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
+            <div class="avatar1">
+              <span><%= infouser.username.substring(0, 1).toUpperCase() %></span>
+            </div>
           <% }else{ %> 
-            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-          <% } %> 
+            <img style="margin-left: -50px;" class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+          <% } %>
           <div class="dropdown">
             <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
           <div class="dropdown-content">
@@ -79,14 +76,10 @@
       </div>
     </nav>
     <!--search-bar----------------------------------->
-   
   <form action="/store/search" method="POST">
     <div class="search-bar">
-       
-      <!--search-input------->
       <div class="search-input">
       <input type="text" placeholder="Search For Product By Name" name="productsearch" />
-      <!--cancel-btn--->
       <a href="javascript:void(0);" class="search-cancel">
         <i class="fas fa-times"></i>
       </a>
@@ -94,21 +87,34 @@
     </div>
   </form>
       <main>
-        <section class="home" id="home">
+
+   <section class="showcase">
+   
+    <video src="/images/wine2.mp4" muted loop autoplay></video>
+    <!-- <div class="text">
+      <span>New Products 2021</span>
+      <h2>WINE!</h2> 
+      <p>"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</p>
+      <a href="/store/allproducts">SHOP NOW</a>
+    </div> -->
+    <ul class="social">
+      <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+    </ul>
+  </section>
+        <!-- <section class="home" id="home">
             <div class="home-slider owl-carousel">
                 <div class="item">
                     <img src="/images/bg43.png" alt="">
                     <div class="content">
                         <h3>WINE PRODUCTS</h3>
                         <p>"Choose what's right for you or for a gift to someone"</p>
-                        <!-- <a href="#"><button class="btn">discover</button></a> -->
                     </div>
                 </div>
             </div>
-            </section>
-           
+         </section> -->
         <br><br>
-         
         <section class="new-arrival">
           <div class="arrival-heading">
             <div style="margin-bottom: -10px;" class="row">
@@ -127,17 +133,13 @@
                     <option value="newproduct" name="newproduct">Sort by new products</option>
                   </select>
                 </form>   
-                   
               </div>
               <div style="position: absolute; margin-top: 80px; margin-left: 76%; background-color: white;">
                 <button  class="filter"style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
-                
               </div>
-              
             </div>
-           
          </div>
-         <div style="margin-top: 0px; margin-bottom: 0px; margin-left: -30px;" class="row">
+         <div class="row filters">
           <% if(filterbrand){ %>
           <div style="margin-right: 5px;">
             <h5>Brands: <span style="color: gray;"> <%= filterbrand %></span> </h5>
@@ -158,7 +160,12 @@
                 <h5>Alcohol: <span style="color: gray;"> <%= filteralcohol %></span> </h5>
               </div>
            <% } %>
-           <% if(filterbrand || filtercategory || filterprice || filteralcohol){ %>
+           <% if(checkcategory != 'Wine'){ %>
+            <div style="margin-right: 5px;">
+              <h5>Category: <span style="color: gray;"> <%= checkcategory %></span> </h5>
+            </div>
+         <% } %>
+           <% if(filterbrand || filtercategory || filterprice || filteralcohol || checkcategory != 'Wine'){ %>
             <div>
               <a href="/store/clearfilter"><span class="clear">clear</span></a>
             </div>
@@ -187,11 +194,9 @@
                 n=72
               }else{
                 n = product.length     
-              }    
-
+              }   
             }
             %> 
-            
             <% if(product) { %> 
               <!-- <div class="ui small stackable images "> -->
                  <% for(let i = j; i < n; i++){ %>
@@ -209,20 +214,14 @@
                       }else{
                         name2 = product[i].name
                       } %> 
-
-                    
                       <div class="product-details">       
                         <p class="product-name"><%= name2 %></p>
                         <span name="price" class="p-price">price : <%= product[i].price %> $</span>
                     </div>
-                    
-                   
                     </div>    
                     </a> 
                   </form> 
-                  
                  <% } %>
-             <!-- </div> -->
             <% } %>
        </div>
        <% if(!product[j]) { %>
@@ -250,24 +249,12 @@
           <% if(page != 3) { %> 
             <a href="/store/page3"><span style="color: black;">3</span></a>
           <% } %> 
-          <!-- <% if(page == 4) { %> 
-            <a href="/allproduct"><span style="color: brown;">4</span></a>
-          <% } %> 
-          <% if(page != 4) { %> 
-            <a href="/allproduct"><span style="color: black;">4</span></a>
-          <% } %>  -->
           <% if(page != 3) { %> 
             <a style="color: black;" href="/store/nextpage"><span>&#8594;</span></a>
           <% } %> 
-          
-         
-
        </div>
         </section>
-
       </main>
-    
-
     <footer id="footer" class="section footer">
         <div class="container">
           <div class="footer-container">
@@ -364,7 +351,6 @@
                 <label for="Vina Pedrosa"> Vina Pedrosao</label><br>
                 <input type="checkbox" id="Sauternes" name="brand" value="Sauternes">
                 <label for="Sauternes"> Sauternes</label><br>
-                
                 <br>             
               </div>   
             </div>         
@@ -384,49 +370,6 @@
               <input type="checkbox" id="Sparkling Wine" name="category" value="Sparkling Wine">
               <label for="Rose Wine"> Sparkling Wine</label><br>          
             </div>
-            <!-- <p class="title" style="margin-left: 10px; margin-top: -5px; margin-bottom: 10px;">Taste</p>
-            <div style="margin-left: 20px; margin-bottom: 25px; font-size: 12px;">   
-              
-              <select style="margin-right: 5px; font-size: 10px; " class="form-control" id="sweettaste" name="sweettaste">
-                <option value="-">-</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>              
-              </select>
-              <label for="sweettaste"> sweet taste</label><br>               
-              <select style="margin-right: 5px;  font-size: 10px; margin-top: 7px;" class="form-control" id="aciditytaste" name="aciditytaste">
-                <option value="-">-</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>            
-              </select>
-              <label for="aciditytaste"> acidity taste</label><br>         
-              <select style="margin-right: 5px;  font-size: 10px; margin-top: 7px;" class="form-control" id="bodytaste" name="bodytaste">
-                <option value="-">-</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>            
-              </select><label for="bodytaste"> body taste</label><br>      
-              <select style="margin-right: 5px;  font-size: 10px; margin-top: 7px;" class="form-control" id="finishtaste" name="finishtaste">
-                <option value="-">-</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>       
-              </select>
-              <label for="finishtaste"> finish taste</label><br>         
-            </div> -->
             <div>
               <p style="margin-left: 16px; margin-top: -5px; margin-bottom: 2px;">Price</p>
               <input style="font-size: 13px; width: 60px; color: black; margin-left: 7%;" name="price1" type = "number" placeholder="$ 0.00">
@@ -444,15 +387,10 @@
              <button style="margin-bottom: 30px; margin-left: 24%; margin-top: 20px; padding: 5px 20px;" type = "submit" class = "btn4 shop-item-button">
               <span style="color: rgb(88, 87, 87);">Search </span>
           </button>
-          </div>
-          
-           
+          </div>    
           </form>
         </div>
       </div>
       <div id="overlay"></div>
-
-    
-    
 </body>
 </html>

@@ -19,13 +19,9 @@
   <!-- Header -->
   <header id="home" class="header">
     <nav class="navi"> 
-      <!--menu-bar----------------------------------------->
       <div class="navigation">
-        <!--logo------------>
         <a href="/" class="logo"><img src="/images/logo12.png"></a>
-        <!--menu-icon------------->
         <div class="toggle"></div>
-        <!--menu----------------->
         <% if(name == '') { %> 
           <ul style="margin-left: -40px;" class="menu menu2">
             <li class="nav-item">
@@ -43,13 +39,9 @@
             <li class="nav-item">
               <a href="#brands" class="nav-link scroll-link">Brands</a>
             </li>
-            
-            <!-- <li class="nav-item">
-              <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
-            </li> -->
           </ul>
           <%  }else{ %> 
-            <ul style="margin-left: 160px;" class="menu">
+            <ul style="margin-left: -70px;" class="menu">
               <li class="nav-item">
                 <a href="#home" class="nav-link scroll-link">Home</a>
               </li>
@@ -65,21 +57,16 @@
               <li class="nav-item">
                 <a href="#brands" class="nav-link scroll-link">Brands</a>
               </li> 
-              <!-- <li class="nav-item">
-                <a href="/totalproduct" class="nav-link">Cart (<span class="amountcart"><%= amountcart %></span>)</a>
-              </li> -->
-            </ul>
-          
+            </ul>       
           <%  } %> 
-       
-        <!--right-menu----------->
-        
         <div class="right-menu">
           <% if(name != '') { %> 
             <% if(infouser.img == null) { %> 
-              <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
+              <div class="avatar1">
+                <span><%= infouser.username.substring(0, 1).toUpperCase() %></span>
+              </div>
             <% }else{ %> 
-              <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+              <img style="margin-left: -50px;" class="avatar" src="<%= infouser.coverImagePath %>" alt="">
             <% } %> 
             <div class="dropdown">
               <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
@@ -108,52 +95,55 @@
       <!--search-bar----------------------------------->
     <form action="/store/search" method="POST">
       <div class="search-bar">
-         
-        <!--search-input------->
         <div class="search-input">
         <input type="text" placeholder="Search For Product By Name" name="productsearch" />
         <button class="btnsearch" type="submit">
           <i class="fas fa-search"></i>
         </button>
-        <!--cancel-btn--->
         <a href="javascript:void(0);" class="search-cancel">
           <i class="fas fa-times"></i>
-        </a>
-      
+        </a>   
       </div>
       </div>
     </form>
-    
   </header>
-
   <!-- Main -->
   <main>
-    <!-- Hero -->
-    <section class="hero">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides glide__hero">
-
-            <li class="glide__slide">
-              <div class="banner">
-                <div class="banner-content">
-                  <span>New Inspiration 2020</span>
-                  <h1>WINE!</h1>
-                  <h3>"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</h3>
-                  <div class="buttons-group">
-                    <a href="/store/allproducts"><button>SHOP NOW</button></a>
-                  </div>
+    <!-- <section class="home" id="home">
+      <div class="home-slider owl-carousel">
+          <div class="item">
+              <img src="/images/bg44.jpeg" alt="">
+              <div class="content banner-content">
+                <span>New Products 2021</span>
+                <h1>WINE!</h1>
+                <h3 style="font-size: 20px;">"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</h3>
+                <div class="buttons-group">
+                  <a href="/store/allproducts"><button>SHOP NOW</button></a>
                 </div>
-            </li>
- 
-          </ul>
-
+              </div>
+          </div>
       </div>
-    </section>
+   </section> -->
+   
+   <section class="showcase">
+   
+    <video src="/images/wine.mp4" muted loop autoplay></video>
+    <div class="text">
+      <span>New Products 2021</span>
+      <h2>WINE!</h2> 
+      <p>"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</p>
+      <a href="/store/allproducts">SHOP NOW</a>
+    </div>
+    <ul class="social">
+      <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+    </ul>
+  </section>
 
     <!-- Category -->
-    <section class="section category" id="category">
-      <h2 class="title">Category </h2>
-      <!-- <p class="icon4"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines">&nbsp;<i class="fas fa-wine-glass-alt"></i>&nbsp;</i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p> -->
+    <section class="section category" >
+      <h2 class="title" id="category">Category </h2>
       <div class="category-center container">
         <div class="category-box">
           <img src="https://th.wine-now.asia/media/blog/5-type-of-wine/BLOG_5-wine_1.jpg" alt="">
@@ -204,78 +194,79 @@
           </div>
         </div>   
       </div>
-      <!-- <div class="category-center container category2">
-        
-      </div> -->
     </section>
-
-     <!-- story2 -->
-     <section class="story2">
+    <div class="story2">
       <div class="row">
-        <div class="column">
+        <div class="col-5 menu">
           <img class="imgstory3" src="https://images.unsplash.com/photo-1566213911111-2e52480e8e7e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt=""> 
         </div>
-        <div class="column">
+        <div class="col-3 menu">
           <img class="imgstory4" src="https://images.unsplash.com/photo-1582004213095-479fb6950366?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt=""> 
         </div>
-        <div class="column">
-         <div class="infostory2">
-          <h2>Shop Wine</h2>
-          <h6>Detail</h6>
-          <p style="font-size: 13px; margin-left: 40px;" class="icon"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i> <i class="fas fa-wine-glass-alt"></i> <i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
-          <div style="margin-top: 10px;">
-            <p class="info2"> &nbsp;&nbsp; Our shop wines are available in many styles. You can choose to drink it or use it to cook. Our wines are imported from every country. Ensuring delicious, fragrant, safe for every brand, every bottle</p>
+        <div class="col-4">
+          <div class="infostory2">
+            <h2>Shop Wine</h2>
+            <h6>Detail</h6>
+            <p style="font-size: 11px; margin-top: 5px;" class="icon"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i> <i class="fas fa-wine-glass-alt"></i> <i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
+            <p style="font-size: 14px; margin-top: 5px;">Our shop wines are available in many styles. You can choose to drink it or use it to cook. Our wines are imported from every country. Ensuring delicious, fragrant, safe for every brand, every bottle</p>
           </div>
-         </div>
         </div>
       </div>
-    </section>
-
+    </div>
     <!-- food -->
-    <section style="margin-bottom: 50px;" class="section blog" id="blog">  
-      <h2 class="title1">Wine with foods </h2>
+    <section style="margin-bottom: 50px;" class="section blog" id="food">  
+      <h2 class="title1">Food </h2>
       <p style="font-size: 11px; margin-left: 570px;" class="icon6 iconress"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines">&nbsp; <i class="fas fa-wine-glass-alt"></i> &nbsp;</i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
       <div class="blog-container container">
-        <div style="margin-left: 60px; margin-bottom: -150px;" class="page-content">
+        <div class="page-content">
           <div class="card1">
-            <img style="height: 70%;" src="https://image.makewebeasy.net/makeweb/m_750x0/UyayqGCPN/05_OurMenu/Seafood_Paella_bodegaswine.png?v=202012190947" alt="">
-            <h2 class="title">Seafood Paella</h2>
+            <div class="content">
+              <h2 class="title">Seafood Paella</h2>
+              <p class="copy">This saffron-infused paella is loaded with mussels, clams, and shrimp. Cook it on the grill in your biggest skillet for best flavor (no special pan required). It serves a crowd and would be so much fun for your next cookout.</p>  
+            </div>
           </div>
           <div class="card1">
-            <img style="height: 70%;" src="https://image.makewebeasy.net/makeweb/m_750x0/UyayqGCPN/05_OurMenu/Ib%C3%A9rico_Pork_bodegaswine.png?v=202012190947" alt="">
-            <h2 class="title">Ibérico Pork</h2>
+            <div class="content">
+              <h2 class="title">Ibérico Pork</h2>
+              <p class="copy">a Spanish national treasure, to the United States. White Oak Pastures legacy farm together with the Oriol Family tradition formed the American company Iberian Pastures.</p>          
+            </div>
           </div>
           <div class="card1">
-            <img style="height: 70%;" src="https://image.makewebeasy.net/makeweb/m_750x0/UyayqGCPN/05_OurMenu/Cuttlefish_Chili_Garlic_bodegaswine.png?v=202012190947" alt="">
-            <h2 class="title">Cuttlefish Chili Garlic</h2>
+            <div class="content">
+              <h2 class="title">Cuttlefish Chili Garlic</h2>
+              <p class="copy">Garlic and chili are perfect match, their combination can bring out the freshness and mouthfeel of the cuttle fish.</p>       
+            </div>
           </div>
           <div class="card1">
-            <img style="height: 70%;" src="https://image.makewebeasy.net/makeweb/m_750x0/UyayqGCPN/05_OurMenu/Wild_scallop_cold_pasta_bodegaswine.png?v=202012190947" alt="">
-            <h2 class="title">Wild Scallop Cold Pasta</h2>
+            <div class="content">
+              <h2 class="title">Wild Scallop Cold Pasta</h2>
+              <p class="copy">Wild Scallop Cold Pasta With large scallops, adding flavor with yuzu orange and aroma of truffle oil Which is known as black gold, used to make sauce, mixed with angel hair When eaten, it is refreshing.
+                Pair with cold white wine such as Astobiza, perfect for hot weather.</p>
+            </div>
           </div>
       </div>    
       </div>
     </section>
-    <section class="story3">
-      <div class="column">
-        <div class="infostory3">
-         <h2>Our Story</h2>
-         <h6>about us</h6>
-         <p style="font-size: 12px; margin-left: 62px;" class="icon"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i> <i class="fas fa-wine-glass-alt"></i> <i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
-         <div style="margin-top: 10px;">
-           <p class="info3"> &nbsp;&nbsp; Wine originated in the 19th century when world famous scientist Louise Pasteur discovered that "yeast" or micro-mold. It is a substitute for sugar in fruit to alcohol.By using a rather complex reaction Fermentation of grape juice is the natural way to turn wine  into wine. The yeast that is naturally </p>
-         </div>
-        </div>
-       </div>
+
+    <!-- story3 -->
+    <div class="story3">
       <div class="row">
-        <div class="column">
+        <div class="col-4">
+          <div class="infostory3">
+            <h2>Our Story</h2>
+            <h6>about us</h6>
+            <p style="font-size: 11px; margin-top: 5px;" class="icon"><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i> <i class="fas fa-wine-glass-alt"></i> <i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i><i class="fas fa-grip-lines"></i></p>
+            <p style="font-size: 14px; margin-top: 5px;">Wine originated in the 19th century when world famous scientist Louise Pasteur discovered that "yeast" or micro-mold. It is a substitute for sugar in fruit to alcohol.By using a rather complex reaction Fermentation of grape juice is the natural way to turn wine  into wine. The yeast that is naturally</p>
+          </div>
+        </div>
+        <div class="col-3 menu">
           <img class="imgstory5" src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwd2luZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80" alt=""> 
         </div>
-        <div class="column">
+        <div class="col-5 menu">
           <img class="imgstory6" src="https://images.unsplash.com/photo-1561461056-77634126673a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVkJTIwd2luZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt=""> 
-        </div>     
+        </div>
       </div>
-    </section>
+    </div>
     <!-- blog -->
     <section class="section blog blogss" id="blogss">  
       <h2 class="title1">Blogs </h2>
@@ -311,34 +302,39 @@
       </div>
     </section>
 
+    <!-- brands -->
     <div class="section brands container" id="brands">
       <h2 class="title">Brands</h2>
       <div class="glide" id="glide2">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides">
             <li class="glide__slide">
-              <img src="./images/brand1.png.crdownload" alt="">
+              <img src="./images/brand10.webp" cla alt="">
             </li>
             <li class="glide__slide">
-              <img src="./images/brand8.png" alt="">
+              <img src="./images/brand11.png" alt="">
             </li>
             <li class="glide__slide">
-              <img src="./images/brand3.png" alt="">
+              <img src="./images/brand12.png" alt="">
             </li>
             <li class="glide__slide">
-              <img src="./images/brand4.webp" alt="">
+              <img src="./images/brand13.svg" alt="">
             </li>
             <li class="glide__slide">
-              <img src="./images/brand5.png" cla alt="">
+              <img src="./images/brand17.jpeg" alt="">
             </li>
             <li class="glide__slide">
-              <img src="./images/brand6.png.crdownload" alt="">
+              <img src="./images/brand16.jpeg" alt="">
             </li>
+            <li class="glide__slide">
+              <img src="./images/brand18.png" alt="">
+            </li> 
           </ul>
         </div>
       </div>
 
     </div>
+
     <!-- Footer -->
   <footer id="footer" class="section footer">
     <div class="container">
@@ -396,11 +392,6 @@
     </div>
     </div>
   </footer>
-
-  <!-- Glidejs Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
-
- 
 </body>
-
 </html>

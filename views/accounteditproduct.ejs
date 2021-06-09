@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+ <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/account.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+  <script src="/js/index.js" defer></script>
+    <!-- add to document <head> -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+     <!-- add before </body> -->
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            FilePond.registerPlugin(
+                FilePondPluginImageResize,
+                FilePondPluginImagePreview,
+                FilePondPluginFileEncode
+                );
+                FilePond.setOptions({
+                    stylePanelAspectRatio: 150/100,
+                    imageResizeTargetWidth: 100,
+                    imageResizeTargetHeight: 150
+                })
+                FilePond.parse(document.body)
+        })
+    </script>
+    <style>
+      .filepond--credits {
+    display: none;
+       }
+    </style>
+    <title><%= editpros[0].name %> - Laespela</title>
+</head>
+<body>
+  <nav style="background-color: black;" class="navbar navbar-light p-3 ">
+    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <a class="navbar-brand logo" href="/">
+          <img src="/images/logo12.png">
+        </a>
+        <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div style="margin-right: 50px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+      <div class="logo-wrap1">
+        <% if(infouser[0].img == null ){ %>
+          <div class="logo">
+            <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
+          </div>
+          <% }else{ %>
+            <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+        <% } %> 
+      </div>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <%= infouser[0].username %> &nbsp;<i class="fas fa-caret-down"></i>
+          </button> 
+         <div class="dropdown-content">
+          <a href="/cart/totalproducts">Cart (<%= amountcart %>)</a>
+          <a href="/account/logout">Log out</a>
+        </div>
+      </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky">
+              <ul class="nav flex-column">
+                <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item">
+                  <div class="logo-wrap">
+                    <% if(infouser[0].img == null ){ %>
+                      <div class="logo">
+                        <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
+                      </div>
+                      <% }else{ %>
+                        <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+                    <% } %> 
+                    <span class="logo-text"><%= infouser[0].username %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <span style="margin-left: 30px; margin-top: 10px; font-size: 18px;" class="nav-link"> Account</span>
+                  <ul class="submenu">
+                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/accountinfo"><i class="far fa-user"></i> &nbsp; Profile </a></li>
+                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/email"><i class="far fa-envelope"></i> &nbsp; Email </a></li>
+                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/address"><i class="fas fa-map-pin"></i> &nbsp; Address & Phone </a></li>
+                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px; margin-bottom: 10px;"class="nav-link" href="/account/creditcard"><i class="far fa-credit-card"></i> &nbsp; Creditcard </a></li>
+                  </ul>
+                </li>
+                <% if(name == 'admin') { %>
+                  <li class="nav-item">
+                    <span style="margin-left: 30px; margin-bottom: 10px; font-size: 18px;" class="nav-link"> Admin </span>
+                    <ul class="submenu">
+                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link active" href="/account/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>
+                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
+                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/allreview"><i class="far fa-comments"></i> &nbsp; All reviews </a></li>
+                    </ul>
+                  </li>
+                  <% } %>
+                <li class="nav-item">
+                  <a style="margin-left: 30px; margin-bottom: 20px; font-size: 16px; margin-top: 20px;" class="nav-link" aria-current="page" href="/account/historybuyer">
+                    <i class="fas fa-history"></i>
+                    <span class="ml-2">History Purchase</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                <a style="margin-left: 30px; margin-bottom: 10px; font-size: 16px;" class="nav-link" aria-current="page" href="/account/review">
+                  <i class="far fa-comments"></i>
+                  <span class="ml-2">My reviews</span>
+                </a>
+              </li>
+              </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Products</li>
+                </ol>
+            </nav>
+            <h1 class="h2">Edit Products</h1>
+            <p>Manage Products</p>
+            <div class="row">
+                <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-5">
+                  <a style="margin-bottom: 10px; font-size: 10px; margin-top: -35px;"href="/account/seller" class="btn btn-info">Back</a>
+                    <div class="card">
+                        <h5 class="card-header">
+                          <ul class="nav nav-pills w-100">
+                            <li class="nav-link">Edit Products</li> 
+                        </ul>
+                        </h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                              <form action="/account/updateproduct" method="post">
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                    <label style="margin-bottom: 10px;">Name:</label>
+                                    <input type="text" class="form-control" name="name" value="<%= editpros[0].name %>" autocomplete="off">
+                                </div>
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                    <label style="margin-bottom: 10px;">Detail:</label>
+                                    <textarea type="text" class="form-control" name="detail" autocomplete="off"><%= editpros[0].detail %>
+                                    </textarea>               
+                                </div>
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                    <label style="margin-bottom: 10px;">Category:</label>
+                                    <input type="text" class="form-control" name="category" value="<%= editpros[0].category %>" autocomplete="off">
+                                </div>
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                    <label style="margin-bottom: 10px;">Price:</label>
+                                    <input type="number" step="0.01" class="form-control" name="price" value="<%= editpros[0].price %>" autocomplete="off">
+                                </div>
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                  <label style="margin-bottom: 10px;">Agign:</label>
+                                  <input type="text" class="form-control" name="aging" value="<%= editpros[0].aging %>" autocomplete="off">
+                              </div>
+                              <div style="margin-bottom: 10px;" class="form-group">
+                                <label style="margin-bottom: 10px;">Alcohol:</label>
+                                <input type="number"step="0.01"  class="form-control" name="alcohol" value="<%= editpros[0].alcohol %>" autocomplete="off">
+                            </div>
+                            <div style="margin-bottom: 10px;" class="form-group">
+                              <label style="margin-bottom: 10px;">Brand:</label>
+                              <input type="text" class="form-control" name="brand" value="<%= editpros[0].brand %>" autocomplete="off">
+                          </div>          
+                                <div style="margin-bottom: 10px;" class="form-group">
+                                  <div class="row">
+                                    <div class="col-2">
+                                      <label style="margin-bottom: 10px;">sweet taste:</label>
+                                      <select class="form-control" name="sweettaste">
+                                        <option value="<%= editpros[0].sweettaste %>"><%= editpros[0].sweettaste %></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="-">-</option>
+                                      </select>   
+                                    </div>
+                                    <div class="col-2">
+                                      <label style="margin-bottom: 10px;">acidity taste:</label>
+                                      <select class="form-control" name="aciditytaste">
+                                        <option value="<%= editpros[0].aciditytaste %>"><%= editpros[0].aciditytaste %></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="-">-</option>
+                                      </select>      
+                                    </div>
+                                    <div class="col-2">
+                                      <label style="margin-bottom: 10px;">body taste:</label>
+                                      <select class="form-control" name="bodytaste">
+                                        <option value="<%= editpros[0].bodytaste %>"><%= editpros[0].bodytaste %></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="-">-</option>
+                                      </select>  
+                                    </div>
+                                    <div class="col-2">
+                                      <label style="margin-bottom: 10px;">finish taste:</label>
+                                      <select class="form-control" name="finishtaste">
+                                        <option value="<%= editpros[0].finishtaste %>"><%= editpros[0].finishtaste %></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="-">-</option>
+                                      </select>  
+                                    </div>
+                                  </div>   
+                              </div>
+                                <div style="margin-bottom: 20px;" class="form-group">
+                                  <label style="margin-bottom: 10px;">Quantity:</label>
+                                  <input type="number" class="form-control" name="quantity" value="<%= editpros[0].quantity %>" autocomplete="off">
+                              </div>
+                              <div class="form-group">
+                                <label style="margin-bottom: 10px;">Image:    <a style="font-size: 10px; margin-left: 10px; color: #8C7741; padding: 5px 0px; margin-top: -1px; position: absolute; text-decoration: none;" href="#" data-toggle="modal" data-target="#myModal">Edit image</a>            </label>
+                                <div scope="row" class="imgpro"><img style="width: 100px; height: 100px;" src="<%= editpros[0].coverImagePath %>" alt="" class="ui image">     
+                               
+                                </div>
+                            </div>    
+                                <div style="margin-bottom: 10px; margin-top: 40px;" class="form-group">
+                                    <input type="submit" class="btn btn-info" value="Save">
+                                </div>
+
+                            </form>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        
+        </main>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<div style="top: 20%; border-radius: 25px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      <form method="POST" action="/account/updateimgproduct">
+          <div class="modal-header">
+              <h2 class="modal-title">&nbsp;Edit Image </h2>
+                  <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">
+                      <span>&times;</span>
+                  </button>
+          </div>
+          <div class="modal-body">     
+            <div style="margin-bottom: 10px; margin-left: 11px;" class="col imgsell">
+              <label style="margin-left: -10px; margin-bottom: 10px; font-size: 12px;" for="img" >Image </label>
+              <div style="margin-bottom: 0px; margin-left: 40px; width: 200px; " class="ui field">
+                  <input type="file" name="img" class="filepond filepond--item ui image small" required>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom: 5px;" class="modal-footer">
+              <button type="submit" class="btn btn-secondary" >Save</button>
+          </div>
+      </form>
+      </div>
+  </div>
+</div>
+</body>
+</html>

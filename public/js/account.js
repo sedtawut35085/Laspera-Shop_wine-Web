@@ -1,18 +1,28 @@
-const image = document.querySelector('.image');
-const hover = document.querySelector('.hover');
-const modal = document.querySelector('.modal');
-const close = document.querySelector('.close');
 
-function show(){
-    hover.classList.add('active');
-    modal.classList.add('show');
-}
-
-function hide(){
-    hover.classList.remove('active');
-    modal.classList.remove('show');
-}
-
-image.addEventListener('click', show);
-close.addEventListener('click', hide);
-
+// document.addEventListener("DOMContentLoaded", function(){
+//     document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+      
+//       element.addEventListener('click', function (e) {
+  
+//         let nextEl = element.nextElementSibling;
+//         let parentEl  = element.parentElement;	
+  
+//           if(nextEl) {
+//               e.preventDefault();	
+//               let mycollapse = new bootstrap.Collapse(nextEl);
+              
+//               if(nextEl.classList.contains('show')){
+//                 mycollapse.hide();
+//               } else {
+//                   mycollapse.show();
+//                   // find other submenus with class=show
+//                   var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+//                   // if it exists, then close all of them
+//                   if(opened_submenu){
+//                     new bootstrap.Collapse(opened_submenu);
+//                   }
+//               }
+//           }
+//       }); // addEventListener
+//     }) // forEach
+//   }); 

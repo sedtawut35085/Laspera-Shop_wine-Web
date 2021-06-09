@@ -21,9 +21,9 @@
         <script src="/js/modal.js" defer></script>
         <script src="/js/slider.js" defer></script>
         <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
-    
+        <script src="/js/index.js" defer></script>
         <script src="/js/cart.js" defer></script>
-        <title>Checkout</title>
+        <title>Laespela</title>
 </head>
 <body style="background: #F2F2EF;">
 
@@ -35,7 +35,7 @@
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul style="margin-left: 90px;" class="menu">
+      <ul style="margin-left: 0px;" class="menu">
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
@@ -47,16 +47,20 @@
       <div class="right-menu">
         <% if(name != '') { %> 
           <% if(infouser.img == null) { %> 
-            <a class="user" style="margin-right: -160px; margin-left: 30px; font-size: 13px;" href=""><%= name %></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="https://i.pinimg.com/originals/1e/f4/ce/1ef4ce20bcac49c2ff39507eaa09b2e7.jpg" alt="">
-            </a>
+            <div class="avatar1">
+              <span><%= infouser.username.substring(0, 1).toUpperCase() %></span>
+            </div>
           <% }else{ %> 
-            <a class="user" style="margin-right: -160px; margin-left: 40px; font-size: 13px;" href=""><%= name %></a>
-            <a href="/account" class="user">
-            <img class="avatar" src="<%= infouser.coverImagePath %>" alt="">
-            </a>
-          <% } %> 
+            <img style="margin-left: -50px;" class="avatar" src="<%= infouser.coverImagePath %>" alt="">
+          <% } %>
+          <div class="dropdown">
+            <button class="dropbtn"><%= name %> &nbsp;<i class="fas fa-caret-down"></i></button> 
+          <div class="dropdown-content">
+            <a href="/account">Account</a>
+            <a href="/account/historybuyer">Purchase</a>
+            <a href="/account/logout">Log out</a>
+          </div>
+        </div>
         <% }else{ %> 
         <a style="margin-left: 50px;" href="/account" class="user">
           <i class="far fa-user"></i>
@@ -118,46 +122,56 @@
         <h2 class="mb-3"><i class="fas fa-shopping-bag"></i>&nbsp; Orders</h2>
 
         <section class="product-area mt-4">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>Item Description</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-                        <td>Subtotal</td>
-                    </tr>
-                </thead>
-                <tbody>
+          <div class="card">
+         
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                          <td>Item Description</td>
+                          <td>Price</td>
+                          <td>Quantity</td>
+                          <td>Line total</td>
+                      </tr>
+                  </thead>
+                  <tbody>
                     <% infocart.forEach(m => { %> 
-                    <tr>
-                        <td>
-                            <div class="media">
-                                <img class="mr-3 img-fluid" src="<%= m.coverImagePath %>">
-                                <div class="media-body">
-                                    <p class="mt-0 title"><%= m.productname %></p>
-                                    <p class="title3"><%= m.productcategory %></p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>$<%= m.productprice %></td>
-                        <td><%= m.productquantity %></td>
-                        <td>$<%= (m.productprice*m.productquantity).toFixed(2) %></td>
-                    </tr>
-                    <% }) %> 
-                </tbody>
-            </table>
+                      <tr>
+                          <td>
+                              <div class="media">
+                                  <img class="mr-3 img-fluid" src="<%= m.coverImagePath %>">
+                                  <div class="media-body">
+                                      <p class="mt-0 title"><%= m.productname %></p>
+                                      <p class="title3"><%= m.productcategory %></p>
+                                  
+                                  </div>
+                              </div>
+                          </td>
+                          <td>$<%= m.productprice %></td>
+                          <td><%= m.productquantity %></td>
+                          <td>$<%= (m.productprice*m.productquantity).toFixed(2) %></td>
+                      </tr>
+                      <% }) %> 
+                  </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
         </section> 
     </div>
     <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
-        <div class="row my-3 gy-3">
-            <div style="margin-left: 825px;">
-                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
-            </div>    
-            <div style="margin-left: 770px; margin-top: 10px;">
-                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
-            </div>
-        </div>
-    </div>
+      <div class="row total">
+          <div style="margin-left:70%;">
+            <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
+          </div>    
+          <div style="margin-left:70%; margin-top: 10px;"">
+            <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
+          </div>    
+  
+      </div>
+  </div>
+    
     <div style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4); background: white; padding: 20px 20px; border-right: rgb(179, 178, 178) 1px solid; border-left: rgb(179, 178, 178) 1px solid; border-top: rgb(179, 178, 178) 1px solid; ">
         <h2 style="margin-bottom: 10px;" class="mb-3"><i class="far fa-credit-card"></i>&nbsp; Payments</h2>
         <!-- <p style="color: gray;"><a style="margin-right: 10px;" href="/creditcard"><button style="font-size: 10px; background: black; color: white; padding: 2px 2px;">Edit</button></a> </p> -->
@@ -186,19 +200,22 @@
             </div>
         </div>
     </div>
-    <div style="background: white; padding: 20px 20px; border-left: gray 1px dashed; border-right: gray 1px dashed; border-bottom: gray 1px dashed; margin-bottom: 80px;">
-        <div class="row my-3 gy-3">
-            <div style="margin-left: 825px;">
-                <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
-            </div>    
-            <div style="margin-left: 770px; margin-top: 10px;">
-                <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
-            </div>
-            <div style="margin-left: 830px; margin-top: 20px; ">
-                <button class="purchase" type="submit" style="padding: 5px 20px; background: black; color: white;">purchaes</button>
-            </div>
-        </div>
-    </div>
+    <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
+      <div class="row total">
+          <div style="margin-left:70%;">
+            <h4>Delivery : <span style="font-size: 15px; margin-left: 30px;" > &nbsp;$ <%= tax %></span></h4>
+          </div>    
+          <div style="margin-left:70%; margin-top: 10px;"">
+             <h4>Total order amount : <span style="font-size: 20px; color: rgb(182, 75, 75);"> &nbsp;$ <%= total %></span></h4>
+          </div>    
+          <div style="margin-left:70%; margin-top: 10px;">
+              <h4>Total : <span style="font-size: 20px; color: rgb(182, 75, 75); margin-left: 50px;" class="cart-total-price">$ <%= total %></span> </h4>
+          </div>
+          <div style="margin-left: 72%; margin-top: 20px; ">
+              <button class="purchase" type="submit" style="padding: 5px 20px; background: black; color: white;">purchaes</button>
+          </div>
+      </div>
+  </div>
   </div>
 </form>
   <footer id="footer" class="section footer">

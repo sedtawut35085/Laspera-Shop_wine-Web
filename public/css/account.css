@@ -7,6 +7,7 @@
     color: black;
 }
 
+
 .nav-item .active{
     color: #8C7741;
 }
@@ -130,6 +131,7 @@
   }
   
   .dropdown-content a:hover {
+    color: #8C7741;
     background-color: #f1f1f1}
   
   .dropdown:hover .dropdown-content {
@@ -143,7 +145,7 @@
   }
 
   .avatar{
-    border: 1px solid rgb(73, 73, 73);
+    border: 1px solid rgb(107, 106, 106);
     background-color:  #b9ac88;
     border-radius: 0%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
@@ -154,6 +156,9 @@
     top: 0;
     width: 20px;
     margin-right: 0px;
+    display: block;
+    height: auto;
+    width: 20px;
 
   }
   
@@ -161,5 +166,213 @@
     display: block;
     height: auto;
     width: 100%;
-    
   }
+/* 
+  .avatar span{
+    margin-top: -2px;
+    position: absolute;
+    font-size: 13px;
+    padding: 2px 4px;
+     color: white;
+    
+  } */
+
+  .text{
+    color: #8C7741; 
+    font-size: 13px; padding: 5px 10px;
+  }
+
+  .text:hover{
+    color: red; 
+    transition: 0.6s all;
+  }
+
+  .sidebar li .submenu{ 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    padding-left: 1rem; 
+    padding-right: 1rem;
+  }
+
+  .num-cart-product{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width:18px;
+    height: 18px;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    background-color:#D9D2C1;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+.logo-wrap {
+  display: block;
+  position: relative;
+  width: 30%;
+  float: left; 
+  margin-bottom: -20px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+  .logo-wrap .logo2 {
+    width: 70px;
+    float: left;
+    height: 70px;
+    border: 2px solid rgb(214, 213, 213);
+    background-color:  #b9ac88;
+    box-shadow: 0 1px 2px rgba(124, 123, 123, 0.2);
+    border-radius: 50%;
+    position: relative;
+    -webkit-transition: .3s margin ease;
+    -o-transition: .3s margin ease;
+    transition: .3s margin ease;
+    margin: 0 auto 50px 10px;
+   }
+  .logo-wrap .logo2 {
+      margin: 0 auto 50px -5px; 
+    }
+    .logo-wrap .logo2 span {
+      position: absolute;
+      color: #fff;
+      font-size: 1.5rem;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+     }
+     .logo-wrap .logo {
+      width: 50px;
+      float: left;
+      height: 50px;
+      border: 1px solid rgb(248, 246, 246);
+      background-color:  #b9ac88;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+      border-radius: 50%;
+      position: relative;
+      -webkit-transition: .3s margin ease;
+      -o-transition: .3s margin ease;
+      transition: .3s margin ease;
+      margin: 0 auto 50px 10px;
+     }
+    .logo-wrap .logo {
+        margin: 0 auto 50px 20px; 
+      }
+  .logo-wrap .logo span {
+      position: absolute;
+      color: #fff;
+      font-size: 1.5rem;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+     }
+  .logo-wrap .logo-text {
+    
+    position: absolute;
+    top: 1px;
+    font-size: 26px;
+    margin-left: 10px;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    opacity: 0;
+    visibility: hidden; 
+  }
+   .logo-wrap .logo-text {
+      opacity: 1;
+      visibility: visible; 
+    }
+    .logo-text2{
+      position: absolute;
+      font-size: 8px;
+      margin-top: -5px;
+      margin-left: 2px;
+    }
+
+    .logo-wrap1 {
+      display: block;
+      position: relative;
+      border: 1px solid rgb(170, 169, 169);
+    background-color:  #b9ac88;
+    height: 20px;
+    left: 0;
+    overflow: hidden;
+    border-radius: 40px;
+    top: 0;
+    width: 20px;
+      /* display: block;
+      position: relative;
+      width: 30%;
+      float: left; 
+      margin-bottom: -20px;
+      margin-left: 0px;
+      margin-top: 10px; */
+    }
+    .logo-wrap1 .logo {
+      width: 20px;
+      float: left;
+      height: 20px;
+      border-radius: 50%;
+      position: relative;
+      -webkit-transition: .3s margin ease;
+      -o-transition: .3s margin ease;
+      transition: .3s margin ease;
+      margin: 0 auto 50px 5px;
+     }
+    .logo-wrap1 .logo {
+        margin: 0 auto 50px -1px; 
+      }
+  .logo-wrap1 .logo span {
+      position: absolute;
+      color: #fff;
+      font-size: 0.8rem;
+      top: 44%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+     }
+
+
+/* Product Section */
+thead {
+  color: black;
+  background:white;
+}
+
+.table td,
+.table th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+tr th:first-child,
+tr td:first-child {
+  text-align: left;
+}
+
+.media img {
+  height: 70px;
+  width: 70px;
+}
+
+.media p {
+  font-weight: 400;
+  margin: 0;
+}
+
+.media p.title {
+  font-weight: 600;
+}
+
+.title3{
+  font-size: 12px
+}
