@@ -527,7 +527,8 @@ router.post('/advance', async(req,res)=>{
       filterbrand,
       filtercategory,
       filterprice,
-      filteralcohol
+      filteralcohol,
+      checkcategory
     });
   })
   

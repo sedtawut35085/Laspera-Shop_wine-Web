@@ -115,8 +115,68 @@
             </div>
          </section> -->
         <br><br>
+       <!-- <div class="toptitle">
+        <div class="row">
+          <div class="col-8 menu">
+            <div class="arrival-heading">
+              <div>
+                <strong>ALL Products</strong>
+              </div>  
+            </div>
+          </div>
+          <div class="col-3 menu">
+            <div>
+              <form action="/store/sort" method="POST">   
+                <select onChange="this.form.submit();" class="example" name="example">
+                  <option value="" ><%= sortname %></option>
+                  <option value="highprice" name="highprice">Sort by highest price</option>
+                  <option value="lowprice" name="lowprice">Sort by lowest price</option>
+                  <option value="A-Z" name="A-Z">Sort by A - Z</option>
+                  <option value="newproduct" name="newproduct">Sort by new products</option>
+                </select>
+              </form>   
+            </div>
+          </div>
+          <div class="col-1">
+            <div>
+              <button style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
+            </div>
+          </div>
+        </div>
+       </div> -->
+       <div class="toptitle">
+        <div class="row">
+          <div class="col-5">
+            <div class="arrival-heading tophead">
+              <div>
+                <strong>ALL&nbsp;Product</strong>
+              </div>  
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="topsort">
+              <form action="/store/sort" method="POST">   
+                <select onChange="this.form.submit();" class="example" name="example">
+                  <option value="" ><%= sortname %></option>
+                  <option value="highprice" name="highprice">Sort by highest price</option>
+                  <option value="lowprice" name="lowprice">Sort by lowest price</option>
+                  <option value="A-Z" name="A-Z">Sort by A - Z</option>
+                  <option value="newproduct" name="newproduct">Sort by new products</option>
+                </select>
+              </form>   
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="topfilter">
+              <button style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter&nbsp;<i style="font-size: 10px;" class="fas fa-filter"></i> </button>
+            </div>
+          </div>
+        </div>
+       </div>
+       
         <section class="new-arrival">
-          <div class="arrival-heading">
+          <!-- <div class="arrival-heading">
             <div style="margin-bottom: -10px;" class="row">
               <div class="col2">
                 <div class="titleallpr">
@@ -138,7 +198,7 @@
                 <button  class="filter"style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
               </div>
             </div>
-         </div>
+         </div> -->
          <div class="row filters">
           <% if(filterbrand){ %>
           <div style="margin-right: 5px;">
