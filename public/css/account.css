@@ -6,6 +6,20 @@
 .nav-item .nav-link{
     color: black;
 }
+.ac {
+  margin-left: 30px;
+}
+
+@media (max-width: 1114px) {
+  .aimg {
+    margin-left: -10px;
+  }
+}
+@media (max-width: 1246px) {
+  .ac {
+    margin-left: 10px;
+  }
+}
 
 
 .nav-item .active{
@@ -44,6 +58,7 @@
     .sidebar {
         top: 11.5rem;
         padding: 0;
+        
         
     }
     .navbar-toggler{
@@ -358,7 +373,7 @@ tr th:first-child,
 tr td:first-child {
   text-align: left;
 }
-
+ 
 .media img {
   height: 70px;
   width: 70px;
@@ -376,3 +391,5 @@ tr td:first-child {
 .title3{
   font-size: 12px
 }
+
+

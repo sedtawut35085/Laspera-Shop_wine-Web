@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
       flash = require('connect-flash')
       userss = require('./models/user'),
       passport = require("passport"),
-      LocalStrategy = require("passport-local")
+      LocalStrategy = require("passport-local"),
+      // Product = require('../models/product'),
       session = require('express-session');
 
 
@@ -46,7 +47,7 @@ app.use(async function(req,res,next){
   next();
 });
 
-mongoose.connect("mongodb://localhost:27017/project",function(err,dbs){
+mongoose.connect("mongodb://localhost:27017/project",async function(err,dbs){
     console.log('mongo connect')
 });
 

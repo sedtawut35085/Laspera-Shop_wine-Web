@@ -386,7 +386,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     allproduct = false
     name = ''
     amountcart = 0
-    res.redirect('/')
+    res.redirect(req.session.fromUrl)
   });
 
   function saveImage(product, imgEncoded) {

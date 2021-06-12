@@ -205,6 +205,11 @@ nav{
       height: 80px;
   }
 
+  .nav-link:hover::after{
+    width: 0px;
+    transition: none;
+  }
+
   .menu{
       position: absolute;
       top: 110px;
@@ -221,8 +226,8 @@ nav{
   }
   .menu2{
     position: absolute;
-    top: 110px;
-    left: 40px;
+    top: 105px;
+    left: -50px;
     background-color: #ffffff;
     border-bottom: 4px solid #8C7741;
     width: 100%;
@@ -383,24 +388,26 @@ nav{
   
 }
 
+@media (max-width: 448px) {
+  .toggle{
+    margin-left: -70px;
+  }
+  
+}
 @media(max-width:390px){
   .nameuser{
     display: none;
   }
 
 }
-@media(max-width:548px){
-  .right-menu{
-    margin-left: -100px;
+
+@media(max-width:378px){
+  .toggle{
+    margin-left: -50px;
   }
 
 }
-@media(max-width:424px){
-  .right-menu{
-    margin-left: -150px;
-  }
 
-}
 
 /* <!--search-bar-----------------------------------> */
 
@@ -416,7 +423,7 @@ nav{
 .btnsearch:hover{
   border: white;
   background-color: black;
-  color: red;
+  color: #c7c1b2;
   margin-right: 30px;
   font-size: 14px;
 }
@@ -867,6 +874,7 @@ nav{
 
 .text
 {
+
   position: relative;
   z-index: 10;
 }
@@ -874,7 +882,7 @@ nav{
 {
   font-size: 0.8em;
   font-weight: 200;
-  color: #fff;
+  color: #d3cfd1;
   line-height: 2em;
   text-transform: uppercase;
 }
@@ -882,7 +890,7 @@ nav{
 {
   font-size: 3em;
   font-weight: 400;
-  color: #fff;
+  color: #d3cfd1;
   line-height: 1em;
   text-transform: uppercase;
 }
@@ -890,14 +898,14 @@ nav{
 {
   font-size: 4em;
   font-weight: 700;
-  color: #fff;
+  color: #d3cfd1;
   line-height: 1em;
   text-transform: uppercase;
 }
 .text p
 {
-  font-size: 1.1em;
-  color: #fff;
+  font-size: 0.9em;
+  color: #d3cfd1;
   margin: 20px 0;
   font-weight: 400;
   max-width: 700px;
@@ -906,7 +914,7 @@ nav{
 {
   display: inline-block;
   font-size: 0.8em;
-  background: #fff;
+  background: #d3cfd1;
   padding: 10px 30px;
   text-transform: uppercase;
   text-decoration: none;
@@ -923,6 +931,7 @@ nav{
 }
 .social
 {
+  
   position: absolute;
   z-index: 10;
   bottom: 20px;
@@ -936,12 +945,14 @@ nav{
 }
 .social li a
 {
+  
   display: inline-block;
   margin-right: 20px;
   filter: invert(1);
   transform: scale(0.5);
   transition: 0.5s;
 }
+
 .social li a:hover
 {
   transform: scale(0.5) translateY(-15px);
@@ -970,7 +981,7 @@ nav{
 }
 
 .category{
-  margin-top: -8px;
+  margin-top: -3px;
   background-color: black;
   margin-bottom: 20px;
 }
@@ -1277,7 +1288,7 @@ nav{
 }
 .infostory2{
 
-  margin-top: 110px;
+  margin-top: 80px;
   text-align: center;
 }
 .infostory2 h2{
@@ -1287,28 +1298,34 @@ nav{
 }
 .infostory2 .icon {
   color: #8C7741;
-  
+   
 } 
+.infostory2 .underimg{
+  width: 120px; margin-top: 20px;
+}
+
+.infostory3 .underimg{
+  width: 80px; margin-top: 20px;
+}
 
 
-@media only screen and (max-width: 1155px){
+@media only screen and (max-width: 1160px){
   .col-4{
-    margin-top: -100px;
+    margin-top: -80px;
     width: 100%;
     margin-left: 0px;
   }
   .story2{
 
-    margin-top: 40px;
+    margin-top: 100px;
   }
 }
 @media only screen and (max-width: 1278px){
   .infostory2{
 
-    margin-top: 80px;
+    margin-top: 50px;
   }
 }
-
    /* End story2 */
 
   /* story3 */
@@ -1334,7 +1351,7 @@ nav{
   .infostory3{
     margin-left: 50px;
     margin-right: -60px;
-    margin-top: 140px;
+    margin-top: 90px;
     text-align: center;
   }
   .infostory3 h2{
@@ -1348,7 +1365,7 @@ nav{
   } 
   
   
-  @media only screen and (max-width: 1155px){
+  @media only screen and (max-width: 1160px){
     .col-4{
       margin-top: -100px;
       width: 100%;
@@ -2197,7 +2214,7 @@ nav{
 
 
   .icon6{
-    color: #8C7741;
+    color: #554418;
     margin-top: -40px;
     margin-left: 503px;
     margin-bottom: 40px;
@@ -2341,3 +2358,4 @@ nav{
     margin-bottom: 920px;
   }
 }
+

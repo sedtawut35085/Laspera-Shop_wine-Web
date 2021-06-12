@@ -81,55 +81,56 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky">
-              <ul class="nav flex-column">
-                <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item">
-                  <div class="logo-wrap">
-                    <% if(infouser[0].img == null ){ %>
-                      <div class="logo">
-                        <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
-                      </div>
-                      <% }else{ %>
-                        <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
-                    <% } %> 
-                    <span class="logo-text"><%= infouser[0].username %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky">
+         
+          <ul class="nav flex-column">
+            <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
+              <div class="logo-wrap">
+                <% if(infouser[0].img == null ){ %>
+                  <div class="logo">
+                    <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
                   </div>
-                </li>
-                <li class="nav-item">
-                  <span style="margin-left: 30px; margin-top: 10px; font-size: 18px;" class="nav-link"> Account</span>
-                  <ul class="submenu">
-                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/accountinfo"><i class="far fa-user"></i> &nbsp; Profile </a></li>
-                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/email"><i class="far fa-envelope"></i> &nbsp; Email </a></li>
-                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/address"><i class="fas fa-map-pin"></i> &nbsp; Address & Phone </a></li>
-                    <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px; margin-bottom: 10px;"class="nav-link" href="/account/creditcard"><i class="far fa-credit-card"></i> &nbsp; Creditcard </a></li>
-                  </ul>
-                </li>
-                <% if(name == 'admin') { %>
-                  <li class="nav-item">
-                    <span style="margin-left: 30px; margin-bottom: 10px; font-size: 18px;" class="nav-link"> Admin </span>
-                    <ul class="submenu">
-                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>
-                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;"class="nav-link active" href="/account/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
-                      <li><a style="margin-left: 30px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/allreview"><i class="far fa-comments"></i> &nbsp; All reviews </a></li>
-                    </ul>
-                  </li>
-                  <% } %>
-                <li class="nav-item">
-                  <a style="margin-left: 30px; margin-bottom: 20px; font-size: 16px; margin-top: 20px;" class="nav-link" aria-current="page" href="/account/historybuyer">
-                    <i class="fas fa-history"></i>
-                    <span class="ml-2">History Purchase</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                <a style="margin-left: 30px; margin-bottom: 10px; font-size: 16px;" class="nav-link" aria-current="page" href="/account/review">
-                  <i class="far fa-comments"></i>
-                  <span class="ml-2">My reviews</span>
-                </a>
-              </li>
+                  <% }else{ %>
+                    <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+                <% } %> 
+                <span class="logo-text"><%= infouser[0].username %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+              </div>
+            </li>
+            <li  class="nav-item ac">
+              <span style="margin-left: 0px; margin-top: 10px; font-size: 18px;" class="nav-link" href="#"> Account</span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/accountinfo"><i class="far fa-user"></i> &nbsp; Profile </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/email"><i class="far fa-envelope"></i> &nbsp; Email </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/address"><i class="fas fa-map-pin"></i> &nbsp; Address & Phone </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px; margin-bottom: 10px;"class="nav-link" href="/account/creditcard"><i class="far fa-credit-card"></i> &nbsp; Creditcard </a></li>
               </ul>
-            </div>
-        </nav>
+            </li>
+            <% if(name == 'admin') { %>
+              <li class="nav-item ac">
+                <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Admin </span>
+                <ul class="submenu">
+                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>
+                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;"class="nav-link active" href="/account/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
+                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/allreview"><i class="far fa-comments"></i> &nbsp; All reviews </a></li>
+                </ul>
+              </li>
+              <% } %>
+            <li class="nav-item ac">
+              <a style="margin-left: 0px; margin-bottom: 20px; font-size: 16px; margin-top: 20px;" class="nav-link" aria-current="page" href="/account/historybuyer">
+                <i class="fas fa-history"></i>
+                <span class="ml-2">History Purchase</span>
+              </a>
+          </li>
+          <li class="nav-item ac">
+            <a style="margin-left: 0px; margin-bottom: 10px; font-size: 16px;" class="nav-link" aria-current="page" href="/account/review">
+              <i class="far fa-comments"></i>
+              <span class="ml-2">My reviews</span>
+            </a>
+        </li>
+          </ul>
+        </div>
+    </nav>
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">

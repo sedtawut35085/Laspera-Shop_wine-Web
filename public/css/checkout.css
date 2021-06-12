@@ -240,6 +240,11 @@ nav{
 .search-input input:focus{
   color: white;
 }
+
+.remove .btn{
+  font-size: 10px;
+  padding: 0px 2px;
+}
 @media(max-width:1010px){
 
   nav{
@@ -264,6 +269,11 @@ nav{
     flex-direction: column;
     display: none;
 
+}
+
+.nav-link:hover::after{
+  width: 0px;
+  transition: none;
 }
   .fix-nav .menu{
       top: 80px;
@@ -412,6 +422,12 @@ nav{
   }
 }
 
+@media(max-width:436px){
+   .toggle{
+     margin-left: -60px;
+   }
+}
+
   
   /* <!--search-bar-----------------------------------> */
   
@@ -427,7 +443,7 @@ nav{
 .btnsearch:hover{
   border: white;
   background-color: black;
-  color: red;
+  color: #c7c1b2;
   margin-right: 30px;
   font-size: 14px;
 }
@@ -516,12 +532,35 @@ nav{
     max-height: 100%;
   }
 
+  .remove{
+    font-size: 5px;
+  }
+
+  .tax{
+    font-size: 15px;
+     margin-left: 30px;
+  }
+
+  .totalorder{
+    font-size: 20px;
+     color: rgb(182, 75, 75);
+  }
 
   @media only screen and (max-width: 998px) {
     .total{
       margin-left: -180px;
     }
+    .totalorder{
+      font-size: 13px;
+    }
 
+  }
+
+  @media only screen and (max-width: 767px) {
+    .remove .btn{
+      font-size: 8px;
+    }
+   
   }
   @media only screen and (max-width: 764px) {
     .total{
@@ -537,18 +576,23 @@ nav{
     .remove{
       font-size: 5px;
     }
+    .remove .btn{
+      font-size: 5px;
+    }
+   
 
   }
-  @media only screen and (max-width: 492px) {
-    .remove{
-      margin-left: -15px;
+  @media only screen and (max-width: 503px) {
+    .total{
+      font-size: 10px;
+      margin-left: -380px;
     }
 
   }
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 444px) {
     .total{
       font-size: 10px;
-      margin-left: -320px;
+      margin-left: -360px;
     }
     .total div h4{
       font-size: 10px;
@@ -559,9 +603,9 @@ nav{
       font-size: 10px;
       margin-left: -380px;
     }
-    .total div h4 span{
+    /* .total div h4 span{
       font-size: 7px;
-    }
+    } */
   }
 
 

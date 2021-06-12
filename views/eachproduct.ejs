@@ -19,13 +19,10 @@
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
-      <!--logo------------>
       <a href="/" class="logo"><img src="/images/logo12.png"></a>
-      <!--menu-icon------------->
       <div class="toggle"></div>
-      <!--menu----------------->
       <% if(name == '') { %> 
-        <ul style="margin-left: -6%;" class="menu menu2">
+        <ul style="margin-left: 1%;" class="menu menu2">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -62,9 +59,13 @@
           </div>
         </div>
         <% }else{ %> 
-        <a style="margin-left: 50px;" href="/account" class="user">
-          <i class="far fa-user"></i>
-        </a>
+          <a style="margin-left: 50px; font-size: 12px;" href="/login" class="user">
+            Login
+          </a>
+          <span style="color: #6e6d6d;">|</span>
+          <a style="margin-left: 8px; font-size: 12px;" href="/register" class="user">
+            Register
+          </a>
         <% }%> 
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
@@ -98,7 +99,7 @@
                 <div class="services-box">
                     <i class="fas fa-shipping-fast"></i>
                     <span>Free Shipping</span>
-                    <p>For all order over 100$</p>
+                    <p>For all order over $ 100</p>
                 </div>
                 <div class="services-box">
                     <i class="fas fa-headphones-alt"></i>
@@ -114,10 +115,46 @@
             <form action="/store/addcart?id=<%= product.name %>" method="POST">
               <div class="small-container single-product product-details">
                 <div class="row">
-                  <div class="col-2">
-                    <img src="<%= product.coverImagePath %>" width="100%">
+                  <div class="col-6">
+                    <img src="<%= product.coverImagePath %>" >
                   </div>
-                  <div class="col-2">           
+                
+                  <div class="col-6">
+                    <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
+                    <h3 style="margin-top: 3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;$ <%= product.price %> </span></h3>
+                    <h6 style="margin-top: 5%; font-size: 12px;">Category <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h6>
+                    <div style="margin-top: 5%;" class = "product-rating">
+                         <i class = "fas fa-star"></i>
+                         <i class = "fas fa-star"></i>
+                         <i class = "fas fa-star"></i>
+                         <i class = "fas fa-star"></i>
+                         <i class = "fas fa-star"></i>
+                    </div>
+                    <% if(product.quantity != 0){ %>
+                    <div>
+                      <input style="font-size: 15px; color: black; height: 30px; border: solid 1px #D6D3D3; padding: 0px 8px; width: 60px; margin-top: 5%;" name="quantity" type = "number" min = "1" max = "<%= product.quantity %>" value = "1">                           
+                    </div>
+                    <div>
+                      <h5 style="color: rgb(114, 112, 112); margin-bottom: 20px; margin-top: -20px; font-size: 12px;">Number of stock : <%= product.quantity %></h5>       
+                    </div>
+                    <div>
+                      <button type = "submit" class = "btn3 shop-item-button btn-center">
+                        <i class = "fas fa-shopping-cart"></i> &nbsp; Add to Cart 
+                        </button>
+                    </div>
+                    <% }else{ %>
+                      <div style="margin-top: 8%;">
+                        <p class="no-stock"> Out of stock &nbsp; <i style="font-size: 20px;" class="far fa-grin-tears"></i> </p>
+                      </div>
+                    <% } %>
+                    <a style="text-decoration: none; margin-bottom: 5%;" href = "/store/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> back to store &nbsp;</span></a>
+                   </div>
+                  </div>
+                </div>
+                  <!-- <div class="col-2">
+                    <img src="<%= product.coverImagePath %>" >
+                  </div> -->
+                  <!-- <div class="col-2">           
                    <div class="desc">
                     <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
                     <h3 style="margin-top: -3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp; <%= product.price %> $</span></h3>
@@ -146,10 +183,9 @@
                         <p class="no-stock"> Out of stock &nbsp; <i style="font-size: 20px;" class="far fa-grin-tears"></i> </p>
                       </div>
                     <% } %>
-                    <a style="text-decoration: none; margin-bottom: 5%;" href = "/store/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> back to all products &nbsp;</span></a>
+                    <a style="text-decoration: none; margin-bottom: 5%;" href = "/store/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> back to store &nbsp;</span></a>
                    </div>
-                  </div>
-                </div>
+                  </div> -->
               </div>
             </form>   
             <div class="small-container single-product">
@@ -182,7 +218,7 @@
                   <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
                 <% } %>          
               <% }else{ %>
-                <p style="margin-top: 5px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+                <p style="margin-top: 5px; margin-bottom: 10px;"><span style="margin-right: 50px;">sweet</span> -</p>
               <% } %>
               <% if(product.aciditytaste != '-'){ %>
                 <% if(product.aciditytaste >= '5'){ %>
@@ -199,7 +235,7 @@
                   <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
                 <% } %>       
                 <% }else{ %>
-                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 42px;">acidity</span>&nbsp; -</p>
                 <% } %>
               <% if(product.bodytaste != '-'){ %>
                 <% if(product.bodytaste >= '5'){ %>
@@ -216,7 +252,7 @@
                   <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
                 <% } %>          
               <% }else { %>
-                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 54px;">body</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 57px;">body</span> -</p>
                 <% } %> 
               <% if(product.finishtaste != '-'){ %>
                 <% if(product.finishtaste >= '5'){ %>
@@ -233,7 +269,7 @@
                   <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
                 <% } %>         
                 <% }else { %>
-                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span> <i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i><i style="color: rgb(201, 199, 199); margin-right: 8px; font-size: 110%;" class="fas fa-wine-bottle"></i></p>
+                  <p style="margin-top: 20px; margin-bottom: 10px;"><span style="margin-right: 50px;">finish</span>&nbsp; -</p>
                 <% } %>   
             </p> 
             </div>                

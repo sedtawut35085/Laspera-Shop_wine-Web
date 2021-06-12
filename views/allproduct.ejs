@@ -23,12 +23,12 @@
       <a href="/" class="logo"><img src="/images/logo12.png"></a>
       <div class="toggle"></div>
       <% if(name == '') { %> 
-        <ul style="margin-left: -4%;" class="menu menu2">
+        <ul style="margin-left: 3%;" class="menu menu2">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/store/allproduct" class="nav-link">Store</a>
+            <a href="/store/allproducts" class="nav-link">Store</a>
           </li>
         </ul>
         <%  }else{ %> 
@@ -37,7 +37,7 @@
             <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/store/allproduct" class="nav-link">Store</a>
+            <a href="/store/allproducts" class="nav-link">Store</a>
           </li>
         </ul>
         <%  } %> 
@@ -59,10 +59,14 @@
             <a href="/account/logout">Log out</a>
           </div>
         </div>
-        <% }else{ %> 
-        <a style="margin-left: 50px;" href="/account" class="user">
-          <i class="far fa-user"></i>
-        </a>
+        <% }else{ %>  
+          <a style="margin-left: 50px; font-size: 12px;" href="/login" class="user">
+            Login
+          </a>
+          <span style="color: #6e6d6d;">|</span>
+          <a style="margin-left: 8px; font-size: 12px;" href="/register" class="user">
+            Register
+          </a>
         <% }%> 
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
@@ -80,6 +84,9 @@
     <div class="search-bar">
       <div class="search-input">
       <input type="text" placeholder="Search For Product By Name" name="productsearch" />
+      <button class="btnsearch" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
       <a href="javascript:void(0);" class="search-cancel">
         <i class="fas fa-times"></i>
       </a>
@@ -87,6 +94,7 @@
     </div>
   </form>
       <main>
+      
 
    <section class="showcase">
    
@@ -103,47 +111,32 @@
       <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
     </ul>
   </section>
-        <!-- <section class="home" id="home">
-            <div class="home-slider owl-carousel">
-                <div class="item">
-                    <img src="/images/bg43.png" alt="">
-                    <div class="content">
-                        <h3>WINE PRODUCTS</h3>
-                        <p>"Choose what's right for you or for a gift to someone"</p>
-                    </div>
-                </div>
-            </div>
-         </section> -->
+  <div class="container2">
+    <div class="grid second-nav">
+      <div class="column-xs-12">
+        <nav>
+          <ol class="breadcrumb-list">
+            <li style="margin-left: 5px;" class="breadcrumb-item"><a href="/">Home</a></li>
+            
+            <% if(checkcategory != 'Wine'){ %>
+              <li class="breadcrumb-item"><a href="/store/allproducts">All store</a></li>
+              <li class="breadcrumb-item active"><%= checkcategory %></li>
+            <% }else if(infosearch != ''){ %>
+              <li class="breadcrumb-item"><a href="/store/allproducts">All store</a></li>
+              <li class="breadcrumb-item active">search</li>
+            <% }else if(filterbrand || filtercategory || filterprice || filteralcohol){  %>
+              <li class="breadcrumb-item"><a href="/store/allproducts">All store</a></li>
+              <li class="breadcrumb-item active">filter</li>
+            <% }else{ %>
+              <li class="breadcrumb-item active">All store</li>
+            <% } %>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
         <br><br>
-       <!-- <div class="toptitle">
-        <div class="row">
-          <div class="col-8 menu">
-            <div class="arrival-heading">
-              <div>
-                <strong>ALL Products</strong>
-              </div>  
-            </div>
-          </div>
-          <div class="col-3 menu">
-            <div>
-              <form action="/store/sort" method="POST">   
-                <select onChange="this.form.submit();" class="example" name="example">
-                  <option value="" ><%= sortname %></option>
-                  <option value="highprice" name="highprice">Sort by highest price</option>
-                  <option value="lowprice" name="lowprice">Sort by lowest price</option>
-                  <option value="A-Z" name="A-Z">Sort by A - Z</option>
-                  <option value="newproduct" name="newproduct">Sort by new products</option>
-                </select>
-              </form>   
-            </div>
-          </div>
-          <div class="col-1">
-            <div>
-              <button style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
-            </div>
-          </div>
-        </div>
-       </div> -->
        <div class="toptitle">
         <div class="row">
           <div class="col-5">
@@ -154,7 +147,7 @@
             </div>
           </div>
           
-          <div class="col-4">
+          <div class="col-5">
             <div class="topsort">
               <form action="/store/sort" method="POST">   
                 <select onChange="this.form.submit();" class="example" name="example">
@@ -167,7 +160,7 @@
               </form>   
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-1">
             <div class="topfilter">
               <button style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter&nbsp;<i style="font-size: 10px;" class="fas fa-filter"></i> </button>
             </div>
@@ -176,62 +169,39 @@
        </div>
        
         <section class="new-arrival">
-          <!-- <div class="arrival-heading">
-            <div style="margin-bottom: -10px;" class="row">
-              <div class="col2">
-                <div class="titleallpr">
-                  <strong>ALL Products</strong>
-                </div>  
-              </div>
-              <div class="col2 sortty">
-                <form action="/store/sort" method="POST">   
-                  <select onChange="this.form.submit();" class="example" name="example">
-                    <option value="" ><%= sortname %></option>
-                    <option value="highprice" name="highprice">Sort by highest price</option>
-                    <option value="lowprice" name="lowprice">Sort by lowest price</option>
-                    <option value="A-Z" name="A-Z">Sort by A - Z</option>
-                    <option value="newproduct" name="newproduct">Sort by new products</option>
-                  </select>
-                </form>   
-              </div>
-              <div style="position: absolute; margin-top: 80px; margin-left: 76%; background-color: white;">
-                <button  class="filter"style="background-color: white; font-size:12px; border: 1px black solid; padding: 1px 5px; border-radius: 2px;" data-modal-target="#modal">Filter <i style="font-size: 10px;" class="fas fa-filter"></i> </button>
-              </div>
-            </div>
-         </div> -->
          <div class="row filters">
           <% if(filterbrand){ %>
           <div style="margin-right: 5px;">
-            <h5>Brands: <span style="color: gray;"> <%= filterbrand %></span> </h5>
+            <h5>Brands : <span style="color: gray;">&nbsp; <%= filterbrand %></span> </h5>
           </div>
           <% } %>
           <% if(filtercategory){ %>
             <div style="margin-right: 5px;">
-              <h5>Category: <span style="color: gray;"> <%= filtercategory %></span> </h5>
+              <h5>Category : <span style="color: gray;">&nbsp; <%= filtercategory %></span> </h5>
             </div>
-          <% } %>
+          <% } %> 
           <% if(filterprice){ %>
             <div style="margin-right: 5px;">
-              <h5>Price: <span style="color: gray;"> <%= filterprice %></span> </h5>
+              <h5>Price : <span style="color: gray;">&nbsp; <%= filterprice %></span> </h5>
             </div>
           <% } %>
           <% if(filteralcohol){ %>
               <div style="margin-right: 5px;">
-                <h5>Alcohol: <span style="color: gray;"> <%= filteralcohol %></span> </h5>
+                <h5>Alcohol: <span style="color: gray;">&nbsp; <%= filteralcohol %></span> </h5>
               </div>
            <% } %>
-           <% if(checkcategory != 'Wine'){ %>
-            <div style="margin-right: 5px;">
-              <h5>Category: <span style="color: gray;"> <%= checkcategory %></span> </h5>
-            </div>
-         <% } %>
-           <% if(filterbrand || filtercategory || filterprice || filteralcohol || checkcategory != 'Wine'){ %>
+         <% if(filterbrand || filtercategory || filterprice || filteralcohol){ %>
             <div>
               <a href="/store/clearfilter"><span class="clear">clear</span></a>
             </div>
-            <% } %>
-        </div>
-         
+         <% } %>
+         <% if(infosearch != '' && countproduct > 0){ %>
+          <h5><%= countproduct %> items from search for <span style="color: #8C7741;">&nbsp; " <%= infosearch %> "</span> </h5>
+         <% } %>
+         <% if(checkcategory != 'Wine'){ %>
+          <h5 style="color: #8C7741; font-size: 13px;"><%= checkcategory %></h5>
+         <% } %>
+        </div>   
           <div class="product-container">
             <% let j=0;
             if(page == 1) { 
@@ -284,11 +254,16 @@
                  <% } %>
             <% } %>
        </div>
-       <% if(!product[j]) { %>
+       <% if(!product[j] && infosearch == '') { %>
         <p class="text-center">Coming soon</p>
        <% } %>
+       <% if(!product[j] && infosearch != '') { %>
+        <p class="text-center">
+          Couldn't find any item from search for <span style="color: #8C7741;"> " <%=  infosearch %> "</span> .
+        </p>
+       <% } %>
        <div class="page-btn">
-          <% if(page != 1) { %> 
+          <% if(page != 1 ) { %> 
             <a style="color: black;" href="/store/backpage"><span>&#8592;</span></a>          
           <% } %> 
           <% if(page == 1) { %> 
@@ -297,19 +272,22 @@
           <% if(page != 1) { %> 
             <a href="/store/page1"><span style="color: black;">1</span></a>
           <% } %> 
-          <% if(page == 2) { %> 
+          <% if(page == 2 && product.length >= 24) { %> 
             <a href="/store/page2"><span style="color: brown;">2</span></a>
           <% } %> 
-          <% if(page != 2) { %> 
+          <% if(page != 2 && product.length >= 24) { %> 
             <a href="/store/page2"><span style="color: black;">2</span></a>
           <% } %> 
-          <% if(page == 3) { %> 
+          <% if(page != 2 && product.length >= 24 && product.length <= 48) { %> 
+            <a style="color: black;" href="/store/nextpage"><span>&#8594;</span></a>
+          <% } %> 
+          <% if(page == 3 && product.length >= 48) { %> 
             <a href="/store/page3"><span style="color: brown;">3</span></a>
           <% } %> 
-          <% if(page != 3) { %> 
+          <% if(page != 3 && product.length >= 48) { %> 
             <a href="/store/page3"><span style="color: black;">3</span></a>
           <% } %> 
-          <% if(page != 3) { %> 
+          <% if(page != 3 && product.length >= 48) { %> 
             <a style="color: black;" href="/store/nextpage"><span>&#8594;</span></a>
           <% } %> 
        </div>
@@ -381,8 +359,6 @@
               <div class="column2">
                 <p class="title" style="margin-left: 20px; margin-top: 15px; margin-bottom: 7px;">Brands</p>
               <div style="margin-left: 20px; font-size: 12px;">
-                <input type="checkbox" id="All" name="All" value="All">
-                <label for="All"> All</label><br>
                 <input type="checkbox" id="Artero" name="brand" value="Artero">
                 <label for="Artero"> Artero</label><br>
                 <input type="checkbox" id="Aliaga" name="brand" value="Aliaga">
@@ -417,8 +393,8 @@
           <div class="column2">
             <p class="title" style="margin-left: 10px; margin-top: 15px; margin-bottom: 10px;">Category</p>
             <div style="margin-left: 20px; margin-bottom: 25px; font-size: 12px;">
-              <input type="checkbox" id="All Wine" name="category" value="All Wine">
-              <label for="All Wine"> All Wine</label><br>
+              <!-- <input type="checkbox" id="All Wine" name="category" value="Wine">
+              <label for="All Wine"> All Wine</label><br> -->
               <input type="checkbox" id="Red Wine" name="category" value="Red Wine">
               <label for="Red Wine"> Red Wine</label><br>
               <input type="checkbox" id="White Wine" name="category" value="White Wine">

@@ -116,6 +116,7 @@ nav{
     font-weight: 500;
 }
 .menu li a{
+  margin-top: -15%;
     color: #8C7741;
 }
 .right-menu a{
@@ -196,6 +197,11 @@ transition: width .3s;
 }
 @media(max-width:1010px){
 
+
+  .nav-link:hover::after{
+    width: 0px;
+    transition: none;
+  }
   nav{
       position: relative;
   }
@@ -223,7 +229,7 @@ transition: width .3s;
   .menu2{
     position: absolute;
     top: 110px;
-    left: 35px;
+    left: -8px;
     background-color: #ffffff;
     border-bottom: 4px solid #8C7741;
     width: 100%;
@@ -379,6 +385,12 @@ transition: width .3s;
   }
 }
 
+@media(max-width:414px){
+  .toggle{
+    margin-left: -50px;
+  }
+
+}
 
 @media(max-width:390px){
   .nameuser{
@@ -401,7 +413,7 @@ transition: width .3s;
 .btnsearch:hover{
   border: white;
   background-color: black;
-  color: red;
+  color: #c7c1b2;
   margin-right: 30px;
   font-size: 14px;
 }
@@ -2126,6 +2138,57 @@ transition: width .3s;
     margin-left: 5px;
   }
 
+  .single-product {
+    box-sizing: border-box;
+    font-family: "Lucida Sans", sans-serif;
+  }
+
+  .single-product .row .col-6 img{
+    width: 700px;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  [class*="col-"] {
+    float: left;
+    padding: 15px;
+  }
+  
+  
+  .single-product .col-1 {width: 8.33%;}
+  .single-product .col-2 {width: 16.66%;}
+  .single-product .col-3 {width: 25%;}
+  .single-product .col-4 {width: 33.33%;}
+  .single-product .col-5 {width: 41.66%;}
+  .single-product .col-6 {width: 50%;}
+  .single-product .col-7 {width: 58.33%;}
+  .single-product .col-8 {width: 66.66%;}
+  .single-product .col-9 {width: 75%;}
+  .single-product .col-10 {width: 83.33%;}
+  .single-product .col-11 {width: 91.66%;}
+  .single-product .col-12 {width: 100%;}
+ 
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  
+  @media screen and (max-width: 518px){
+    
+    .single-product .col-6 {width: 100%;}
+  }
   
   @media screen and (max-width: 1196px){
     .column .imgstory5{
@@ -3592,10 +3655,9 @@ transition: width .3s;
 
   }
   @media screen and (max-width: 502px) {
-    .arrival-heading{
-      margin-top: -8%;
-      margin-left: -30%;
-    }
+   .Related .arrival-heading{
+     margin-top: 90px;
+   }
     .comment-form{
       margin-left: -10px;
       width: 400px;

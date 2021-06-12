@@ -31,7 +31,7 @@
       <!--menu-icon------------->
       <div class="toggle"></div>
       <!--menu----------------->
-      <ul class="menu">
+      <ul style="margin-left: 30px;" class="menu">
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
@@ -42,11 +42,12 @@
       </ul>
       <!--right-menu----------->
       <div class="right-menu">
-       
-        <a href=""><%= name %></a>
-        <a href="/account" class="user">
-          <i class="far fa-user"></i>
+        <a style="margin-left: 30px; font-size: 12px;" href="/login" class="user">
+          Login
         </a>
+        <span style="color: #6e6d6d;">|</span>
+        <a style="margin-left: 8px; font-size: 12px;" href="/register" class="user">
+          Register
         <a href="javascript:void(0);" class="search">
          <i class="fas fa-search"></i>
        </a>
@@ -77,7 +78,7 @@
     </div>
     </div>
   </form>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-2">
       <img style="width: 600px; margin-top: 100px;" src="/images/account2.png" alt="">
 
@@ -104,7 +105,94 @@
       </form>
       </div>
     </div>
+  </div> -->
+  <div class="formlgrs">
+    <div class="row">
+      <div class="col-7">
+        <!-- <img class="imglogin" src="/images/account2.png" alt=""> -->
+      </div>
+    
+      <div class="col-5">
+        <div class="wrapper">
+          <div style="margin-bottom: -45px;">
+            <h3 style="margin-top: -20px;">Register</h3>
+          </div>
+          <form action="/register" method="POST">
+          <div class="login is-active">
+            <div class="form-element">
+              <span><i class="fas fa-user"></i></span><input type="text" name="username" placeholder="username" required/>
+            </div>
+            <div class="form-element">
+              <span><i class="fas fa-envelope"></i></span><input type="email" name="email" placeholder="email" required/>
+            </div>
+            <div class="form-element">
+              <span><i class="fa fa-lock"></i></span><input type="password" name="password" placeholder="password" required/>
+            </div>
+            <button style="margin-bottom: 20px;" class="btn-login purchase">register</button>
+            <p style="margin-top: -15px; margin-bottom: 20px; color: black; font-size: 10px; letter-spacing: 1px; margin-left: 20px;">Your already have an account <a style="color: blue" class="account" href="/login">Login</a> </p>
+          </div>
+        </form>
+        </div>
+    </div>
+   </div>
   </div>
+  <!-- Footer -->
+  <footer id="footer" class="section footer">
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-center">
+          <h3>EXTRAS</h3>
+          <a href="#">Brands</a>
+          <a href="#">Gift Certificates</a>
+          <a href="#">Specials</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>INFORMATION</h3>
+          <a href="#">About Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Map</a>
+        </div>
+        <div class="footer-center">
+          <h3>MY PROFILE</h3>
+          <a href="#">FB : Sedtawut chalothornnarumit</a>
+          <a href="#">IG : Aoystwr</a>
+          <a href="#">Twitter : Aoystwr</a>
+          <a href="#">LineID : aoybcc</a>
+        </div>
+        <div class="footer-center">
+          <h3>CONTACT US</h3>
+          <div>
+            <span>
+              <i class="fas fa-map-marker-alt"></i>
+            </span>
+            123 Aoy House, Aoy street, Bangkok
+          </div>
+          <div>
+            <span>
+              <i class="far fa-envelope"></i>
+            </span>
+            aoy35085@hotmail.com
+          </div>
+          <div>
+            <span>
+              <i class="fas fa-phone"></i>
+            </span>
+            095-291-1766
+          </div>
+          <div>
+            <span>
+              <i class="far fa-paper-plane"></i>
+            </span>
+            Aoy City, Bangkok
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
 
 </body>
 

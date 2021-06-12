@@ -21,13 +21,17 @@ let sortname = 'Sort by';
 let advance;
 let product ;
 let infoadvance;
-let checkadvance =false
+let checkadvance = false
+let checksearch = false
+let infosearch = ''
+let countproduct = 0
 let filterbrand 
 let filtercategory 
 let filterprice 
 let filteralcohol 
 
 router.get('/productsearch',async (req,res,next) =>{
+  req.session.fromUrl = req.originalUrl;
   if(res.locals.currentUser == null){
     amountcart = 0
     name= ''
@@ -37,29 +41,39 @@ router.get('/productsearch',async (req,res,next) =>{
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
   }
     try{
-      const productinfo  = await Product.find({name: productsearch});
-      console.log('productinfo: ' + productinfo)
-      console.log('productinfo._id: ' + productinfo[0]._id)
-      const product = await Product.findById(productinfo[0]._id).populate('comments').exec();
-      if(product.name != null){
-        const relateproduct  = await Product.find({ category:product.category, name: { $ne: product.name} });
-        res.render('eachproduct.ejs',{
-          relateproduct ,
-          product,
-          name: name,
-          amountcart: amountcart,
-          infouser 
-        })      
-      }
-    }catch{
-      console.log('error')
-      res.render('errorproduct.ejs',{
-        name: name,
-        amountcart: amountcart,
-        error: productsearch,
-        amountcart: amountcart,
-        infouser    
-      })
+      page =1
+      filterbrand = null
+      filtercategory = null
+      filterprice = null
+      filteralcohol = null
+      checkcategory = 'Wine'
+      // const productinfo = await Product.find({ $text: { $search: "\"bella\""} })
+      infosearch = productsearch
+      checksearch = true
+      checkadvance = false
+      const product  = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}})
+      countproduct  = await Product.countDocuments({name: {'$regex' : infosearch, '$options' : 'i'}})
+      // const product = await Product.findById(productinfo[0]._id).populate('comments').exec();
+      // console.log('productinfo2: ' + product)
+      con = 'Sort by'
+      res.render("allproduct.ejs", {
+            product,
+            name: name,
+            amountcart: amountcart,
+            sortname: con,
+            page : page,
+            filterbrand,
+            filtercategory,
+            filterprice,
+            filteralcohol,
+            infouser,
+            checkcategory,
+            infosearch,
+            countproduct
+          });  
+    }catch(err){
+      console.log(err)
+   
   }
 })
   
@@ -71,6 +85,12 @@ router.post('/search', async(req, res, next)=>{
 })
 
 router.get('/redproduct' , async(req,res)=>{  
+  infosearch = ''
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
+  req.session.fromUrl = req.originalUrl;
   if(res.locals.currentUser == null){
     amountcart = 0
     name= ''
@@ -80,120 +100,10 @@ router.get('/redproduct' , async(req,res)=>{
     amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
   }
     page = 1;
+    countproduct = 0
     product  = await Product.find({category: 'Red Wine'})
     checkcategory = 'Red Wine'
-    con = 'Sort by'
-    res.render("allproduct.ejs", {
-      product,
-      name: name,
-      amountcart: amountcart,
-      sortname: con,
-      page : page,
-      filterbrand,
-      filtercategory,
-      filterprice,
-      filteralcohol,
-      infouser,
-      checkcategory
-    }); 
-})
-
-router.get('/whiteproduct' , async(req,res)=>{  
-  if(res.locals.currentUser == null){
-    amountcart = 0
-    name= ''
-  }else{
-    name = res.locals.currentUser.username
-    infouser = await userss.findById(res.locals.currentUser._id)
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }
-    page = 1;
-    product = await Product.find({category: 'White Wine'})
-    checkcategory = 'White Wine'
-    con = 'Sort by'
-    res.render("allproduct.ejs", {
-      product,
-      name: name,
-      amountcart: amountcart,
-      sortname: con,
-      page : page,
-      filterbrand,
-      filtercategory,
-      filterprice,
-      filteralcohol,
-      infouser,
-      checkcategory
-    }); 
-})
-  
-router.get('/dessertproduct' , async(req,res)=>{  
-  if(res.locals.currentUser == null){
-    amountcart = 0
-    name= ''
-  }else{
-    name = res.locals.currentUser.username
-    infouser = await userss.findById(res.locals.currentUser._id)
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }
-    page = 1;
-    product = await Product.find({category: 'Dessert Wine'})
-    checkcategory = 'Dessert Wine'
-    con = 'Sort by'
-    res.render("allproduct.ejs", {
-      product,
-      name: name,
-      amountcart: amountcart,
-      sortname: con,
-      page : page,
-      filterbrand,
-      filtercategory,
-      filterprice,
-      filteralcohol,
-      infouser,
-      checkcategory
-    }); 
-})
-  
-router.get('/roseproduct' , async(req,res)=>{  
-  if(res.locals.currentUser == null){
-    amountcart = 0
-    name= ''
-  }else{
-    name = res.locals.currentUser.username
-    infouser = await userss.findById(res.locals.currentUser._id)
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }
-    page = 1;
-    product = await Product.find({category: 'Rose Wine'})
-    checkcategory = 'Rose Wine'
-    con = 'Sort by'
-    res.render("allproduct.ejs", {
-      product,
-      name: name,
-      amountcart: amountcart,
-      sortname: con,
-      page : page,
-      filterbrand,
-      filtercategory,
-      filterprice,
-      filteralcohol,
-      infouser,
-      checkcategory
-    }); 
-})
-  
-router.get('/sparklingproduct' , async(req,res)=>{  
-  if(res.locals.currentUser == null){
-    amountcart = 0
-    name= ''
-  }else{
-    name = res.locals.currentUser.username
-    infouser = await userss.findById(res.locals.currentUser._id)
-    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
-  }
-    page = 1;
-    product = await Product.find({category: 'Sparkling Wine'})
-    checkcategory = 'Sparkling Wine'
+    checkadvance = false
     con = 'Sort by'
     res.render("allproduct.ejs", {
       product,
@@ -207,10 +117,170 @@ router.get('/sparklingproduct' , async(req,res)=>{
       filteralcohol,
       infouser,
       checkcategory,
+      infosearch,
+      countproduct
+    }); 
+})
+
+router.get('/whiteproduct' , async(req,res)=>{  
+  infosearch = ''
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
+  req.session.fromUrl = req.originalUrl;
+  if(res.locals.currentUser == null){
+    amountcart = 0
+    name= ''
+  }else{
+    name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+  }
+    page = 1;
+    product = await Product.find({category: 'White Wine'})
+    checkcategory = 'White Wine'
+    checkadvance = false
+    con = 'Sort by'
+    countproduct = 0
+    res.render("allproduct.ejs", {
+      product,
+      name: name,
+      amountcart: amountcart,
+      sortname: con,
+      page : page,
+      filterbrand,
+      filtercategory,
+      filterprice,
+      filteralcohol,
+      infouser,
+      checkcategory,
+      infosearch,
+      countproduct
+    }); 
+})
+  
+router.get('/dessertproduct' , async(req,res)=>{ 
+  infosearch = ''
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null 
+  checkadvance = false
+  req.session.fromUrl = req.originalUrl;
+  if(res.locals.currentUser == null){
+    amountcart = 0
+    name= ''
+  }else{
+    name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+  }
+    page = 1;
+    product = await Product.find({category: 'Dessert Wine'})
+    checkcategory = 'Dessert Wine'
+    con = 'Sort by'
+    countproduct = 0
+    res.render("allproduct.ejs", {
+      product,
+      name: name,
+      amountcart: amountcart,
+      sortname: con,
+      page : page,
+      filterbrand,
+      filtercategory,
+      filterprice,
+      filteralcohol,
+      infouser,
+      checkcategory,
+      infosearch,
+      countproduct
+    }); 
+})
+  
+router.get('/roseproduct' , async(req,res)=>{
+  infosearch = '' 
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null
+  req.session.fromUrl = req.originalUrl; 
+  checkadvance = false
+  if(res.locals.currentUser == null){
+    amountcart = 0
+    name= ''
+  }else{
+    name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+  }
+    page = 1;
+    product = await Product.find({category: 'Rose Wine'})
+    checkcategory = 'Rose Wine'
+    checkadvance = false
+    con = 'Sort by'
+    countproduct = 0
+    res.render("allproduct.ejs", {
+      product,
+      name: name,
+      amountcart: amountcart,
+      sortname: con,
+      page : page,
+      filterbrand,
+      filtercategory,
+      filterprice,
+      filteralcohol,
+      infouser,
+      checkcategory,
+      infosearch,
+      countproduct
+    }); 
+})
+  
+router.get('/sparklingproduct' , async(req,res)=>{
+  infosearch = ''
+  filterbrand = null
+  filtercategory = null
+  filterprice = null
+  filteralcohol = null  
+  req.session.fromUrl = req.originalUrl;
+  if(res.locals.currentUser == null){
+    amountcart = 0
+    name= ''
+  }else{
+    name = res.locals.currentUser.username
+    infouser = await userss.findById(res.locals.currentUser._id)
+    amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+  }
+    page = 1;
+    product = await Product.find({category: 'Sparkling Wine'})
+    checkcategory = 'Sparkling Wine'
+    checkadvance = false
+    con = 'Sort by'
+    countproduct = 0
+    res.render("allproduct.ejs", {
+      product,
+      name: name,
+      amountcart: amountcart,
+      sortname: con,
+      page : page,
+      filterbrand,
+      filtercategory,
+      filterprice,
+      filteralcohol,
+      infouser,
+      checkcategory,
+      infosearch,
+      countproduct
     }); 
 })
   
 router.get('/allproducts' , async(req,res)=>{  
+    filterbrand = null
+    filtercategory = null
+    filterprice = null
+    filteralcohol = null
+    req.session.fromUrl = req.originalUrl;
     page = 1;
     if(res.locals.currentUser == null){
       name= ''
@@ -219,9 +289,13 @@ router.get('/allproducts' , async(req,res)=>{
       infouser = await userss.findById(res.locals.currentUser._id)
       amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     }
+    infosearch = ''
+    checkadvance = false
+    checksearch = false
     product  = await Product.find()
     checkcategory = 'Wine'
     con = 'Sort by'
+    countproduct = 0
     res.render("allproduct.ejs", {
       product,
       infouser,
@@ -233,7 +307,9 @@ router.get('/allproducts' , async(req,res)=>{
       filtercategory,
       filterprice,
       filteralcohol,
-      checkcategory
+      checkcategory,
+      infosearch,
+      countproduct
     }); 
 })
   
@@ -263,6 +339,7 @@ router.get('/page3', async(req,res)=>{
 })
   
 router.get('/allproduct', async (req,res) => {
+    req.session.fromUrl = req.originalUrl;
     if(res.locals.currentUser == null){
       name= ''
     }else{
@@ -276,6 +353,8 @@ router.get('/allproduct', async (req,res) => {
       try{
         if(checkadvance == true){
           product  = await Product.find(infoadvance).sort({"name":1});
+        }else if(checksearch){
+          product  = await Product.find({category: {'$name' : infosearch, '$options' : 'i'}}).sort({"name":1});
         }else{
           product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"name":1});
         }
@@ -291,7 +370,9 @@ router.get('/allproduct', async (req,res) => {
           filtercategory,
           filterprice,
           filteralcohol,
-          checkcategory
+          checkcategory,
+          infosearch,
+          countproduct
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -299,8 +380,10 @@ router.get('/allproduct', async (req,res) => {
     }else if(con =='highprice'){
       console.log('find highprice')
       try{
-        if(checkadvance == true){
+        if(checkadvance){
           product = await Product.find(infoadvance).sort({"price":-1});
+        }else if(checksearch){
+          product = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}}).sort({"price":-1});
         }else{
           product = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":-1});
         }
@@ -316,7 +399,9 @@ router.get('/allproduct', async (req,res) => {
           filtercategory,
           filterprice,
           filteralcohol,
-          checkcategory
+          checkcategory,
+          infosearch,
+      countproduct
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -324,8 +409,10 @@ router.get('/allproduct', async (req,res) => {
     }else if(con == 'lowprice'){
       console.log('find lowprice');
       try{
-        if(checkadvance == true){
+        if(checkadvance){
           product  = await Product.find(infoadvance).sort({"price":1});
+        }else if(checksearch){
+          product  = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}}).sort({"price":1});
         }else{
           product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({"price":1});
         }
@@ -341,7 +428,9 @@ router.get('/allproduct', async (req,res) => {
           filtercategory,
           filterprice,
           filteralcohol,
-          checkcategory
+          checkcategory,
+          infosearch,
+          countproduct
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -349,8 +438,10 @@ router.get('/allproduct', async (req,res) => {
     }else if(con == 'newproduct'){
       console.log('Find newproduct')
       try{
-        if(checkadvance == true){
+        if(checkadvance){
           product = await Product.find(infoadvance).sort({_id:-1});
+        }else if(checksearch){
+          product = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}}).sort({_id:-1});
         }else{
           product = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}}).sort({_id:-1});
         }
@@ -366,7 +457,9 @@ router.get('/allproduct', async (req,res) => {
           filtercategory,
           filterprice,
           filteralcohol,
-          checkcategory
+          checkcategory,
+          infosearch,
+          countproduct
         });
       }catch (err){
         console.log("err: "+ err); 
@@ -377,9 +470,11 @@ router.get('/allproduct', async (req,res) => {
       try{
         if(checkadvance == true){
           product = await Product.find(infoadvance); 
+        }else if(checksearch){
+          product  = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}});
         }else{
           product  = await Product.find({category: {'$regex' : checkcategory, '$options' : 'i'}});
-        }  
+        }
         res.render("allproduct.ejs", {
           infouser,
           product,
@@ -391,7 +486,9 @@ router.get('/allproduct', async (req,res) => {
           filtercategory,
           filterprice,
           filteralcohol,
-          checkcategory
+          checkcategory,
+          infosearch,
+          countproduct
         });    
       }catch (err){
         console.log("err: "+ err);      
@@ -399,7 +496,10 @@ router.get('/allproduct', async (req,res) => {
 });
 
 router.post('/advance', async(req,res)=>{
+    checksearch = false
+    infosearch = ''
     page =1
+    checkcategory = 'Wine'
     filterbrand = null
     filtercategory = null
     filterprice = null
@@ -517,6 +617,20 @@ router.post('/advance', async(req,res)=>{
       infoadvance = {brand: advance.brand,category: advance.category,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
+    res.redirect('/store/filter')
+   
+  })
+
+  router.get('/filter',async (req,res)=>{
+    req.session.fromUrl = req.originalUrl;
+    try{
+      name = res.locals.currentUser.username
+      infouser = await userss.findById(res.locals.currentUser._id)
+      amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
+    }catch{
+      console.log('err')
+    }
+    countproduct = 0
     res.render("allproduct.ejs", {
       infouser,
       product,
@@ -528,8 +642,11 @@ router.post('/advance', async(req,res)=>{
       filtercategory,
       filterprice,
       filteralcohol,
-      checkcategory
+      checkcategory,
+      infosearch,
+      countproduct
     });
+
   })
   
   router.get('/clearfilter', (req,res)=>{
@@ -539,7 +656,6 @@ router.post('/advance', async(req,res)=>{
     filterprice = null
     filteralcohol = null
     checkadvance = false
-    checkcategory = 'Wine'
     sortname = 'Sort by'
     con = ''
     res.redirect('/store/allproduct')
@@ -563,6 +679,7 @@ router.get('/oneproduct', async (req,res) => {
         infouser = await userss.findById(res.locals.currentUser._id)
         amountcart = await productcart.countDocuments({username: res.locals.currentUser.username});
     }catch{
+        name = ''
         console.log('err')
     }
     const product  = await Product.findById(nowproductt).populate('comments').exec();

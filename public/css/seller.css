@@ -211,8 +211,13 @@ nav{
 }
 @media(max-width:1010px){
 
+  
   nav{
       position: relative;
+  }
+  .nav-link:hover::after{
+    width: 0px;
+    transition: none;
   }
   .navigation{
       height: 80px;
@@ -395,7 +400,7 @@ nav{
   .btnsearch:hover{
     border: white;
     background-color: black;
-    color: red;
+    color: #c7c1b2;
     margin-right: 30px;
     font-size: 14px;
   }
