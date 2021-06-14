@@ -51,7 +51,7 @@
       } %>     
     <nav style="background-color: black;" class="navbar navbar-light p-3 ">
       <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-          <a class="navbar-brand logo" href="/">
+          <a class="navbar-brand logo" href="#">
             <img src="/images/logo12.png">
           </a>
           <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,7 @@
               <%= name %> &nbsp;<i class="fas fa-caret-down"></i>
             </button> 
            <div class="dropdown-content">
-            <a href="/cart/totalproducts">Cart (<%= amountcart %>)</a>
-            <a href="/account/logout">Log out</a>
+            <a href="/admin/logout2">Log out</a>
           </div>
         </div>
       </div>
@@ -84,47 +83,47 @@
           <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
               <div class="position-sticky">
                 <ul class="nav flex-column">
-                  <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
-                    <div class="logo-wrap">
-                   
-                      <% if(infouser[0].img == null ){ %>
-                        <div class="logo">
-                          <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
-                        </div>
-                        <% }else{ %>
-                          <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
-                      <% } %> 
-                      <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
-                    </div>
-                  </li>
-                  <li  class="nav-item ac">
-                    <span style="margin-left: 0px; margin-top: 10px; font-size: 18px;" class="nav-link" href="#"> Account</span>
-                    <ul class="submenu">
-                      <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link active" href="#"><i class="far fa-user"></i> &nbsp; Profile </a></li>
-                      <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/email"><i class="far fa-envelope"></i> &nbsp; Email </a></li>
-                      <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/address"><i class="fas fa-map-pin"></i> &nbsp; Address & Phone </a></li>
-                      <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px; margin-bottom: 10px;"class="nav-link" href="/account/creditcard"><i class="far fa-credit-card"></i> &nbsp; Creditcard </a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item ac">
-                    <a style="margin-left: 0px; margin-bottom: 20px; font-size: 16px; margin-top: 20px;" class="nav-link" aria-current="page" href="/account/historybuyer">
-                      <i class="fas fa-history"></i>
-                      <span class="ml-2">History Purchase</span>
-                    </a>
-                </li>
-                <li class="nav-item ac">
-                  <a style="margin-left: 0px; margin-bottom: 10px; font-size: 16px;" class="nav-link" aria-current="page" href="/account/review">
-                    <i class="far fa-comments"></i>
-                    <span class="ml-2">My reviews</span>
-                  </a>
-              </li>
-                </ul>
+                    <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
+                      <div class="logo-wrap">
+                        <% if(infouser[0].img == null ){ %>
+                          <div class="logo">
+                            <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
+                          </div>
+                          <% }else{ %>
+                            <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+                        <% } %> 
+                        <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+                      </div>
+                    </li>
+                    <li style="margin-top: 20px;" class="nav-item ac">
+                      <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Account </span>
+                      <ul class="submenu">
+                        <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link active" href="#"><i class="fas fa-user"></i> &nbsp; Manage Profile </a></li>
+                      </ul>
+                    </li>
+                    <% if(currentUser.role == 'Master Admin') { %>
+                    <li style="margin-top: 20px;" class="nav-item ac">
+                      <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Master Admin </span>
+                      <ul class="submenu">
+                        <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/alluser"><i class="fas fa-users"></i> &nbsp; Manage users </a></li>
+                      </ul>
+                    </li>
+                    <% } %>
+                    <li style="margin-top: 10px;" class="nav-item ac">
+                      <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Admin </span>
+                      <ul class="submenu">
+                        <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;" class="nav-link " href="/admin/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>  
+                        <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/allreview"><i class="far fa-comments"></i> &nbsp; Manage reviews </a></li>
+                        <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
+                      </ul>
+                    </li>
+                  
+                  </ul>
               </div>
           </nav>
           <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="/">Home</a></li>
                       <li class="breadcrumb-item active" aria-current="page">Account</li>
                       <li class="breadcrumb-item active" aria-current="page">Profile</li>
                   </ol>
@@ -162,35 +161,37 @@
                             </div>
                             <div class="form-group" style="margin-top: 40px; " >
                              <!-- <input style="font-size: 13px;" type="submit" class="btn btn-info" value="Save">    -->
+                          <% if(infouser[0].role != 'Master Admin'){  %>
                             <div style="margin-top: 30px;" class="form-group">
-                              <label style="font-size: 16px;  margin-bottom: 0px;">Delete Account</label>
-                          </div>
-                          <div style="margin-top: 15px;" class="form-group" >
-                              <div class="form-group" style="margin-top: 5px; " >
-                                  <input type="submit" style="margin-left: 0px; font-size: 12px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="Delete">        
+                                <label style="font-size: 16px;  margin-bottom: 0px;">Delete Account</label>
                             </div>
-                          </div>
-                          <form action="/account/deleteaccount?id=<%= infouser[0]._id %>" method="post">
-                            <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirm to Delete</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    Are you sure to delete this account ?
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-danger">Confirm</button>
+                            <div style="margin-top: 15px;" class="form-group" >
+                                <div class="form-group" style="margin-top: 5px; " >
+                                    <input type="submit" style="margin-left: 0px; font-size: 12px;" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" value="Delete">        
+                              </div>
+                            </div>
+                            <form action="/admin/deleteaccount?id=<%= infouser[0]._id %>" method="post">
+                              <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Confirm to Delete</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure to delete this account ?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-danger">Confirm</button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </form>
+                            </form>
+                          <% } %>
                           </div>
                         </div>
                       </div>
@@ -230,7 +231,7 @@
           <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade " id="myModal">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                <form method="POST" action="/account/updateimgprofile">
+                <form method="POST" action="/admin/updateimgprofile">
                     <div class="modal-header">
                         <h2 style="font-size: 20px;" class="modal-title"><i style="font-size: 20px; padding: 5px 5px;" class="fas fa-image"></i> &nbsp; Image Profile</h2>
                         <button style="padding: 18px 20px;" data-dismiss="modal" type="button" class="close">
@@ -254,7 +255,7 @@
           <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade " id="myModal2">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                <form method="POST" action="/account/changepassword">
+                <form method="POST" action="/admin/changepassword">
                   <div class="modal-header">
                     <h2 style="font-size: 20px;" class="modal-title"><i style="font-size: 17px; padding: 5px 5px;" class="fas fa-lock"></i> &nbsp; Change password </h2>
                         <button style="padding: 18px 20px;" data-dismiss="modal" type="button" class="close">

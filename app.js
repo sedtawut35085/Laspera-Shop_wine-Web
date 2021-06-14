@@ -6,11 +6,12 @@ const mongoose = require("mongoose");
       userss = require('./models/user'),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
-      // Product = require('../models/product'),
+      middleware = require('./middleware'),
       session = require('express-session');
 
 
 var IndexRoutes = require('./routes/index')
+var AdminRoutes = require('./routes/admin')
 var AccountRoutes = require('./routes/account')
 var CartRoutes = require('./routes/cart')
 var StoreRoutes = require('./routes/store')
@@ -55,10 +56,11 @@ mongoose.connect("mongodb://localhost:27017/project",async function(err,dbs){
 });
 
 app.use('/',IndexRoutes)
-app.use('/account',AccountRoutes)
-app.use('/cart',CartRoutes)
-app.use('/store',StoreRoutes)
+app.use('/account',middleware.checkUser, AccountRoutes)
+app.use('/cart',middleware.checkUser,CartRoutes)
+app.use('/store',middleware.checkUser,StoreRoutes)
 app.use('/comment',CommentRoutes)
+app.use('/admin',AdminRoutes)
 
 app.listen(3000,()=>{
     console.log('server running')

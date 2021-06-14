@@ -17,7 +17,7 @@ let countdessertwine = 0;
 let name;
 let infouser;
 
-router.get('/',  async(req,res) => {
+router.get('/',middleware.checkUser, async(req,res) => {
   req.session.fromUrl = req.originalUrl;
   checkadvance = false
     var datetime = new Date().toLocaleString('en-US', {
@@ -84,29 +84,32 @@ router.post('/login', passport.authenticate('local',
      failureFlash: true,
      successFlash: 'Successfully log in',
      failureFlash: 'Invalid username or password'
-   }), async function(req,res){
-    console.log('req.session.fromUrl : ' + req.session.fromUrl)
-     console.log('login done.') 
-     try{
-      amountcart  = await productcart.countDocuments({username: res.locals.currentUser.username});
-       name = res.locals.currentUser.username
-     }catch{
-       console.log('error')
+   }),async function(req,res){
+     console.log('req.session.fromUrl : ' + req.session.fromUrl)
+     console.log('login done.')
+     console.log('req.user.username ' + req.user.username)
+     
+     console.log('req.user.role ' + req.user.role)
+ 
+     if(req.user.role == 'Admin' || req.user.role == 'Master Admin'){
+      res.redirect('/admin/seller');
+     }else{
+      res.redirect(req.session.fromUrl);
      }
-     res.redirect(req.session.fromUrl);
+
    }
 );
 
 router.post('/register', function async (req,res){
     console.log('register')
-    var newUser = new userss({username: req.body.username , email: req.body.email , address: '' , phone: '' , img: null , imgType: null});
+    var newUser = new userss({username: req.body.username , email: req.body.email , address: '' , phone: '' , img: null , imgType: null , role: 'User'});
       userss.register(newUser, req.body.password, function(err, user){
           if(err) {
               console.log(err);
               req.flash('error', err.message);
               return res.redirect('/register');
           }
-          req.flash('success', 'Register finish ' + user.username);
+          req.flash('success', 'Register finish ');
           const cardinfo = new creditcards({NameCard: '' , NumberCard: '' ,  ValidDate : '', CVV : null})
           cardinfo.save();
           console.log('cardinfo._id ' + cardinfo._id)
@@ -115,6 +118,8 @@ router.post('/register', function async (req,res){
           res.redirect('/login');
       });
 });
+
+
 
 
 module.exports = router;

@@ -13,6 +13,7 @@
 	  <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
+      
     ></script>
     
     <link rel="stylesheet" href="/css/styles2.css">
@@ -126,8 +127,11 @@
               <span><i class="fas fa-envelope"></i></span><input type="email" name="email" placeholder="email" required/>
             </div>
             <div class="form-element">
-              <span><i class="fa fa-lock"></i></span><input type="password" name="password" placeholder="password" required/>
+              <span><i class="fa fa-lock"></i></span><input type="password" name="password" placeholder="password" id="txtPassword" required/>
             </div>
+            <!-- <div class="form-element" onchange="return Validate()" >
+              <span><i class="fa fa-lock"></i></span><input type="password"  placeholder="confirm password" id="txtConfirmPassword" required/>
+            </div> -->
             <button style="margin-bottom: 20px;" class="btn-login purchase">register</button>
             <p style="margin-top: -15px; margin-bottom: 20px; color: black; font-size: 10px; letter-spacing: 1px; margin-left: 20px;">Your already have an account <a style="color: blue" class="account" href="/login">Login</a> </p>
           </div>
@@ -195,5 +199,15 @@
   </footer>
 
 </body>
-
+<script>
+  function Validate() {
+        var password = document.getElementById("txtPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
 </html>

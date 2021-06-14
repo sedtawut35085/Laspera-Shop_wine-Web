@@ -774,7 +774,7 @@ router.get('/oneproduct', async (req,res) => {
     }
     const product  = await Product.findById(nowproductt).populate('comments').exec();
     console.log(product)
-    const relateproduct  = await Product.find({ category:product.category, name: { $ne: product.name} });
+    const relateproduct  = await Product.find({ category:product.category, name: { $ne: product.name} }).limit(4);
     res.render('eachproduct.ejs',{
         relateproduct,
         product,

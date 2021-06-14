@@ -51,7 +51,7 @@
   } %> 
   <nav style="background-color: black;" class="navbar navbar-light p-3 ">
     <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-        <a class="navbar-brand logo" href="/">
+        <a class="navbar-brand logo" href="#">
           <img src="/images/logo12.png">
         </a>
         <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,7 @@
             <%= name %> &nbsp;<i class="fas fa-caret-down"></i>
           </button> 
          <div class="dropdown-content">
-          <a href="/cart/totalproducts">Cart (<%= amountcart %>)</a>
-          <a href="/account/logout">Log out</a>
+          <a href="/admin/logout2">Log out</a>
         </div>
       </div>
     </div>
@@ -83,6 +82,7 @@
     <div class="row">
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="position-sticky">
+         
          
           <ul class="nav flex-column">
             <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
@@ -97,54 +97,59 @@
                 <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
               </div>
             </li>
-            <li  class="nav-item ac">
-              <span style="margin-left: 0px; margin-top: 10px; font-size: 18px;" class="nav-link" href="#"> Account</span>
+            <li style="margin-top: 20px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Account </span>
               <ul class="submenu">
-                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/accountinfo"><i class="far fa-user"></i> &nbsp; Profile </a></li>
-                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/email"><i class="far fa-envelope"></i> &nbsp; Email </a></li>
-                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link" href="/account/address"><i class="fas fa-map-pin"></i> &nbsp; Address & Phone </a></li>
-                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px; margin-bottom: 10px;"class="nav-link" href="/account/creditcard"><i class="far fa-credit-card"></i> &nbsp; Creditcard </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/accountprofileadmin"><i class="fas fa-user"></i> &nbsp; Manage Profile </a></li>
               </ul>
             </li>
-            <% if(name == 'admin') { %>
-              <li class="nav-item ac">
-                <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Admin </span>
-                <ul class="submenu">
-                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;" class="nav-link active" href="/account/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>
-                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
-                  <li><a style="margin-left: 0px; margin-top: 10px; font-size: 12px;"class="nav-link" href="/account/allreview"><i class="far fa-comments"></i> &nbsp; All reviews </a></li>
-                </ul>
-              </li>
-              <% } %>
-            <li class="nav-item ac">
-              <a style="margin-left: 0px; margin-bottom: 20px; font-size: 16px; margin-top: 20px;" class="nav-link" aria-current="page" href="/account/historybuyer">
-                <i class="fas fa-history"></i>
-                <span class="ml-2">History Purchase</span>
-              </a>
-          </li>
-          <li class="nav-item ac">
-            <a style="margin-left: 0px; margin-bottom: 10px; font-size: 16px;" class="nav-link" aria-current="page" href="/account/review">
-              <i class="far fa-comments"></i>
-              <span class="ml-2">My reviews</span>
-            </a>
-        </li>
+            <% if(currentUser.role == 'Master Admin') { %>
+            <li style="margin-top: 20px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Master Admin </span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/alluser"><i class="fas fa-users"></i> &nbsp; Manage users </a></li>
+              </ul>
+            </li>
+            <% } %>
+            <li style="margin-top: 10px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Admin </span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;" class="nav-link active" href="/admin/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>  
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/allreview"><i class="far fa-comments"></i> &nbsp; Manage reviews </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
+              </ul>
+            </li>
+          
           </ul>
         </div>
     </nav>
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
-                    <li class="breadcrumb-item active" aria-current="page">Manage Products</li>
+                    <li class="breadcrumb-item" aria-current="page">Admin</li>
+                    <li class="breadcrumb-item" aria-current="page">Manage Products</li>
                     <li class="breadcrumb-item active" aria-current="page">Edit Products</li>
                 </ol>
             </nav>
+            <% if(error && error.length > 0) { %>
+              <div class='alert error' role ='alert'>
+                <p class="inner">
+                  <%= error %>
+                </p>
+              </div>
+            <%}%>
+            <% if(success && success.length > 0) { %>
+              <div class="alert success" role="alert">
+                <p class="inner">
+                  <%= success %>
+                </p>
+              </div>  
+            <%}%>
             <h1 class="h2">Edit Products</h1>
             <p>Manage Products</p>
             <div class="row">
                 <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-5">
-                  <a style="margin-bottom: 10px; font-size: 10px; margin-top: -35px;"href="/account/seller" class="btn btn-info">Back</a>
+                  <a style="margin-bottom: 10px; font-size: 10px; margin-top: -35px;"href="/admin/seller" class="btn btn-info">Back</a>
                     <div class="card">
                         <h5 class="card-header">
                           <ul class="nav nav-pills w-100">
@@ -153,7 +158,7 @@
                         </h5>
                         <div class="card-body">
                             <div class="table-responsive">
-                              <form action="/account/updateproduct" method="post">
+                              <form action="/admin/updateproduct" method="post">
                                 <div style="margin-bottom: 10px;" class="form-group">
                                     <label style="margin-bottom: 10px;">Name:</label>
                                     <input type="text" class="form-control" name="name" value="<%= editpros[0].name %>" autocomplete="off">
@@ -273,7 +278,7 @@
 <div style="top: 20%; border-radius: 25px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
   <div class="modal-dialog modal-sm">
       <div class="modal-content">
-      <form method="POST" action="/account/updateimgproduct">
+      <form method="POST" action="/admin/updateimgproduct">
           <div class="modal-header">
               <h2 class="modal-title">&nbsp;Edit Image </h2>
                   <button style="margin-top: -2px;" data-dismiss="modal" type="button" class="close">

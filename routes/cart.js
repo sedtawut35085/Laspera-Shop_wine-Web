@@ -13,6 +13,10 @@ let subtotal = 0
 let total = 0
 let tax = 0
 let sum;
+let m
+let n
+let updateinfouser = ''
+let purchase = ''
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
 router.post('/updatecarts', async(req,res)=>{
@@ -78,9 +82,9 @@ router.get('/checkout', async function(req,res){
 })
   
 router.post('/buy',async function(req,res){
-    let m
+   
     const check2  = await invoice.find();
-    let n = await invoice.countDocuments();    
+    n = await invoice.countDocuments();    
     console.log('n : ' + n)  
     if(n==0){
       m=0
@@ -90,7 +94,7 @@ router.post('/buy',async function(req,res){
     }
     await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
     await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
-    const purchase  = await productcart.find({username: res.locals.currentUser.username});
+    purchase  = await productcart.find({username: res.locals.currentUser.username});
     const infouser = await userss.findById(res.locals.currentUser._id)
     try{
       for(i=0;;i++){
@@ -115,27 +119,32 @@ router.post('/buy',async function(req,res){
     }catch{
       console.log('error')  
     }
-    const updateinfouser = await userss.find({username: res.locals.currentUser.username})
-    let date2 = new Date().toLocaleString('en-US', {
-      timeZone: 'Asia/Bangkok'
-    });
+    updateinfouser = await userss.find({username: res.locals.currentUser.username})
+ 
     await productcart.remove({username: res.locals.currentUser.username})
     await userss.findOneAndUpdate({username: res.locals.currentUser.username}, 
       {"$set": { "cart": []}}, 
        )
-    alert('Thank for your purchase')
-    res.render('purchase.ejs',{
-          invoiceid: m,
-          subtotal: subtotal,
-          total: total,
-          tax: tax,
-          purchase: purchase,
-          adduser: updateinfouser[0].address,
-          phoneuser: updateinfouser[0].phone,
-          date: date2,
-          name: res.locals.currentUser.username.toUpperCase(),
-          amountcart: amountcart,
-    })
+    req.flash('success', 'Thank for your purchase');
+   res.redirect('/cart/purchase')
+})
+
+router.get('/purchase', async(req,res)=>{
+  let date2 = new Date().toLocaleString('en-US', {
+    timeZone: 'Asia/Bangkok'
+  });
+  res.render('purchase.ejs',{
+    invoiceid: m,
+    subtotal: subtotal,
+    total: total,
+    tax: tax,
+    purchase: purchase,
+    adduser: updateinfouser[0].address,
+    phoneuser: updateinfouser[0].phone,
+    date: date2,
+    name: res.locals.currentUser.username.toUpperCase(),
+    amountcart: amountcart,
+})
 })
   
 router.post('/firstaddadress',async(req,res)=>{

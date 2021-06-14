@@ -33,6 +33,10 @@ const userSchema = new Schema({
         type: String,
     
     },
+    role: {
+        type: String,
+    
+    },
     creditcard: [
         {
             type: mongoose.Schema.Types.ObjectId,

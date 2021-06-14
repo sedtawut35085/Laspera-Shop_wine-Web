@@ -133,20 +133,21 @@
             </section> 
             <form action="/store/addcart?id=<%= product.name %>" method="POST">
               <div class="small-container single-product product-details">
+                <% if(addcartsuccess && addcartsuccess.length > 0) { %>
+                  <div style="margin-bottom: -50px;" class='alert success' role ='alert'>
+                    <p class="inner">
+                      <%= addcartsuccess %>
+                    </p>
+                  </div>
+                <%}%>
                 <div class="row">
+
                   <div class="col-6">
                     <img src="<%= product.coverImagePath %>" >
                   </div>
                 
                   <div class="col-6">
-                    <% if(addcartsuccess && addcartsuccess.length > 0) { %>
-                      <div style="margin-bottom: -50px;" class='alert success' role ='alert'>
-                        <p class="inner">
-                          <%= addcartsuccess %>
-                        </p>
-                      </div>
-                    <%}%>
-                 
+                   
                     <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
                     <h3 style="margin-top: 3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;$ <%= product.price %> </span></h3>
                     <h6 style="margin-top: 5%; font-size: 12px;">Category <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h6>
@@ -285,9 +286,15 @@
           <div class="form-row">
             <textarea class="input form-control" type="text" name='comment'ng-model="cmntCtrl.comment.text" placeholder="your comment here ..."required></textarea>
           </div>
+          <% if(currentUser) { %>
           <div class="form-row">
             <input type="submit" value="Add Comment">
           </div>
+          <% }else{ %>
+            <div class="form-row">
+              <span style="font-size: 14px;">Login to add comment >> <a class="login" href="/login">login</a></span>
+            </div>
+            <% } %>
         </form>
       </div>
       <div class="com">
@@ -312,7 +319,7 @@
                       <%= m.author.username %>
                     </span>
                     <span class="comment-date"><%= m.date %></span>
-                    <% if((currentUser && m.author.id.equals(currentUser._id)) || name == 'admin'){ %>
+                    <% if((currentUser && m.author.id.equals(currentUser._id))){ %>
                     <span class="comment-date" onclick="editReview('<%= m._id %>')">
                       <span><button style="color: rgb(53, 105, 53);" class="deletecomment">Edit</button></span>
                     </span>
@@ -340,26 +347,26 @@
         </div>
       </section>
       <div class="product-container">
-        <% for(let i = 0; i < 4; i++){ %>
-        <form action="/store/oneproduct?id=<%= relateproduct[i]._id %>" method="GET">
-          <a href="/store/oneproduct?id=<%= relateproduct[i]._id%>">
+        <% relateproduct.forEach(m => {  %>
+        <form action="/store/oneproduct?id=<%= m._id %>" method="GET">
+          <a href="/store/oneproduct?id=<%= m._id%>">
           <div class="product-box">
             <div class="product-img">
-              <img src="<%= relateproduct[i].coverImagePath %>" alt="" class="ui image" width="20%">
+              <img src="<%= m.coverImagePath %>" alt="" class="ui image" width="20%">
             </div>
             <div class="product-details">     
-              <% if(relateproduct[i].name.length > 32) { 
-                name2 = relateproduct[i].name.substring(0, 30) + '..';
+              <% if(m.name.length > 32) { 
+                name2 = m.name.substring(0, 30) + '..';
               }else{
-                name2 = relateproduct[i].name
+                name2 = m.name
               } %>   
               <p class="product-name"><%=  name2 %></p>
-              <span name="price" class="p-price">price : <%= relateproduct[i].price %> $</span>
+              <span name="price" class="p-price">price : <%= m.price %> $</span>
           </div>  
           </div>    
           </a> 
         </form> 
-        <% } %>
+        <% }) %>
       </div>
      </div>
       </main>   

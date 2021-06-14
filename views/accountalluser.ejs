@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/account.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+  <script src="/js/index.js" defer></script>
+  
+    <style>
+      .filepond--credits {
+    display: none;
+       }
+    </style>
+    <title>Laespela</title>
+</head>
+<body>
+  <% if(infouser[0].username.length > 7){
+    name = infouser[0].username.substring(0,7) + '..'
+  } %> 
+  <nav style="background-color: black;" class="navbar navbar-light p-3 ">
+    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <a class="navbar-brand logo" href="/">
+          <img src="/images/logo12.png">
+        </a>
+        <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <!-- <div class="col-12 col-md-4 col-lg-2">
+        <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+    </div> -->
+    <div style="margin-right: 50px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+      <div class="logo-wrap1">
+        <% if(infouser[0].img == null ){ %>
+          <div class="logo">
+            <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
+          </div>
+          <% }else{ %>
+            <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+        <% } %> 
+      </div>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <%= name %> &nbsp;<i class="fas fa-caret-down"></i>
+          </button> 
+         <div class="dropdown-content">
+          <a href="/admin/logout2">Log out</a>
+        </div>
+      </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky">
+         
+         
+          <ul class="nav flex-column">
+            <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
+              <div class="logo-wrap">
+                <% if(infouser[0].img == null ){ %>
+                  <div class="logo">
+                    <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
+                  </div>
+                  <% }else{ %>
+                    <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
+                <% } %> 
+                <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+              </div>
+            </li>
+            <li style="margin-top: 20px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Account </span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/accountprofileadmin"><i class="fas fa-user"></i> &nbsp; Manage Profile </a></li>
+              </ul>
+            </li>
+            <% if(currentUser.role == 'Master Admin') { %>
+            <li style="margin-top: 20px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Master Admin </span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link active" href="#"><i class="fas fa-users"></i> &nbsp; Manage users </a></li>
+              </ul>
+            </li>
+            <% } %>
+            <li style="margin-top: 10px;" class="nav-item ac">
+              <span style="margin-left: 0px; margin-bottom: 10px; font-size: 18px;" class="nav-link" href="#"> Admin </span>
+              <ul class="submenu">
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;" class="nav-link " href="/admin/seller"><i class="fas fa-store"></i> &nbsp; Manage Products </a></li>  
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/allreview"><i class="far fa-comments"></i> &nbsp; Manage reviews </a></li>
+                <li><a style="margin-left: 0px; margin-top: 10px; font-size: 14px;"class="nav-link" href="/admin/dashboard"><i class="fab fa-sellsy"></i> &nbsp; Dashboard </a></li>
+              </ul>
+            </li>
+          
+          </ul>
+        </div>
+    </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Master Admin</li>
+                    <li class="breadcrumb-item" aria-current="page">Manage Users</li>
+                </ol>
+            </nav>
+            
+             
+            <% if(success && success.length > 0) { %>
+              <div style="margin-left: -15px;" class='alert success' role ='alert'>
+                <p class="inner">
+                  <%= success %>
+                </p>
+              </div>
+            <%}%>
+            <h1 class="h2">Manage user</h1>
+            <p>Manage user</p>
+              <div class="row">
+                <div class="col-12 col-xl-10 mb-6 mb-lg-0 mt-1">
+                    <div class="card">
+                        <h5 class="card-header">
+                          <ul class="nav nav-pills w-100">
+                            <li class="nav-link">Manage user</li>
+                            <li class="nav-link ml-auto">
+                              <input class="form-control form-control-dark" type="text" placeholder="Search for name" aria-label="Search" id='myInput' onkeyup='myFunction()'>
+                          </li>
+                            
+                        </ul>
+                        </h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                              <% if(infoalluser.length) { %>
+                              <table class="table" id="table-big">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">username</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">role</th>
+                                    <th scope="col">see info</th>
+                                    <th scope="col">delete</th>     
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% for(let i = 0; i < infoalluser.length; i++) { %>
+                                    <tr class='item'>
+                                        <td class="name-s"><%= infoalluser[i].username %></td>
+                                        <td><%= infoalluser[i].email %></td>
+                                        <td>
+                                          <% if( infoalluser[i].role  == 'Master Admin'){ %>
+                                            <span style="margin-bottom: 5px;"><i style="color: red;" class="fas fa-crown"></i> Master role </span>
+                                          <% }else{ %>
+                                            <form action="/admin/updaterole?id=<%= infoalluser[i]._id %>&name=<%= infoalluser[i].username %>" method="POST">
+                                              <select class="form-select" onChange="this.form.submit();" aria-label="Default select example" name="role">
+                                                <% if( infoalluser[i].role  == 'Admin'){ %>
+                                                  <option selected><%= infoalluser[i].role %></option>
+                                                  <option value="User">User</option>
+                                                <% }else{ %>
+                                                <option selected>User</option>
+                                                <option value="Admin">Admin</option>
+                                                <% } %>
+                                              </select>
+                                            </form>
+                                          <% } %>
+                                        </td>
+                                        <td>
+                                          <% if( infoalluser[i].role  == 'Master Admin'){ %>
+                                            <i style="color: red;" class="fas fa-ban"></i>
+                                          <% }else{ %>
+                                            <button  style="font-size: 10px;"class="btn btn-success" data-toggle="modal" data-target="#exampleModal2-<%= infoalluser[i]._id %>">See info</button>
+                                            <% } %>
+                                            <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal2-<%= infoalluser[i]._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Infomation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                      <% if(infoalluser[i].img == null ){ %>
+                                                        <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png" alt="">
+                                                        <% }else{ %>
+                                                          <img width="100px" src="<%= infoalluser[i].coverImagePath %>" alt="">
+                                                      <% } %> 
+                                                    <br>
+                                                    <br>
+                                                    <span>ID : </span><span style="color: #8C7741;"> <%= infoalluser[i]._id %></span>
+                                                    <br>
+                                                    <span>Username : </span><span style="color: #8C7741;"> "<%= infoalluser[i].username %>"</span>
+                                                    <br>
+                                                    <span>Email : </span><span style="color: #8C7741;"> "<%= infoalluser[i].email %>"</span>
+                                                    <br>
+                                                    <span>Address : </span><span style="color: #8C7741;"> "<%= infoalluser[i].address %>"</span>
+                                                    <br>
+                                                    <span>Phone : </span><span style="color: #8C7741;"> "<%= infoalluser[i].phone %>"</span>
+                                                    <br>
+                                                    <span>Role : </span><span style="color: #8C7741;"> "<%= infoalluser[i].role %>"</span>
+                                                    
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </td>
+                                 
+                                        <td> 
+                                          <% if( infoalluser[i].role  == 'Master Admin'){ %>
+                                            <i style="color: red;" class="fas fa-ban"></i>
+                                            <% }else{ %>
+                                            <button  style="font-size: 10px;"class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-<%= infoalluser[i]._id %><%= infoalluser[i].username %>">Delete</button>
+                                            <% } %>
+                                            <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal-<%= infoalluser[i]._id %><%= infoalluser[i].username %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Confirm to Delete</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    Are you sure to delete account : <%= infoalluser[i].username %> ?
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <form action="/admin/removeuser?ids=<%= infoalluser[i]._id %>&name= <%= infoalluser[i].username %>" method="POST">
+                                                    <button type="submit" class="btn btn-danger">Confirm</button>
+                                                  </form>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </td>                                    
+                                    </tr>
+                                <% } %>            
+                                </tbody>
+                              </table>
+                              <% } %>
+                        </div>
+                    </div>
+                </div>       
+            </div> 
+        </main>
+    </div>
+</div>
+<script>
+  function myFunction() {
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("table-big");
+  li = ul.getElementsByClassName('item');
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByClassName("name-s")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+  }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</body>
+</html>

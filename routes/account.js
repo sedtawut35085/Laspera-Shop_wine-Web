@@ -39,7 +39,6 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         name:  res.locals.currentUser.username,
         amountcart: amountcart,
         infouser,
-        msg
       })
   });
 
@@ -110,153 +109,12 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     });
   });
 
-  router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
-    let checkorder = 0
-    let suminvoice = 0
-    let sumpurchase = 0
-    let sumuser = 0
-    let sumproduct = 0
-    let countredwine = await Product.countDocuments({category: 'Red Wine'});
-    let countwhitewine = await Product.countDocuments({category: 'White Wine'});
-    let countrosewine = await Product.countDocuments({category: 'Rose Wine'});
-    let countdessertwine = await Product.countDocuments({category: 'Dessert Wine'});
-    let countsparklingwine = await Product.countDocuments({category: 'Sparkling Wine'});
-    const infouser = await userss.find({username: res.locals.currentUser.username})
-    const order = await invoice.find();
-    sumuser = await userss.countDocuments();
-    sumproduct = await Product.countDocuments();
-    try{
-      checkorder = order[0].invoiceid
-    }catch{
-      
-    }
-    var datetime = new Date().toLocaleString('en-US', {
-      timeZone: 'Asia/Bangkok'
-    });
-    try{
-      for(let i=0;;i++){
-        sumpurchase += order[i].sumofproduct
-        suminvoice = order[i].invoiceid
-      }
-    }catch(err){
-      console.log('err: ' + err)
-    }
-    res.render('accountdashboard.ejs',{
-      order,
-      name:  res.locals.currentUser.username,
-      amountcart: amountcart,
-      infouser,
-      checkorder,
-      datetime,
-      sumpurchase,
-      suminvoice,
-      sumuser,
-      sumproduct,
-      countredwine,
-      countwhitewine,
-      countrosewine,
-      countdessertwine,
-      countsparklingwine
-    })
-  })
-  
-  router.get('/seller', middleware.checkAdmin, async (req,res,next) => {
-    try{
-      const infouser = await userss.find({username: res.locals.currentUser.username})
-        const product  = await Product.find();
-        res.render("accountseller.ejs", {
-          product,
-          name: res.locals.currentUser.username,
-          amountcart: amountcart,
-          infouser
-        });
-      }catch (err){
-        console.log("err: "+ err); 
-      }
-  });
-  
-  router.get('/sellproduct', middleware.checkAdmin, async (req,res,next) => {
-    const infouser = await userss.find({username: res.locals.currentUser.username})
-    res.render("accountsellproduct.ejs", {
-      name: res.locals.currentUser.username,
-      amountcart: amountcart,
-      infouser
-    });
-  });
-
-  router.get('/allreview',middleware.checkAdmin, async (req,res,next) => {
-    req.session.fromUrl = req.originalUrl;
-    const infouser = await userss.find({username: res.locals.currentUser.username})
-    const product  = await Product.find().populate('comments').exec();
-    res.render("accountallreview.ejs", {
-      name: res.locals.currentUser.username,
-      amountcart: amountcart,
-      infouser,
-      product
-    });
-  });
-
   router.post('/addaddress', async(req,res)=>{
     console.log('add address')
     await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
     req.flash('success','Your Address & Phone has been changed successfully')
     res.redirect('/account/address')
     
-  })
-
-  router.post('/addproduct', async ( req, res, next)=>{
-    let checkproduct = false
-    const sellproduct  = await Product.countDocuments({name: req.body.name});
-    if(sellproduct == 0){
-      checkproduct = false
-    }else{
-      checkproduct = true
-    }
-    if(checkproduct == true){
-      req.flash('success', "This product already have in store. !!!")
-      res.redirect('/account/sellproduct');
-    }else{
-      var datetime = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Bangkok'
-      });
-      date = datetime
-      const {name, detail, category, price, aging, alcohol, brand, sweettaste, aciditytaste ,bodytaste, finishtaste, quantity, img} = req.body;
-      const product = new Product({
-        name,
-        detail,
-        category,
-        price, 
-        aging,
-        alcohol,
-        brand,
-        sweettaste,
-        aciditytaste,
-        bodytaste,
-        finishtaste,
-        quantity,
-        date,
-      });
-      try{
-        console.log('req.body.img: ' + req.body.img)
-        console.log('req.body.name: ' + req.body.name)
-        saveImage(product, req.body.img);
-        console.log('succes save image')
-         const newProduct = await product.save();
-         console.log(newProduct);  
-         req.flash('success', "Product name " + req.body.name + " has been packed in store.")
-         res.redirect('/account/seller');
-      }catch (err){
-         console.log(err); 
-         res.redirect('/account/seller');   
-    }
-    }
-  });
-
-  router.post('/updateemail', async(req,res)=>{
-    console.log('updateemail')
-    await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
-    req.flash('success', 'Your email has been changed successfully');
-    res.redirect('/account/email')
   })
 
   router.post('/changepassword', function(req, res) {
@@ -294,6 +152,14 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
     });
 
+
+  router.post('/updateemail', async(req,res)=>{
+    console.log('updateemail')
+    await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
+    req.flash('success', 'Your email has been changed successfully');
+    res.redirect('/account/email')
+  })
+
   router.post('/updateimgprofile', async(req,res)=>{
     req.flash('success','Change image profile success')
     console.log('updateimgprofile')
@@ -304,70 +170,15 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     res.redirect('/account/accountinfo')
   })
 
-  router.get('/editproduct',middleware.isLoggedIn, async(req,res)=>{
-    infouser = await userss.find({username: res.locals.currentUser.username})
-    editpros = await Product.find({name : editpro })
-    res.render('accounteditproduct.ejs',{
-      editpros,
-      name: res.locals.currentUser.username,
-      amountcart: amountcart,
-      infouser
-    })
-  })
-
-  router.post('/editproduct', async(req,res)=>{
-    editpro = req.query.ids
-    console.log(editpros)
-    res.redirect('/account/editproduct')
-  })
-
-  router.post('/updateproduct', async(req,res)=>{
-    await Product.update({name: editpro},{$set:{"name": req.body.name,"price": req.body.price,"category": req.body.category,"detail": req.body.detail,"quantity": req.body.quantity,"sweettaste": req.body.sweettaste,"aciditytaste": req.body.aciditytaste,"bodytaste": req.body.bodytaste,"finishtaste": req.body.finishtaste,"brand": req.body.brand,"aging": req.body.aging,"alcohol": req.body.alcohol}})
-    req.flash('success',"Your product has been changed successfully")
-    updatepro = ''
-    res.redirect('/account/seller') 
-  })
-
-  router.post('/updateimgproduct', async(req,res)=>{
-    console.log('update img')
-    const updateproduct = new Product({})
-    if(req.body.img != ""){
-      saveImage(updateproduct, req.body.img);
-      await Product.update({name: editpro},{$set:{"img":updateproduct.img,"imgType":updateproduct.imgType}})
-    }
-    req.flash('success',"Your Img product has been changed successfully")
-    res.redirect('/account/editproduct') 
-  })
-
   router.post('/updatecard',async (req,res)=>{ 
     await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
     req.flash('success',"Your creditcard has been changed successfully")
     res.redirect('/account/creditcard')
   })
 
-  router.post('/removeorder', async(req,res)=>{
-    console.log('romove: ' + req.query.ids);
-    console.log('romove2: ' + req.query.idss);
-    var removepros = req.query.ids
-    await userss.findOneAndUpdate({username: req.query.ids}, 
-      {$pull: {invoice: req.query.idss}}, 
-       )
-    await invoice.findByIdAndRemove(req.query.idss)
-    req.flash('success',"remove order id " + removepros + " finish.")
-    res.redirect('/account/dashboard')
-  }) 
-
-  router.post('/removestore', async(req,res)=>{
-    console.log('romove: ' + req.query.ids);
-    var removepro = req.query.ids
-    re = await Product.remove({name : removepro })
-    req.flash('success', 'remove product name ' + removepro + ' finish.');
-    res.redirect('/account/seller')
-  })
-
   router.post('/deleteaccount', async (req,res) =>{
     console.log('Delete')
-    req.flash('success','account name ' + res.locals.currentUser.username + ' is remove');
+    req.flash('success','account name ' + res.locals.currentUser.username + ' has been delete successfully');
     console.log(req.query.id)
     const infodelete = await userss.findById(req.query.id)
     console.log(infodelete)
@@ -390,6 +201,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     amountcart = 0
     res.redirect(req.session.fromUrl)
   });
+
 
   function saveImage(product, imgEncoded) {
     if (imgEncoded == null) return;

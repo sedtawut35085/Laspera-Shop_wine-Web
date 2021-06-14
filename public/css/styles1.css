@@ -2970,6 +2970,15 @@ transition: width .3s;
   margin-top: 5px;
 }
 
+.login{
+  font-size: 14px;
+  color: #8C7741;
+}
+
+.login:hover{
+  color: red;
+}
+
 .btn3{
   font-size: 17px;
   border: black solid 0px;

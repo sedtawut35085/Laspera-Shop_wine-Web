@@ -16,10 +16,17 @@
     <title>Laespela</title>
 </head>
 <body>
-    <div class="homey">
-         <a href="/store/allproduct"><i class="fas fa-store"></i> Back to Store </a>
-    </div>
-
+   
+    <% if(success && success.length > 0) { %>
+        <div style="margin-bottom: -30px;" class="alert success" role="alert">
+          <p class="inner">
+            <%= success %>
+          </p>
+        </div>  
+      <%}%>
+      <div class="homey">
+        <a href="/store/allproduct"><i class="fas fa-store"></i> Back to Store </a>
+   </div>
   <div class="my-5 page" size="A4">
     <div class="p-5">
         <section class="top-content bb d-flex justify-content-between">

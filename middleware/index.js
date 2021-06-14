@@ -15,7 +15,7 @@ middlewareObj.checkAdmin = function(req, res, next){
                 res.redirect('back');
             } else {
                 console.log('foundUser : ' + foundUser.username)
-                if(foundUser.username == 'admin') {
+                if(foundUser.role == 'Admin' || foundUser.role == 'Master Admin') {
                     next();
                 } else {
                     res.redirect('back');
@@ -27,6 +27,24 @@ middlewareObj.checkAdmin = function(req, res, next){
     }
 }
 
+middlewareObj.checkMasterAdmin = function(req, res, next){
+    if(req.isAuthenticated()){
+        userss.findById(res.locals.currentUser._id, function(err, foundUser){
+            if(err){
+                res.redirect('back');
+            } else {
+                console.log('foundUser : ' + foundUser.username)
+                if(foundUser.role == 'Master Admin') {
+                    next();
+                } else {
+                    res.redirect('back');
+                }
+            }
+        });
+    } else {
+        res.redirect('back');
+    }
+}
 
 middlewareObj.checkCommentOwner = function(req, res, next){
     if(req.isAuthenticated()){
@@ -43,6 +61,18 @@ middlewareObj.checkCommentOwner = function(req, res, next){
         });
     } else {
         res.redirect('back');
+    }
+}
+
+middlewareObj.checkUser = function(req, res, next){
+    try{
+     if(res.locals.currentUser.role == 'Admin' || res.locals.currentUser.role == 'Master Admin'){
+        res.redirect('/admin/seller');
+     }else{
+        next();
+     }
+    }catch(err){
+        next();
     }
 }
 
