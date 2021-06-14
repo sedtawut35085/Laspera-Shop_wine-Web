@@ -16,6 +16,9 @@
     <title><%= product.name %> - Laespela</title>
 </head>
 <body>
+  <% if(name.length > 7){
+    name = name.substring(0,7) + '..'
+  } %> 
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
@@ -31,7 +34,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul style="margin-left: -110px;" class="menu">
+        <ul style="margin-left: -95px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -94,6 +97,22 @@
     </div>
     </div>
   </form>
+  <div >
+    <% if(error && error.length > 0) { %>
+      <div class='alert error' role ='alert'>
+        <p class="inner">
+          <%= error %>
+        </p>
+      </div>
+    <%}%>
+    <% if(success && success.length > 0) { %>
+      <div class="alert success" role="alert">
+        <p class="inner">
+          <%= success %>
+        </p>
+      </div>  
+    <%}%>
+  </div>
       <main>
             <section style="margin-top: 10px; margin-bottom: -60px;" class="services">
                 <div class="services-box">
@@ -120,6 +139,14 @@
                   </div>
                 
                   <div class="col-6">
+                    <% if(addcartsuccess && addcartsuccess.length > 0) { %>
+                      <div style="margin-bottom: -50px;" class='alert success' role ='alert'>
+                        <p class="inner">
+                          <%= addcartsuccess %>
+                        </p>
+                      </div>
+                    <%}%>
+                 
                     <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
                     <h3 style="margin-top: 3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;$ <%= product.price %> </span></h3>
                     <h6 style="margin-top: 5%; font-size: 12px;">Category <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h6>
@@ -138,54 +165,24 @@
                       <h5 style="color: rgb(114, 112, 112); margin-bottom: 20px; margin-top: -20px; font-size: 12px;">Number of stock : <%= product.quantity %></h5>       
                     </div>
                     <div>
+            
+                    </div>
+                    <div>
                       <button type = "submit" class = "btn3 shop-item-button btn-center">
                         <i class = "fas fa-shopping-cart"></i> &nbsp; Add to Cart 
                         </button>
                     </div>
+             
                     <% }else{ %>
                       <div style="margin-top: 8%;">
                         <p class="no-stock"> Out of stock &nbsp; <i style="font-size: 20px;" class="far fa-grin-tears"></i> </p>
                       </div>
                     <% } %>
                     <a style="text-decoration: none; margin-bottom: 5%;" href = "/store/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> back to store &nbsp;</span></a>
-                   </div>
+                  
+                  </div>
                   </div>
                 </div>
-                  <!-- <div class="col-2">
-                    <img src="<%= product.coverImagePath %>" >
-                  </div> -->
-                  <!-- <div class="col-2">           
-                   <div class="desc">
-                    <h1 class="nameproduct" style="margin-top: -2%;"><%= product.name %></h1>
-                    <h3 style="margin-top: -3%;">Price <span style="color: black; font-size: 30px;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp; <%= product.price %> $</span></h3>
-                    <h6 style="margin-top: 4%; font-size: 12px;">Category <span style="color: black;" class="price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= product.category %></span></h6>
-                    <div style="margin-top: 5%;" class = "product-rating">
-                         <i class = "fas fa-star"></i>
-                         <i class = "fas fa-star"></i>
-                         <i class = "fas fa-star"></i>
-                         <i class = "fas fa-star"></i>
-                         <i class = "fas fa-star"></i>
-                    </div>
-                    <% if(product.quantity != 0){ %>
-                    <div>
-                      <input style="font-size: 15px; color: black; height: 30px; border: solid 1px #D6D3D3; padding: 0px 8px; width: 60px; margin-top: 5%;" name="quantity" type = "number" min = "1" max = "<%= product.quantity %>" value = "1">                           
-                    </div>
-                    <div>
-                      <h5 style="color: rgb(114, 112, 112); margin-bottom: 20px; margin-top: -20px; font-size: 12px;">Number of stock : <%= product.quantity %></h5>       
-                    </div>
-                    <div>
-                      <button type = "submit" class = "btn3 shop-item-button btn-center">
-                        <i class = "fas fa-shopping-cart"></i> &nbsp; Add to Cart 
-                        </button>
-                    </div>
-                    <% }else{ %>
-                      <div style="margin-top: 8%;">
-                        <p class="no-stock"> Out of stock &nbsp; <i style="font-size: 20px;" class="far fa-grin-tears"></i> </p>
-                      </div>
-                    <% } %>
-                    <a style="text-decoration: none; margin-bottom: 5%;" href = "/store/allproduct" class = "product-link"><i class="fas fa-store"></i> &nbsp;&nbsp; <span> back to store &nbsp;</span></a>
-                   </div>
-                  </div> -->
               </div>
             </form>   
             <div class="small-container single-product">
@@ -286,13 +283,7 @@
       <div class="comment-form">
         <form class="form" action="/comment/addcomment?id=<%= product._id %>" method="POST">
           <div class="form-row">
-            <textarea
-               class="input form-control"
-               type="text" 
-               name='comment'
-               ng-model="cmntCtrl.comment.text"
-               placeholder="your comment here ..."
-               required></textarea>
+            <textarea class="input form-control" type="text" name='comment'ng-model="cmntCtrl.comment.text" placeholder="your comment here ..."required></textarea>
           </div>
           <div class="form-row">
             <input type="submit" value="Add Comment">
@@ -302,26 +293,38 @@
       <div class="com">
         <% if(product.comments) { %>
           <% product.comments.forEach(m => { %>
-          
-            <form action="/comment/removecomment?idcomment=<%= m._id %>&idproduct=<%= product._id %>" method="post">
               <div class="comment-box">
-                <div class="comment-text"><%= m.text %></div>
+                <div class="comment-text" id='<%= m._id %>'>
+                  <%= m.text %>
+                </div>
+                <div id="edit<%= m._id %>" class="editcomment">
+                  <div style="display: flex;">
+                  <form action="/comment/editcomment?idcomment=<%= m._id %>&idproduct=<%= product._id %>" method="post">
+                    <input type="text" name="editcomment" placeholder="edit your comment here ..." value="<%= m.text %>">
+                    <button style="margin-top: 17px; margin-left: 15px; color: rgb(53, 105, 53);" type="submit">confirm</button>
+                  </form>
+                  <button style="margin-left: 15px; color: red;" onclick="cancelEdit('<%= m._id %>')"><i class="fas fa-times"></i></button>
+                  </div>
+                </div>
                 <div class="comment-footer">
-                  <div class="comment-info">
+                  <div style="display: flex;" class="comment-info">
                     <span class="comment-author">
                       <%= m.author.username %>
                     </span>
                     <span class="comment-date"><%= m.date %></span>
                     <% if((currentUser && m.author.id.equals(currentUser._id)) || name == 'admin'){ %>
+                    <span class="comment-date" onclick="editReview('<%= m._id %>')">
+                      <span><button style="color: rgb(53, 105, 53);" class="deletecomment">Edit</button></span>
+                    </span>
                     <span class="comment-date">
-                     <span><button class="deletecomment">Delete</button></span>
-                   </span>
+                      <form action="/comment/removecomment?idcomment=<%= m._id %>&idproduct=<%= product._id %>" method="post">
+                       <span><button style="margin-left: 30px; margin-top: -18px; position: absolute;" class="deletecomment" type="submit">Delete</button></span>
+                      </form>
+                    </span>
                    <% } %>
-                  
                   </div>
                 </div>
-              </div> 
-            </form> 
+              </div>    
            <% }) %>
           <% } %> 
           <% if(!product.comments.length) { %>

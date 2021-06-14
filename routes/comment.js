@@ -9,9 +9,11 @@ var express = require('express'),
     middleware = require('../middleware');
 
 let alert = require('alert');
+const { body } = require('express-validator');
 
 
 router.post('/addcomment',middleware.isLoggedIn, async(req,res)=>{
+    req.flash('success', 'Complete to add a comment "' + req.body.comment + '"');
     console.log('addcomment')
     console.log('id : ' + req.query.id)
     console.log(req.body.comment)
@@ -30,6 +32,7 @@ router.post('/addcomment',middleware.isLoggedIn, async(req,res)=>{
   })
 
   router.post('/removecomment',middleware.isLoggedIn, async(req,res)=>{
+    req.flash('success', 'Remove comment success');
     console.log('removecomment')
     console.log('req.query.id : ' + req.query.idcomment)
     console.log('req.query.ids : ' + req.query.idproduct)
@@ -37,7 +40,15 @@ router.post('/addcomment',middleware.isLoggedIn, async(req,res)=>{
         {$pull: {comments: req.query.idcomment}}, 
          )
     await comment.findByIdAndRemove(req.query.idcomment)
-    alert('remove comment success')
+    res.redirect(req.session.fromUrl)
+  })
+
+  router.post('/editcomment',middleware.isLoggedIn, async(req,res)=>{
+    req.flash('success', 'Edit comment success');
+    console.log('editcomment')
+    console.log('req.query.id : ' + req.query.idcomment)
+    console.log('editcomment : ' + req.body.editcomment)
+    await comment.findByIdAndUpdate(req.query.idcomment,{$set:{"text": req.body.editcomment}})
     res.redirect(req.session.fromUrl)
   })
 

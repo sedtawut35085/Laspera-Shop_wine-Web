@@ -17,6 +17,9 @@
     <title>Laespela</title>
 </head>
 <body>
+  <% if(name.length > 7){
+    name = name.substring(0,7) + '..'
+  } %> 
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
@@ -32,7 +35,7 @@
           </li>
         </ul>
         <%  }else{ %> 
-        <ul style="margin-left: -80px;" class="menu">
+        <ul style="margin-left: -70px;" class="menu">
           <li class="nav-item">
             <a href="/" class="nav-link">Home</a>
           </li>
@@ -93,6 +96,22 @@
     </div>
     </div>
   </form>
+  <div >
+    <% if(error && error.length > 0) { %>
+      <div class='alert error' role ='alert'>
+        <p class="inner">
+          <%= error %>
+        </p>
+      </div>
+    <%}%>
+    <% if(success && success.length > 0) { %>
+      <div class="alert success" role="alert">
+        <p class="inner">
+          <%= success %>
+        </p>
+      </div>  
+    <%}%>
+  </div>
       <main>
       
 
@@ -408,9 +427,9 @@
             </div>
             <div>
               <p style="margin-left: 16px; margin-top: -5px; margin-bottom: 2px;">Price</p>
-              <input style="font-size: 13px; width: 60px; color: black; margin-left: 7%;" name="price1" type = "number" placeholder="$ 0.00">
+              <input style="font-size: 13px; width: 60px; color: black; margin-left: 7%;" name="price1" type = "number" placeholder="0.00">
               <span style="font-size: 13px;"> &nbsp;&nbsp; to&nbsp;</span>
-              <input style="font-size: 13px; width: 60px; color: black; margin-bottom: 10px; margin-left: 7%;" name="price2" type = "number" placeholder="$ 0.00">
+              <input style="font-size: 13px; width: 60px; color: black; margin-bottom: 10px; margin-left: 7%;" name="price2" type = "number" placeholder="0.00">
               <br>
              </div>
              <div>
@@ -421,7 +440,7 @@
               <br>
              </div>
              <button style="margin-bottom: 30px; margin-left: 24%; margin-top: 20px; padding: 5px 20px;" type = "submit" class = "btn4 shop-item-button">
-              <span style="color: rgb(88, 87, 87);">Search </span>
+              <span style="color: black">Search </span>
           </button>
           </div>    
           </form>

@@ -79,7 +79,11 @@ router.get('/register', async (req,res,next) => {
 
 router.post('/login', passport.authenticate('local',
    {  
-     failureRedirect: '/login'
+     failureRedirect: '/login',
+     successFlash: true,
+     failureFlash: true,
+     successFlash: 'Successfully log in',
+     failureFlash: 'Invalid username or password'
    }), async function(req,res){
     console.log('req.session.fromUrl : ' + req.session.fromUrl)
      console.log('login done.') 
@@ -90,7 +94,6 @@ router.post('/login', passport.authenticate('local',
        console.log('error')
      }
      res.redirect(req.session.fromUrl);
-     alert('login success.')
    }
 );
 
@@ -100,10 +103,10 @@ router.post('/register', function async (req,res){
       userss.register(newUser, req.body.password, function(err, user){
           if(err) {
               console.log(err);
-              alert('username already use')
+              req.flash('error', err.message);
               return res.redirect('/register');
           }
-          alert('register finish.')
+          req.flash('success', 'Register finish ' + user.username);
           const cardinfo = new creditcards({NameCard: '' , NumberCard: '' ,  ValidDate : '', CVV : null})
           cardinfo.save();
           console.log('cardinfo._id ' + cardinfo._id)

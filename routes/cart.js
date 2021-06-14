@@ -22,9 +22,9 @@ router.post('/updatecarts', async(req,res)=>{
       req.body.quantity = 1;
     }
     if(req.body.quantity <= checkproduct[0].quantity){
-      let updatepro  = await productcart.update({productname: req.query.idss , username: res.locals.currentUser.username},{$set:{"productquantity":req.body.quantity}})
+      await productcart.update({productname: req.query.idss , username: res.locals.currentUser.username},{$set:{"productquantity":req.body.quantity}})
     }else{
-      alert('The inventory is not enough for your product requirements.')
+      req.flash('error', 'The inventory is not enough for your product requirements.');
     }
     res.redirect('/cart/totalproduct')
 })

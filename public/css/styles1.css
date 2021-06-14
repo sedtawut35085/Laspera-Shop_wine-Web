@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
 :root {
     --white: #fff;
@@ -39,7 +40,64 @@
     z-index: -1;
   } */
 
-
+  .alert .inner {
+    display: block;
+    padding: 6px;
+    border-radius: 3px;
+  }
+  
+  .alert .inner,.alert .close {
+    color: rgb(88,88,88);
+  }
+  
+  .alert input {
+    display: none;
+  }
+  
+  .alert input:checked ~ * {
+    animation-name: dismiss,hide;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0s,100ms;
+  }
+  
+  .alert.error .inner {
+    border: 1px solid rgb(238,211,215);
+    background-color: rgb(242,222,222);
+  }
+  
+  .alert.error .inner,.alert.error .close {
+    color: rgb(185,74,72);
+  }
+  
+  .alert.success .inner {
+    border: 1px solid rgb(214,233,198);
+    background-color: rgb(223,240,216);
+  }
+  
+  .alert.success .inner,.alert.success .close {
+    color: rgb(70,136,71);
+  }
+  
+  .alert.info .inner {
+    border: 1px solid rgb(188,232,241);
+    background-color: rgb(217,237,247);
+  }
+  
+  .alert.info .inner,.alert.info .close {
+    color: rgb(58,135,173);
+  }
+  
+  .alert.warning .inner {
+    border: 1px solid rgb(251,238,213);
+    background-color: rgb(252,248,227);
+  }
+  
+  .alert.warning .inner,.alert.warning .close {
+    color: rgb(192,152,83);
+  }
 
 @media only screen and (max-width: 1200px) {
   .container {
@@ -116,7 +174,7 @@ nav{
     font-weight: 500;
 }
 .menu li a{
-  margin-top: -15%;
+  margin-top: -5%;
     color: #8C7741;
 }
 .right-menu a{
@@ -215,7 +273,7 @@ transition: width .3s;
   .menu{
       position: absolute;
       top: 110px;
-      left: 110px;
+      left: 95px;
       background-color: #ffffff;
       border-bottom: 4px solid #8C7741;
       width: 100%;
@@ -425,9 +483,9 @@ transition: width .3s;
   max-width: 480px;
 }
 
-.error{
+/* .error{
   margin-left: 50px;
-}
+} */
 .search-bar{
     width:100%;
     height: 300px;
@@ -2144,7 +2202,7 @@ transition: width .3s;
   }
 
   .single-product .row .col-6 img{
-    width: 700px;
+    width: 650px;
   }
   
   .row::after {
@@ -2172,18 +2230,6 @@ transition: width .3s;
   .single-product .col-11 {width: 91.66%;}
   .single-product .col-12 {width: 100%;}
  
-  .menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .menu li {
-    padding: 8px;
-    margin-bottom: 7px;
-    color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  }
   
   @media screen and (max-width: 518px){
     
@@ -3349,6 +3395,8 @@ transition: width .3s;
 .comment-form .form textarea.input{
   height: 100px;
   padding: 15px;
+  color: black;
+  
 }
 
 .comment-form .form label{
@@ -3412,6 +3460,7 @@ transition: width .3s;
     border-width: 1px 1px 1px 1px;
     border: #D6D3D3 solid 1px;
     border-radius: 10px;
+    
   
 }
 .comment-box1 textarea:focus{
@@ -3529,6 +3578,28 @@ transition: width .3s;
     display: block;
     height: auto;
     width: 100%;
+  }
+
+  .editcomment{
+    display: none;
+    margin-bottom: 20px;
+
+    
+  }
+
+  
+  .editcomment input{
+    padding: 5px 10px;
+    width: 500px;
+    height: 50px;
+    border: rgb(156, 154, 154) solid 1px;
+    
+  }
+  .editcomment button{
+    border: none;
+    background-color: white;
+    margin-left: 5px;
+    
   }
 
   .no-comment{

@@ -24,6 +24,9 @@
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script> 
 </head>
 <body>
+  <% if(infouser[0].username.length > 7){
+    name = infouser[0].username.substring(0,7) + '..'
+  } %>   
   <nav style="background-color: black;" class="navbar navbar-light p-3 ">
     <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
         <a class="navbar-brand logo" href="/">
@@ -48,7 +51,7 @@
       </div>
         <div class="dropdown">
           <button class="dropbtn">
-            <%= infouser[0].username %> &nbsp;<i class="fas fa-caret-down"></i>
+            <%= name %> &nbsp;<i class="fas fa-caret-down"></i>
           </button> 
          <div class="dropdown-content">
           <a href="/cart/totalproducts">Cart (<%= amountcart %>)</a>
@@ -72,7 +75,7 @@
                   <% }else{ %>
                     <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
                 <% } %> 
-                <span class="logo-text"><%= infouser[0].username %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+                <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
               </div>
             </li>
             <li  class="nav-item ac">
@@ -117,6 +120,13 @@
                     <li class="breadcrumb-item active" aria-current="page">Address & Phone</li>
                 </ol>
             </nav>
+            <% if(success && success.length > 0) { %>
+              <div style="margin-left: -15px;" class='alert success' role ='alert'>
+                <p class="inner">
+                  <%= success %>
+                </p>
+              </div>
+            <%}%>
             <h1 class="h2">Address</h1>
             <p>Manage your personal information for the safety of this account</p>
             <div class="row my-4">

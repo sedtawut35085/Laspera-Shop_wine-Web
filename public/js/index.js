@@ -61,3 +61,12 @@ tgg.addEventListener("click", ()=>{
 
 
 })
+
+function editReview(id) {
+  document.getElementById(id).style.display = 'none';
+  document.getElementById('edit'+id).style.display = 'block';
+}
+function cancelEdit(id) {
+  document.getElementById(id).style.display = 'block';
+  document.getElementById('edit'+id).style.display = 'none';
+}

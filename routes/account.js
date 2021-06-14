@@ -50,7 +50,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
       infouser
-  } 
+   } 
     )
   })
 
@@ -198,8 +198,10 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
   router.post('/addaddress', async(req,res)=>{
     console.log('add address')
-    let O  = await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
+    await userss.update({username: res.locals.currentUser.username},{$set:{ "address":req.body.address, "phone":req.body.phone}})
+    req.flash('success','Your Address & Phone has been changed successfully')
     res.redirect('/account/address')
+    
   })
 
   router.post('/addproduct', async ( req, res, next)=>{
@@ -211,8 +213,8 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       checkproduct = true
     }
     if(checkproduct == true){
-      alert("This product already have in store. !!!")
-      res.redirect('/account/seller');
+      req.flash('success', "This product already have in store. !!!")
+      res.redirect('/account/sellproduct');
     }else{
       var datetime = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Bangkok'
@@ -241,7 +243,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         console.log('succes save image')
          const newProduct = await product.save();
          console.log(newProduct);  
-         alert("Product name " + req.body.name + " has been packed in store.")
+         req.flash('success', "Product name " + req.body.name + " has been packed in store.")
          res.redirect('/account/seller');
       }catch (err){
          console.log(err); 
@@ -253,7 +255,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
   router.post('/updateemail', async(req,res)=>{
     console.log('updateemail')
     await userss.update({username: res.locals.currentUser.username},{$set:{"email":req.body.email}})
-    alert("Your email has been changed successfully")
+    req.flash('success', 'Your email has been changed successfully');
     res.redirect('/account/email')
   })
 
@@ -272,34 +274,34 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
                console.log('err ' + err)
                       if(err.name === 'IncorrectPasswordError'){
                         console.log('Incorrect password')
-                        alert('Old Password is incorrect')
+                        req.flash('error','Old Password is not correct')
+                        res.redirect('/account/accountinfo')
                       }else {
                         console.log('Something went wrong!! Please try again after sometimes.')
-                        alert('Something went wrong!! Please try again after sometimes.')
+                        req.flash('error','Something went wrong!! Please try again after sometimes')
+                        res.redirect('/account/accountinfo')
+
                       }
             } else {
-              alert('Your password has been changed successfully')
-              console.log('Your password has been changed successfully')
+              console.log('success')
+              req.flash('success','Your password has been changed successfully')
+              res.redirect('/account/accountinfo')
              }
            })
         }
       }
     }); 
-    res.redirect('/account')
+
     });
 
   router.post('/updateimgprofile', async(req,res)=>{
-    req.flash('success','Update Img Profile Done!!')
-    req.flash('error','Update Img Profile Done!!')
-    msg = req.flash('success')
-    console.log('msg : '+ msg )
+    req.flash('success','Change image profile success')
     console.log('updateimgprofile')
     const updateuser = new userss({})
     saveImage(updateuser, req.body.img);
     await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
-    alert("Change image profile success.")
    
-    res.redirect('/account')
+    res.redirect('/account/accountinfo')
   })
 
   router.get('/editproduct',middleware.isLoggedIn, async(req,res)=>{
@@ -321,7 +323,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
   router.post('/updateproduct', async(req,res)=>{
     await Product.update({name: editpro},{$set:{"name": req.body.name,"price": req.body.price,"category": req.body.category,"detail": req.body.detail,"quantity": req.body.quantity,"sweettaste": req.body.sweettaste,"aciditytaste": req.body.aciditytaste,"bodytaste": req.body.bodytaste,"finishtaste": req.body.finishtaste,"brand": req.body.brand,"aging": req.body.aging,"alcohol": req.body.alcohol}})
-    alert("Your product has been changed successfully")
+    req.flash('success',"Your product has been changed successfully")
     updatepro = ''
     res.redirect('/account/seller') 
   })
@@ -333,13 +335,13 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       saveImage(updateproduct, req.body.img);
       await Product.update({name: editpro},{$set:{"img":updateproduct.img,"imgType":updateproduct.imgType}})
     }
-    alert("Your Img product has been changed successfully")
+    req.flash('success',"Your Img product has been changed successfully")
     res.redirect('/account/editproduct') 
   })
 
   router.post('/updatecard',async (req,res)=>{ 
     await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
-    alert("Your creditcard has been changed successfully")
+    req.flash('success',"Your creditcard has been changed successfully")
     res.redirect('/account/creditcard')
   })
 
@@ -351,7 +353,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
       {$pull: {invoice: req.query.idss}}, 
        )
     await invoice.findByIdAndRemove(req.query.idss)
-    alert("remove order id " + removepros + " finish.")
+    req.flash('success',"remove order id " + removepros + " finish.")
     res.redirect('/account/dashboard')
   }) 
 
@@ -359,12 +361,13 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     console.log('romove: ' + req.query.ids);
     var removepro = req.query.ids
     re = await Product.remove({name : removepro })
-    alert("remove product name " + removepro + " finish.")
+    req.flash('success', 'remove product name ' + removepro + ' finish.');
     res.redirect('/account/seller')
   })
 
   router.post('/deleteaccount', async (req,res) =>{
     console.log('Delete')
+    req.flash('success','account name ' + res.locals.currentUser.username + ' is remove');
     console.log(req.query.id)
     const infodelete = await userss.findById(req.query.id)
     console.log(infodelete)
@@ -372,7 +375,6 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     await userss.findByIdAndRemove(req.query.id)
     await creditcards.findByIdAndRemove(infodelete.creditcard[0]._id)
     await productcart.remove({username: res.locals.currentUser.username})
-    alert('account name ' + res.locals.currentUser.username + ' is remove')
     req.logout();
     amountcart = 0
     name = ''
@@ -381,7 +383,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
   router.get('/logout', async (req,res) =>{
     console.log('logout')
-    alert('log out.')
+    req.flash('error', 'Logged you out successfully');
     req.logout();
     allproduct = false
     name = ''

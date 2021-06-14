@@ -78,33 +78,22 @@
     </div>
     </div>
   </form>
- 
-  <!-- <div class="row">
-    <div class="col-2">
-      <img style="width: 600px; margin-top: 100px;" src="/images/account2.png" alt="">
-
-    </div>
-    <div class="col-2">
-      <div style="margin-right: 250px;" class="wrapper">
-        <div style="margin-bottom: -45px;">
-          <h3 style="margin-top: -10px;">Login</h3>
-        </div>
-        <form action="/login" method="POST">
-        <div class="login is-active">
-          <div class="form-element">
-            <span><i class="fas fa-user"></i></span><input type="text" name="username" placeholder="username" required/>
-          </div>
-          <div class="form-element">
-            <span><i class="fa fa-lock"></i></span><input type="password" name="password" placeholder="password" required/>
-          </div>
-          <button class="btn-login purchase">login</button>
-          <p style="margin-top: -15px; margin-bottom: 10px; color: black; font-size: 10px; letter-spacing: 1px;">Not a member <a style="color: blue" class="account" href="/register">Register now</a> </p>
-        </div>
-      </form>
+  <div >
+    <% if(error && error.length > 0) { %>
+      <div class='alert error' role ='alert'>
+        <p class="inner">
+          <%= error %>
+        </p>
       </div>
-    </div>
-  </div> -->
-  
+    <%}%>
+    <% if(success && success.length > 0) { %>
+      <div class="alert success" role="alert">
+        <p class="inner">
+          <%= success %>
+        </p>
+      </div>  
+    <%}%>
+  </div>
  <div class="formlgrs">
   <div class="row">
     <div class="col-7">

@@ -44,9 +44,11 @@
               FilePond.parse(document.body)
       })
     </script>
-  
     </head>
-    <body>      
+    <body> 
+      <% if(infouser[0].username.length > 7){
+        name = infouser[0].username.substring(0,7) + '..'
+      } %>     
     <nav style="background-color: black;" class="navbar navbar-light p-3 ">
       <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
           <a class="navbar-brand logo" href="/">
@@ -68,7 +70,7 @@
         </div>
           <div class="dropdown">
             <button class="dropbtn">
-              <%= infouser[0].username %> &nbsp;<i class="fas fa-caret-down"></i>
+              <%= name %> &nbsp;<i class="fas fa-caret-down"></i>
             </button> 
            <div class="dropdown-content">
             <a href="/cart/totalproducts">Cart (<%= amountcart %>)</a>
@@ -81,10 +83,10 @@
       <div class="row">
           <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
               <div class="position-sticky">
-               
                 <ul class="nav flex-column">
                   <li style="border-bottom: rgb(211, 211, 211) 1px solid;" class="nav-item aimg">
                     <div class="logo-wrap">
+                   
                       <% if(infouser[0].img == null ){ %>
                         <div class="logo">
                           <span><%= infouser[0].username.substring(0, 1).toUpperCase() %></span>
@@ -92,7 +94,7 @@
                         <% }else{ %>
                           <img  class="logo" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" src="<%= infouser[0].coverImagePath %>">
                       <% } %> 
-                      <span class="logo-text"><%= infouser[0].username %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
+                      <span class="logo-text"><%= name %> <br> <span class="logo-text2">Edit&nbsp;information</span></span>
                     </div>
                   </li>
                   <li  class="nav-item ac">
@@ -137,6 +139,21 @@
                       <li class="breadcrumb-item active" aria-current="page">Profile</li>
                   </ol>
               </nav>
+              
+              <% if(error && error.length > 0) { %>
+                <div style="margin-left: -15px;" class='alert error' role ='alert'>
+                  <p class="inner">
+                    <%= error %>
+                  </p>
+                </div>
+              <%}%>
+              <% if(success && success.length > 0) { %>
+                <div style="margin-left: -15px;" class='alert success' role ='alert'>
+                  <p class="inner">
+                    <%= success %>
+                  </p>
+                </div>
+              <%}%>
               <h1 class="h2">Account</h1>
               <p>Manage your personal information for the safety of this account</p>
               <div class="row my-4">

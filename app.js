@@ -44,6 +44,9 @@ app.use(async function(req,res,next){
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error')
   res.locals.success = req.flash('success')
+  res.locals.warning = req.flash('warning')
+  res.locals.addcartsuccess = req.flash('addcartsuccess')
+  res.locals.addcarterror = req.flash('addcarterror')
   next();
 });
 

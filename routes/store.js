@@ -469,7 +469,7 @@ router.get('/allproduct', async (req,res) => {
       sortname = 'Sort by'
       try{
         if(checkadvance == true){
-          product = await Product.find(infoadvance); 
+          // product = await Product.find(infoadvance); 
         }else if(checksearch){
           product  = await Product.find({name: {'$regex' : infosearch, '$options' : 'i'}});
         }else{
@@ -515,8 +515,14 @@ router.post('/advance', async(req,res)=>{
       infoadvance = {brand: advance.brand}
       product  = await Product.find(infoadvance).sort({brand: 1});
     }
-    else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    else if(advance.brand == null && (advance.price1 != '' || advance.price2 != '') && advance.category == null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
       console.log('price')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       console.log(filterprice)
       infoadvance = {price: {$gte: advance.price1, $lte: advance.price2}}
@@ -528,14 +534,26 @@ router.post('/advance', async(req,res)=>{
       infoadvance = {category: advance.category}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category == null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('alcohol')
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       infoadvance = {alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({alcohol: 1});
     }
-    else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category == null &&  advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    else if(advance.brand != null && (advance.price1 != '' || advance.price2 != '') && advance.category == null &&  advance.alcohol1 == '' &&  advance.alcohol2 == ''){
       console.log('brand price')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filterbrand = advance.brand
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       infoadvance = {brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2}}
@@ -549,67 +567,139 @@ router.post('/advance', async(req,res)=>{
       console.log('advance : ' + infoadvance)
       product  = await Product.find(infoadvance).sort({brand: 1});
     }
-    else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category == null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('brand alcohol')
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filterbrand = advance.brand
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       infoadvance = {brand: advance.brand,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({brand: 1});
     }
-    else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    else if(advance.brand == null && (advance.price1 != '' || advance.price2 != '') && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
       console.log('price category')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       filtercategory = advance.category
       infoadvance = {price: {$gte: advance.price1, $lte: advance.price2},category: advance.category}
       product  = await Product.find(infoadvance).sort({price: 1});
     }
-    else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category == null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand == null && (advance.price1 != '' || advance.price2 != '') && advance.category == null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('price alcohol')
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       infoadvance = {price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand == null && advance.price1 == '' && advance.price2 == '' && advance.category != null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('category alcohol')
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filtercategory = advance.category
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       infoadvance = {category: advance.category,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand != null && advance.price1 == '' && advance.price2 == '' && advance.category != null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('brand alcohol category')
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filtercategory = advance.category
       filterbrand = advance.brand
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       infoadvance = {brand: advance.brand,category: advance.category,alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    else if(advance.brand != null && (advance.price1 != '' || advance.price2 != '') && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
       console.log('brand price category')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filterbrand = advance.brand
       filtercategory = advance.category
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       infoadvance = {brand: advance.brand,category: advance.category,price: {$gte: advance.price1, $lte: advance.price2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
+    else if(advance.brand != null && (advance.price1 != '' || advance.price2 != '') && advance.category != null && advance.alcohol1 == '' &&  advance.alcohol2 == ''){
       console.log('brand price alcohol')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
       filterbrand = advance.brand
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       infoadvance = {brand: advance.brand,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
     }
-    else if(advance.brand == null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    else if(advance.brand == null && (advance.price1 != '' || advance.price2 != '') && advance.category != null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('price category alcohol')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       filtercategory = advance.category
       infoadvance = {category: advance.category,price: {$gte: advance.price1, $lte: advance.price2},alcohol: {$gte: advance.alcohol1, $lte: advance.alcohol2}}
       product  = await Product.find(infoadvance).sort({category: 1});
-    }else if(advance.brand != null && advance.price1 != '' && advance.price2 != '' && advance.category != null && advance.alcohol1 != '' &&  advance.alcohol2 != ''){
+    }else if(advance.brand != null && (advance.price1 != '' || advance.price2 != '') && advance.category != null && (advance.alcohol1 != '' ||  advance.alcohol2 != '')){
       console.log('price category alcohol category')
+      if(advance.price1 == ''){
+        advance.price1 = 0
+      }
+      if(advance.price2 == ''){
+        advance.price2 = 1000
+      }
+      if(advance.alcohol1 == ''){
+        advance.alcohol1 = 0
+      }
+      if(advance.alcohol2 == ''){
+        advance.alcohol2 = 100
+      }
       filterprice = '$'+advance.price1 + ' to ' + '$'+advance.price2 
       filteralcohol = advance.alcohol1 + ' to ' + advance.alcohol2
       filtercategory = advance.category
@@ -740,14 +830,16 @@ router.get('/oneproduct', async (req,res) => {
         const infouser = await userss.findById(res.locals.currentUser._id)
         infouser.cart.push(newProduct._id)
         await infouser.save()
-        alert(productname + ' is added to your cart.')
+        // alert(productname + ' is added to your cart.')
+        req.flash('addcartsuccess', productname + ' is added to your cart.');
         res.redirect('/store/oneproduct')
        }catch (err){
         console.log(err);   
         }
       }else{
        await productcart.update({productname: req.query.id , username: res.locals.currentUser.username},{$set:{"productquantity": Number(currentquality) + Number(req.body.quantity)}})
-        alert('This product update quantity in your cart ' + currentquality + ' to ' + (Number(currentquality) + Number(req.body.quantity)) )
+        // alert('This product update quantity in your cart ' + currentquality + ' to ' + (Number(currentquality) + Number(req.body.quantity)) )
+        req.flash('addcartsuccess', 'This product update quantity in your cart ' + currentquality + ' to ' + (Number(currentquality) + Number(req.body.quantity)) );
         res.redirect('/store/oneproduct')
      }
   })

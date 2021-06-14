@@ -1,3 +1,66 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+@import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css);
+
+.alert .inner {
+  display: block;
+  padding: 6px;
+  border-radius: 3px;
+}
+
+.alert .inner,.alert .close {
+  color: rgb(88,88,88);
+}
+
+.alert input {
+  display: none;
+}
+
+.alert input:checked ~ * {
+  animation-name: dismiss,hide;
+  animation-duration: 300ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-delay: 0s,100ms;
+}
+
+.alert.error .inner {
+  border: 1px solid rgb(238,211,215);
+  background-color: rgb(242,222,222);
+}
+
+.alert.error .inner,.alert.error .close {
+  color: rgb(185,74,72);
+}
+
+.alert.success .inner {
+  border: 1px solid rgb(214,233,198);
+  background-color: rgb(223,240,216);
+}
+
+.alert.success .inner,.alert.success .close {
+  color: rgb(70,136,71);
+}
+
+.alert.info .inner {
+  border: 1px solid rgb(188,232,241);
+  background-color: rgb(217,237,247);
+}
+
+.alert.info .inner,.alert.info .close {
+  color: rgb(58,135,173);
+}
+
+.alert.warning .inner {
+  border: 1px solid rgb(251,238,213);
+  background-color: rgb(252,248,227);
+}
+
+.alert.warning .inner,.alert.warning .close {
+  color: rgb(192,152,83);
+}
+
 @import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
 :root {
     --white: #fff;
@@ -27,18 +90,6 @@
     box-sizing: border-box;
     font-size: 62.5%;
   }
-
-  /* body {
-    position: relative;
-    font-family: "Poppins", sans-serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--black);
-    background-color: var(--white);
-    z-index: -1;
-  } */
-
-
 
 @media only screen and (max-width: 1200px) {
   .container {
@@ -141,33 +192,7 @@ nav{
     color: #c7c1b2;
     transition: all ease 0.3s;
 }
-.sale-lable{
-    width:38px;
-    height: 17px;
-    background-color: #f76b6a;
-    color: #ffffff;
-    font-weight: 400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-}
-.sale-lable:after{
-    content: '';
-    width:0px;
-    height: 0px;
-    border-bottom: 5px solid transparent;
-    border-left: 3px solid transparent;
-    border-top: 7px solid #f76b6a;
-    border-right: 5px solid transparent;
-    position: absolute;
-    left: 10%;
-    top: 100%;
-}
+
 
 .fa-shopping-cart{
     color: #8C7741;
@@ -213,7 +238,7 @@ nav{
   .menu{
       position: absolute;
       top: 110px;
-      left: 70px;
+      left: 68px;
       background-color: #ffffff;
       border-bottom: 4px solid #8C7741;
       width: 100%;
@@ -255,9 +280,6 @@ nav{
       padding: 25px;
       border: 1px solid rgba(0,0,0,0.03);
   }
-  .sale-lable{
-      display: none;
-  }
   .toggle{
       color: white;
       display: block;
@@ -276,19 +298,7 @@ nav{
       display: block;
       padding: auto;
   }
-  .full-slider-box,
-  .banner-box{
-      height: 45vh;
-  }
-  .f-slider-text span,
-  .banner-text span{
-      font-size: 0.9rem;
-  }
-  .f-slider-text strong,
-  .banner-text strong{
-      font-size: 2rem;
-      line-height: 40px;
-  }
+ 
   .search-input{
       height: 60px;
   }
@@ -296,9 +306,7 @@ nav{
   .search-cancel{
       font-size: 1.4rem;
   }
-  .sale-box{
-      height: 200px;
-  }
+ 
 }
 @media (max-width: 633px) {
   .icon{
@@ -307,8 +315,6 @@ nav{
   
 }
 @media(max-width:600px){
-
-
   .iconres{
     display: none;
 
@@ -322,81 +328,12 @@ nav{
   .navigation{
       padding: 10px;
   }
-  .f-slider-text strong,
-  .banner-text strong{
-      font-size: 1.2rem;
-      line-height: 25px;
-  }
-  .full-slider-box,
-  .banner-box{
-      height: 30vh;
-  }
-  .f-slider-text span,
-  .banner-text span{
-      font-size: 0.8rem;
-  }
-  .f-slider-btn,
-  .banner-btn{
-      width:120px;
-      height: 30px;
-      font-size: 0.8rem;
-  }
-  .feature-heading h2{
-      font-size: 1.2rem;
-  }
-  .feature-box{
-      width:120px;
-      height: 120px;
-  }
-  .new-arrival strong,
-  .feature-heading strong{
-      font-size: 1.2rem;
-  }
-  .new-arrival p,
-  .feature-heading p{
-      font-size: 0.8rem;
-      text-align: center;
-  }
-  .sale-box{
-      width:100%;
-      height: 180px;
-  }
-  .sale{
-      width: 100%;
-  }
-
-  .copyright{
-      margin: 20px 0px;
-      text-align: center;
-  }
-  .subscribe{
-      width:100%;
-  }
-  .subscribe form{
-      flex-wrap: nowrap;
-      display: flex;
-      width:100%;
-  }
-  .subscribe input{
-      width:100%;
-      flex-grow: 1;
-  }
-  .login-form,
-  .sign-up-form{
-      width:90%;
-  }
   
 }
 
 @media (max-width: 448px) {
   .toggle{
-    margin-left: -70px;
-  }
-  
-}
-@media(max-width:390px){
-  .nameuser{
-    display: none;
+    margin-left: -20px;
   }
 
 }
@@ -474,9 +411,9 @@ nav{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.error{
+/* .error{
   margin-left: 50px;
-}
+} */
 .errorimg{
   text-decoration: none; font-size: 10px; color: #8C7741;
 }

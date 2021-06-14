@@ -12,10 +12,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
   <script src="/js/slider.js" defer></script>
   <script src="/js/index.js" defer></script>
+  
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
   <title>Laespela</title>
 </head>
 <body>
+  <% if(name.length > 7){
+    name = name.substring(0,7) + '..'
+  } %> 
   <!-- Header -->
   <header id="home" class="header">
     <nav class="navi"> 
@@ -41,7 +45,7 @@
             </li>
           </ul>
           <%  }else{ %> 
-            <ul style="margin-left: -70px;" class="menu">
+            <ul style="margin-left: -68px;" class="menu">
               <li class="nav-item">
                 <a href="#home" class="nav-link scroll-link">Home</a>
               </li>
@@ -115,6 +119,23 @@
     </form>
   </header>
   <!-- Main -->
+
+  <div>
+    <% if(error && error.length > 0) { %>
+      <div class='alert error' role ='alert'>
+        <p class="inner">
+          <%= error %>
+        </p>
+      </div>
+    <%}%>
+    <% if(success && success.length > 0) { %>
+      <div class="alert success" role="alert">
+        <p class="inner">
+          <%= success %>
+        </p>
+      </div>  
+    <%}%>
+  </div>
   <main>
    <section class="showcase">
     <video src="/images/wine5.mp4" muted loop autoplay></video>

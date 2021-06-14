@@ -24,6 +24,9 @@ crossorigin="anonymous">
   <title>Laespela</title>
 </head>
 <body>
+  <% if(name.length > 7){
+    name = name.substring(0,7) + '..'
+  } %> 
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
@@ -88,11 +91,27 @@ crossorigin="anonymous">
     </div>
     </div>
   </form>
+  <div>
+  
+    <% if(success && success.length > 0) { %>
+      <div style="margin-bottom: -10px;" class="alert success" role="alert">
+        <p class="inner">
+          <%= success %>
+        </p>
+      </div>  
+    <%}%>
+  </div>
 
   <div style="margin-top: 50px; margin-bottom: 16%;" class="container">
     <div style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4);  background: white; padding: 20px 20px; border: white 1px solid; margin-bottom: 0px;">
       <h2 class="mb-3"><i class="fas fa-shopping-bag"></i>&nbsp; Cart</h2>
-
+      <% if(error && error.length > 0) { %>
+        <div style="margin-bottom: -15px;" class="alert warning" role="alert">
+          <p class="inner">
+            <%= error %>
+          </p>
+        </div>  
+      <%}%>
       <section class="product-area mt-4">
         <% if(!cartproduct.length) { %>
          <div class="ttp">

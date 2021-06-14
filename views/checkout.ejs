@@ -26,7 +26,9 @@
         <title>Laespela</title>
 </head>
 <body style="background: #F2F2EF;">
-
+  <% if(name.length > 7){
+    name = name.substring(0,7) + '..'
+  } %> 
   <nav class="navi"> 
     <!--menu-bar----------------------------------------->
     <div class="navigation">
