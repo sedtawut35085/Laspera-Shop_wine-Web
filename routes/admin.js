@@ -19,6 +19,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
  
 router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
+    let tt = 0
     let checkorder = 0
     let suminvoice = 0
     let sumpurchase = 0
@@ -36,8 +37,7 @@ router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
     sumproduct = await Product.countDocuments();
     try{
       checkorder = order[0].invoiceid
-    }catch{
-      
+    }catch{ 
     }
     var datetime = new Date().toLocaleString('en-US', {
       timeZone: 'Asia/Bangkok'
@@ -51,8 +51,9 @@ router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
     }catch(err){
       console.log('err: ' + err)
     }
-    suminvoice = i-1
+    suminvoice = order[i-1].invoiceid + 1
     res.render('accountdashboard.ejs',{
+      tt,
       order,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
@@ -263,6 +264,40 @@ router.get('/dashboard' ,middleware.checkAdmin, async function(req,res){
     req.flash('success',"remove order by username " + removepros + " success")
     res.redirect('/admin/dashboard')
   }) 
+
+
+  router.post('/invoicehistoryallbuyer', async (req,res)=>{
+    console.log('req.body.invoiceid : ' + req.query.id)
+    orderhistorybuyer  = await invoice.find({invoiceid: req.query.id});
+    res.redirect('/admin/invoicehistoryallbuyer')
+  })
+
+  router.get('/invoicehistoryallbuyer', async (req,res)=>{
+    let total = 0
+    let tax = 0
+    let subtotal = 0
+    try{
+       for(let i = 0;;i++){
+        subtotal += orderhistorybuyer[i].sumofproduct
+       }
+    }catch(err){
+       console.log(err)
+    }
+    if(subtotal <= 100){
+      tax = 10
+       total =  (Number(subtotal) + Number(tax))
+    }else{
+      tax = 0
+      total = subtotal
+    }
+    res.render('accountinvoicehistoryallbuyer.ejs',{
+      orderhistorybuyer,
+      name:  res.locals.currentUser.username,
+      total,
+      subtotal,
+      tax,
+    })
+  })
 
   router.post('/removestore', async(req,res)=>{
     console.log('romove: ' + req.query.idpro);

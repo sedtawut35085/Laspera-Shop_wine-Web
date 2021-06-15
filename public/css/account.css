@@ -233,7 +233,6 @@
     display: block;
     height: auto;
     width: 20px;
-
   }
   
   .avatar img{
@@ -269,21 +268,6 @@
     padding-right: 1rem;
   }
 
-  .num-cart-product{
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    width:18px;
-    height: 18px;
-    font-size: 0.8rem;
-    border-radius: 50%;
-    background-color:#D9D2C1;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 400;
-}
 .logo-wrap {
   display: block;
   position: relative;

@@ -112,18 +112,9 @@
       </div>  
     <%}%>
   </div>
-      <main>
-      
-
+  <main>
    <section class="showcase">
-   
     <video src="/images/wine2.mp4" muted loop autoplay></video>
-    <!-- <div class="text">
-      <span>New Products 2021</span>
-      <h2>WINE!</h2> 
-      <p>"You can choose to drink it or use it to cook.<br> Our wines are imported from every country."</p>
-      <a href="/store/allproducts">SHOP NOW</a>
-    </div> -->
     <ul class="social">
       <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
       <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
@@ -253,9 +244,6 @@
                     <a href="/store/oneproduct?id=<%= product[i]._id %>">
                     <div class="product-box">
                       <div class="product-img">
-                        <!-- <a href="" class="add-cart">
-                          <i class="fas fa-shopping-cart"></i>
-                        </a> -->
                         <img src="<%= product[i].coverImagePath %>" alt="" class="ui image" width="20%">
                       </div>
                       <% if(product[i].name.length > 32) { 

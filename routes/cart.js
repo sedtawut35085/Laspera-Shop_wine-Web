@@ -17,7 +17,6 @@ let m
 let n
 let updateinfouser = ''
 let purchase = ''
-const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
 router.post('/updatecarts', async(req,res)=>{
     console.log('updatecarts')
@@ -80,9 +79,15 @@ router.get('/checkout', async function(req,res){
         amountcart: amountcart
       })
 })
+
+router.post('/updateaddressphone',async function(req,res){
+  await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
+  res.redirect('/cart/checkout')
+})
+
   
 router.post('/buy',async function(req,res){
-   
+   console.log('creditcards : ' + req.query.id)
     const check2  = await invoice.find();
     n = await invoice.countDocuments();    
     console.log('n : ' + n)  
@@ -92,10 +97,11 @@ router.post('/buy',async function(req,res){
       m = check2[n-1].invoiceid         
       m = m+1
     }
-    await userss.update({username: res.locals.currentUser.username},{$set:{"address": req.body.address,"phone": req.body.phone}});
-    await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard":req.body.cardname,"NumberCard":req.body.cardnumber,"ValidDate":req.body.cardvalid,"CVV":req.body.cvv}})
+
     purchase  = await productcart.find({username: res.locals.currentUser.username});
     const infouser = await userss.findById(res.locals.currentUser._id)
+    const cr = await creditcards.findByIdAndUpdate(req.query.id,{$set:{"NameCard": req.body.cardname,"NumberCard": req.body.cardnumber,"ValidDate": req.body.cardvalid,"CVV": req.body.cvv}});
+    console.log('cr : ' + cr)
     try{
       for(i=0;;i++){
         try{   

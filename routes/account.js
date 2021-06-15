@@ -10,9 +10,7 @@ var   express = require('express'),
 
 let alert = require('alert'); 
 let amountcart = 0
-let msg ;
-var editpro;
-let editpros;
+let orderhistorybuyer
 
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
@@ -64,19 +62,53 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
   router.get('/historybuyer',middleware.isLoggedIn, async (req,res)=>{
     let checkorder = 0
+    let tt = 0
     const order  = await invoice.find({username:res.locals.currentUser.username});
     const infouser  = await userss.find({username:res.locals.currentUser.username})
     try{
       checkorder = order[0].invoiceid
     }catch{
-      
     }
     res.render('accounthistorybuyer.ejs',{
       order,
+      tt,
       infouser,
       name:  res.locals.currentUser.username,
       amountcart: amountcart,
-      checkorder
+      checkorder,
+    })
+  })
+
+  router.post('/invoicehistorybuyer',middleware.isLoggedIn, async (req,res)=>{
+    console.log('req.body.invoiceid : ' + req.query.id)
+    orderhistorybuyer  = await invoice.find({invoiceid: req.query.id});
+    res.redirect('/account/invoicehistorybuyer')
+  })
+
+  router.get('/invoicehistorybuyer',middleware.isLoggedIn, async (req,res)=>{
+    let total = 0
+    let tax = 0
+    let subtotal = 0
+    try{
+       for(let i = 0;;i++){
+        subtotal += orderhistorybuyer[i].sumofproduct
+       }
+    }catch(err){
+       console.log(err)
+    }
+    if(subtotal <= 100){
+      tax = 10
+       total =  (Number(subtotal) + Number(tax))
+    }else{
+      tax = 0
+      total = subtotal
+    }
+    res.render('accountinvoicehistorybuyer.ejs',{
+      orderhistorybuyer,
+      name:  res.locals.currentUser.username,
+      total,
+      subtotal,
+      tax,
     })
   })
 
@@ -149,9 +181,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
         }
       }
     }); 
-
-    });
-
+  });
 
   router.post('/updateemail', async(req,res)=>{
     console.log('updateemail')
@@ -166,7 +196,6 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
     const updateuser = new userss({})
     saveImage(updateuser, req.body.img);
     await userss.update({username: res.locals.currentUser.username},{$set:{"img":updateuser.img,"imgType":updateuser.imgType}})
-   
     res.redirect('/account/accountinfo')
   })
 

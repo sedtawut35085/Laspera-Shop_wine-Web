@@ -830,16 +830,21 @@ router.get('/oneproduct', async (req,res) => {
         const infouser = await userss.findById(res.locals.currentUser._id)
         infouser.cart.push(newProduct._id)
         await infouser.save()
-        // alert(productname + ' is added to your cart.')
         req.flash('addcartsuccess', productname + ' is added to your cart.');
         res.redirect('/store/oneproduct')
        }catch (err){
         console.log(err);   
         }
       }else{
-       await productcart.update({productname: req.query.id , username: res.locals.currentUser.username},{$set:{"productquantity": Number(currentquality) + Number(req.body.quantity)}})
-        // alert('This product update quantity in your cart ' + currentquality + ' to ' + (Number(currentquality) + Number(req.body.quantity)) )
+       console.log('countproductcart : ' + rr[0].productquantity )
+       console.log('countmaxproductcart : ' + rr[0].productmaxquantity )
+       if((Number(currentquality) + Number(req.body.quantity)) > rr[0].productmaxquantity){
+        req.flash('addcarterror', 'The inventory is not enough for your product requirements because There are ' + currentquality + ' total of this product in your cart.');
+       }else{
+        await productcart.update({productname: req.query.id , username: res.locals.currentUser.username},{$set:{"productquantity": Number(currentquality) + Number(req.body.quantity)}})
         req.flash('addcartsuccess', 'This product update quantity in your cart ' + currentquality + ' to ' + (Number(currentquality) + Number(req.body.quantity)) );
+       }
+       
         res.redirect('/store/oneproduct')
      }
   })

@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-       <script
-          src="https://kit.fontawesome.com/64d58efce2.js"
-          crossorigin="anonymous" defer
-        ></script>
-        <link rel="stylesheet" href="/css/checkout.css">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-        <script src="/js/modal.js" defer></script>
-        <script src="/js/slider.js" defer></script>
-        <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
-        <script src="/js/index.js" defer></script>
-        <script src="/js/cart.js" defer></script>
-        <title>Laespela</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <script
+    src="https://kit.fontawesome.com/64d58efce2.js"
+    crossorigin="anonymous" defer
+  ></script>
+  <link rel="stylesheet" href="/css/checkout.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
+  <script src="/js/modal.js" defer></script>
+  <script src="/js/slider.js" defer></script>
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <title>Laespela</title>
 </head>
 <body style="background: #F2F2EF;">
   <% if(name.length > 7){
@@ -98,27 +97,33 @@
   </form>
   
 
-  <form action="/cart/buy?id=<%= infouser.creditcard[0]._id  %>" method="POST">
   <div style="margin-top: 50px; margin-bottom: -100px;" class="container">
     <a style="margin-bottom: 2%;" href="/cart/totalproduct" class="btn btn-info">Back</a>
     <div class="row" style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4); background: white; padding: 20px 20px; border-left: white 1px solid; border-right: white 1px solid; border-bottom: white 1px solid; border-top: white 2px dashed; margin-bottom: 30px;">
       <img style="width: 240px; height: 50px;" src="/images/logo12.png" alt="">
   </div>
     <div style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4); background: white; padding: 20px 20px; border-left: white 1px solid; border-right: white 1px solid; border-bottom: white 1px solid; border-top: gray 2px dashed; margin-bottom: 20px;">
-        <h2 class="mb-3"><i class="fas fa-map-marker-alt"></i>&nbsp; location</h2>
+        <div style="display: flex;">
+          <h2 class="mb-3"><i class="fas fa-map-marker-alt"></i>&nbsp; location </h2> 
+          <button style="margin-left: 2%; height: 24px;" class="btn btn-info" data-toggle="modal" data-target="#myModal2" >Edit</button>
+          
+        </div>
         <div class="row my-3 gy-3">
             <div class="col-md-12">
                 <label style="font-size: 12px;" for="" class="form-label">Address</label>
-                <textarea style="font-size: 13px;" class="form-control" name="address" id=""  cols="30" rows="3"><%= infouser.address %></textarea>
-                
-                <!-- <small style="font-size: 10px;" class="text-muted">Fullname as displayed on card.</small> -->
+            
+                <div style="font-size: 13px; padding: 10px 5px; border: 1px rgb(218, 218, 218) solid;" class="form-control" name="address" id=""  cols="30" rows="3" required>
+                  <%= infouser.address %>
+                </div>
             </div>
             <div class="col-md-12">
                 <label style="font-size: 12px;" for="" class="form-label">Phone</label>
-                <input style="font-size: 13px;" type="text" class="form-control" name="phone" id="" required value="<%= infouser.phone %>">
-                <!-- <small style="font-size: 10px;" class="text-muted">Fullname as displayed on card.</small> -->
+                <div style="font-size: 13px; border: 1px rgb(218, 218, 218) solid;" type="text" class="form-control" name="phone" id="" required>
+                  <%= infouser.phone %>
+                </div>
             </div>
         </div>
+        
     </div>
     <div style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4);  background: white; padding: 20px 20px; border: white 1px solid; margin-bottom: 0px;">
         <h2 class="mb-3"><i class="fas fa-shopping-bag"></i>&nbsp; Orders</h2>
@@ -173,7 +178,7 @@
   
       </div>
   </div>
-    
+  <form action="/cart/buy?id=<%= infouser.creditcard[0]._id  %>" method="POST">
     <div style="box-shadow: 0 5px 5px 0px rgba(124, 123, 123, 0.4); background: white; padding: 20px 20px; border-right: rgb(179, 178, 178) 1px solid; border-left: rgb(179, 178, 178) 1px solid; border-top: rgb(179, 178, 178) 1px solid; ">
         <h2 style="margin-bottom: 10px;" class="mb-3"><i class="far fa-credit-card"></i>&nbsp; Payments</h2>
         <!-- <p style="color: gray;"><a style="margin-right: 10px;" href="/creditcard"><button style="font-size: 10px; background: black; color: white; padding: 2px 2px;">Edit</button></a> </p> -->
@@ -202,6 +207,7 @@
             </div>
         </div>
     </div>
+
     <div style="padding: 20px 20px; border: gray 1px dashed; margin-bottom: 20px; margin-top: 3px; background: #FEFEFA;">
       <div class="row total">
           <div style="margin-left:70%;">
@@ -214,12 +220,13 @@
               <h4>Total : <span style="font-size: 20px; color: rgb(182, 75, 75); margin-left: 50px;" class="cart-total-price">$ <%= total %></span> </h4>
           </div>
           <div style="margin-left: 72%; margin-top: 20px; ">
-              <button class="purchase" type="submit" style="padding: 5px 20px; background: black; color: white;">purchaes</button>
+              <button class="purchase" type="submit" style="padding: 5px 20px; background: black; color: white;">purchase</button>
           </div>
       </div>
   </div>
-  </div>
 </form>
+  </div>
+
   <footer id="footer" class="section footer">
     <div class="container">
       <div class="footer-container">
@@ -276,6 +283,31 @@
     </div>
     </div>
   </footer>
+  <div style="top: 26%; border-radius: 65px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-20">
+        <form method="POST" action="/cart/updateaddressphone">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-map-marker-alt"></i>&nbsp; location </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                 <p style="margin-left: 0px; font-size: 10px; margin-top: 10px; margin-bottom: 10px;">
+                    Please add your address before placing an order.
+                  </p>
+                  <textarea style="margin-top: 0px; margin-left: 0px; padding: 2px 5px; font-size: 12px; border: rgb(211, 209, 209) 1px solid; border-radius: 3px;" name="address" id="" cols="74" rows="2" placeholder="Address" required><%= infouser.address %></textarea> 
+                  <div class="title" style="margin-bottom: 10px; margin-top: 5px; font-size: 13px;"><i class="fas fa-phone"></i>&nbsp; Phone  </div>
+                  <textarea style="padding: 2px 5px; margin-bottom: 10px; font-size: 12px; width: 240px; border: rgb(211, 209, 209) 1px solid;  border-radius: 3px;" name="phone" id="" cols="74" rows="1" placeholder="Phone" required><%= infouser.phone %></textarea>
+            </div>
+            <div style="margin-bottom: 5px;" class="modal-footer">
+                <button type="submit" class="btn btn-secondary" >Confirm</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
   <div style="top: 26%; border-radius: 65px; border: white ; padding: 20px 10px;" class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content rounded-20">

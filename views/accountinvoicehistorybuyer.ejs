@@ -15,17 +15,8 @@
     <title>Laespela</title>
 </head>
 <body>
-   
-    <% if(success && success.length > 0) { %>
-        <div style="margin-bottom: -30px;" class="alert success" role="alert">
-          <p class="inner">
-            <%= success %>
-          </p>
-        </div>  
-      <%}%>
-      
-      <div class="homey">
-        <a href="/store/allproduct"><i class="fas fa-store"></i> Back to Store </a>
+    <div class="homey2">
+        <a href="/account/historybuyer" class="btn btn-info"> Back</a>
    </div>
   <div class="my-5 page" size="A4">
     <div class="p-5">
@@ -36,11 +27,10 @@
             <div class="top-left">
                
                 <div style="margin-top: 10px;" class="position-relative">
-                    <p>Invoice No. <span><%= invoiceid %></span></p>
+                    <p>Invoice No. <span><%= orderhistorybuyer[0].invoiceid %></span></p>
                 </div>
             </div>
         </section>
-
         <section class="store-user mt-5">
             <div class="col-10">
                 <div class="row bb pb-3">
@@ -51,10 +41,10 @@
                         <div class="txn mt-2">Tel: 012-3456-789</div>
                     </div>
                     <div class="col-5">
-                        <p>Customer,</p>
-                        <h2><%= name %></h2>
-                        <p class="address"><%= adduser %></p>
-                        <div class="txn mt-2">Tel: <%= phoneuser %></div>
+                        <p>Customer,</p> 
+                        <h2><%= orderhistorybuyer[0].username %></h2>
+                        <div class="txn mt-2"><%= orderhistorybuyer[0].useraddress %></div>
+                        <div class="txn mt-2">Tel: <%= orderhistorybuyer[0].userphone %></div>
                     </div>
                 </div>
                 <div class="row extra-info pt-3">
@@ -63,7 +53,7 @@
                         <!-- <p>Order Number: <span>#868</span></p> -->
                     </div>
                     <div class="col-5">
-                        <p>Purchase Date: <span><%= date %></span></p>
+                        <p>Purchase Date: <span><%= orderhistorybuyer[0].date %></span></p>
                     </div>
                 </div>
             </div>
@@ -79,8 +69,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if(purchase) { %> 
-                    <% purchase.forEach(m => { %>
+                    <% if(orderhistorybuyer) { %> 
+                    <% orderhistorybuyer.forEach(m => { %>
                     <tr>
                         <td>
                             <div class="media">

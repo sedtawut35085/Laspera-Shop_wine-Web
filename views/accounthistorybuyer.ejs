@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-      <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
    <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -36,9 +36,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-    <!-- <div class="col-12 col-md-4 col-lg-2">
-        <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-    </div> -->
     <div style="margin-right: 50px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
       <div class="logo-wrap1">
         <% if(infouser[0].img == null ){ %>
@@ -116,39 +113,62 @@
                     <div class="card">
                         <h5 class="card-header">History your order</h5>
                         <% if(order.length) { %>
-                        <div class="card-body">
+                          <div class="card-body">
                             <div class="table-responsive">
                               <table class="table">
                                 <thead>
                                     <tr style="font-size: 11px;">
-                                        <th scope="col">Invoiceid</th>                        
-                                        <th scope="col">address</th>
-                                        <th scope="col">phone</th>
-                                        <th scope="col">productname</th>
-                                        <th scope="col">price</th>
-                                        <th scope="col">quantity</th>
-                                        <th scope="col">date</th>
+                                        <th scope="col">Invoiceid</th>   
+                                        <th scope="col">Sum</th>                     
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Info</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% for(let i = 0; i < order.length; i++) { %>
-                                        <tr>  
-                                          <% if(order[i].invoiceid == checkorder && i == 0){ %>
-                                            <td><%= checkorder %></td>  
-                                            <% }else if(order[i].invoiceid == checkorder){ %>
-                                              <td> </td>  
-                                            <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
-                                              <td> </td>  
-                                            <% }else{ %>
-                                              <td><%= order[i].invoiceid %></td>  
-                                            <% } %>                       
-                                            <td><%= order[i].useraddress %></td>
-                                            <td><%= order[i].userphone %></td>
-                                            <td><%= order[i].productname %></td>
-                                            <td><%= order[i].productprice %></td>
-                                            <td ><%= order[i].productquantity %></td>
-                                            <td><%= order[i].date %></td>
+                                      <% tt =0 %>
+                                      <tr>  
+                                      <% if(order[i].invoiceid == checkorder && i == 0){ %>
+                                        <td><%= checkorder %></td>  
+                                        <% order.forEach(m => {
+                                          if(m.invoiceid == order[i].invoiceid){
+                                             tt += m.sumofproduct}
+                                          }) %>
+                                        <td>$ <%= tt %></td>
+                            
+                                        <td><%= order[i].date %></td>
+                                        <td>
+                                          <form action="/account/invoicehistorybuyer?id=<%= order[i].invoiceid %>" method="POST">
+                                            <button style="font-size: 10px;"class="btn btn-success">See info</button>
+                                          </form>
+                                        </td>
+                                        <% }else if(order[i].invoiceid == checkorder){ %>
+                                     
+                                        <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
+                              
+                                        <% }else{ %>
+                                          
+                                          <td><%= order[i].invoiceid %></td>  
+                                          <% order.forEach(m => {
+                                            if(m.invoiceid == order[i].invoiceid){
+                                               tt += m.sumofproduct}
+                                            }) 
+                                            tt 
+                                            if(tt <= 100){
+                                              tt = tt + 10
+                                            }
+                                          %>
+                                          <td>$ <%= tt.toFixed(2) %></td>
+                                          <td><%= order[i].date %></td>
+                                          <td>
+                                            <form action="/account/invoicehistorybuyer?id=<%= order[i].invoiceid %>" method="POST">
+                                              <button style="font-size: 10px;"class="btn btn-success">See info</button>
+                                            </form>
+                                          </td>
+                                        <% } %>  
+
                                         </tr>
+                           
                                     <% } %>
                                 </tbody>
                             </table>

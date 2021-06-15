@@ -5,6 +5,21 @@
     margin-top: 40px;
 }
 
+.homey2{
+  font-size: 5px;
+  transition: all 0.5s;
+  position: relative;
+  margin-left: 340px;
+  margin-bottom: -40px;
+  margin-top: 40px;
+}
+
+.homey2 a{
+  text-decoration: none;
+  font-size: 10px;
+  transition: all 0.5s;
+}
+
 .homey a{
     text-decoration: none;
     color: black;
@@ -15,6 +30,7 @@
   text-decoration: none;
   color: #8C7741;
 }
+
 
 
 :root {

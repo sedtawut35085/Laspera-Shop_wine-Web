@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Laespela</title>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <title>Laespela</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/account.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-    <script src="/js/account.js" defer></script>
     <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
@@ -35,9 +34,6 @@
               <span class="navbar-toggler-icon"></span>
           </button>
       </div>
-      <!-- <div class="col-12 col-md-4 col-lg-2">
-          <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-      </div> -->
       <div style="margin-right: 50px;" class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
         <div class="logo-wrap1">
           <% if(infouser[0].img == null ){ %>
@@ -145,7 +141,7 @@
                                 <tbody>
                                     <% product.forEach(n => { %>
                                         <% n.comments.forEach(m => { %>
-                                        <% if(currentUser && name == 'admin'){ %>
+                                        <% if(currentUser){ %>
                                         <tr>             
                                             <td><%= m.author.username %></td>
                                             <td><%= n.name %></td>

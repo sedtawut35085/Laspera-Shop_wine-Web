@@ -14,14 +14,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/account.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-  <script src="/js/index.js" defer></script>
-    <!-- add to document <head> -->
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-
     <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-     <!-- add before </body> -->
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded',()=>{
@@ -181,69 +177,64 @@
                         <div class="card-body">
                             <div class="table-responsive">
                               <% if(order.length) { %>
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Invoiceid</th>
-                                    <th scope="col">username</th>
-                                    <th scope="col">address</th>
-                                    <th scope="col">phone</th>
-                                    <th scope="col">productname</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">quantity</th>
-                                    <th scope="col">date</th>
-                                    <th scope="col">Action</th>     
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <% for(let i = 0; i < order.length; i++) { %>
-                                    <tr>
-                                      <% if(order[i].invoiceid == checkorder && i == 0){ %>
-                                        <th scope="row"><%= checkorder %></th>
-                                        <% }else if(order[i].invoiceid == checkorder){ %>
-                                          <th scope="row"> </th> 
-                                        <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
-                                          <th scope="row"> </th> 
-                                        <% }else{ %>
-                                          <th scope="row"><%= order[i].invoiceid %></th> 
-                                        <% } %>      
-                                        <td><%= order[i].username %></td>
-                                        <td><%= order[i].useraddress %></td>
-                                        <td><%= order[i].userphone %></td>
-                                        <td><%= order[i].productname %></td>
-                                        <td><%= order[i].productprice %></td>
-                                        <td><%= order[i].productquantity %></td>
-                                        <td style="width: 100px;"><%= order[i].date %></td>
-                                        <td> 
-                                            <!-- <form action="/admin/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
-                                              <button style="font-size: 8px;" class="btn btn-danger delete" type="submit">Delete</button>
-                                            </form> -->
-                                            <button  style="font-size: 10px;"class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-<%= order[i].username %><%= order[i]._id %>">Delete</button>
-                                            <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal-<%= order[i].username %><%= order[i]._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                              <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                  <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Confirm to Delete</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                    Are you sure to delete this order ?
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <form action="/admin/removeorder?ids=<%= order[i].username %>&idss=<%= order[i]._id %>" method="POST">
-                                                    <button type="submit" class="btn btn-danger">Confirm</button>
-                                                  </form>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                        </td>                                    
-                                    </tr>
-                                <% } %>            
-                                </tbody>
+                                <table class="table">
+                                  <thead>
+                                      <tr style="font-size: 11px;">
+                                          <th scope="col">Invoiceid</th> 
+                                          <th scope="col">username</th> 
+                                          <th scope="col">Sum</th>                     
+                                          <th scope="col">Date</th>
+                                          <th scope="col">Info</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <% for(let i = 0; i < order.length; i++) { %>
+                                        <% tt =0 %>
+                                        <tr>  
+                                        <% if(order[i].invoiceid == checkorder && i == 0){ %>
+                                          <td><%= checkorder %></td> 
+                                          <td><%= order[i].username %></td> 
+                                          <% order.forEach(m => {
+                                            if(m.invoiceid == order[i].invoiceid){
+                                               tt += m.sumofproduct}
+                                            }) %>
+                                          <td>$ <%= tt %></td>
+                                          <td><%= order[i].date %></td>
+                                          <td>
+                                            <form action="/admin/invoicehistoryallbuyer?id=<%= order[i].invoiceid %>" method="POST">
+                                              <button style="font-size: 10px;"class="btn btn-success">See info</button>
+                                            </form>
+                                          </td>
+                                          <% }else if(order[i].invoiceid == checkorder){ %>
+                                       
+                                          <% }else if(order[i].invoiceid == order[i-1].invoiceid){ %>
+                                
+                                          <% }else{ %>
+                                            
+                                            <td><%= order[i].invoiceid %></td>  
+                                            <td><%= order[i].username %></td> 
+                                            <% order.forEach(m => {
+                                              if(m.invoiceid == order[i].invoiceid){
+                                                 tt += m.sumofproduct}
+                                              }) 
+                                              tt 
+                                              if(tt <= 100){
+                                                tt = tt + 10
+                                              }
+                                            %>
+                                            <td>$ <%= tt.toFixed(2) %></td>
+                                            <td><%= order[i].date %></td>
+                                            <td>
+                                              <form action="/admin/invoicehistoryallbuyer?id=<%= order[i].invoiceid %>" method="POST">
+                                                <button style="font-size: 10px;"class="btn btn-success">See info</button>
+                                              </form>
+                                            </td>
+                                          <% } %>  
+  
+                                          </tr>
+                             
+                                      <% } %>
+                                  </tbody>
                               </table>
                               <% } %>
                         </div>

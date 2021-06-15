@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Laespela</title>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-      <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <title>Laespela</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
    <link rel="shortcut icon" href="/images/logo12.jpeg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -15,15 +15,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/account.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
-    <script src="/js/index.js" defer></script>
-    <script src="/js/account.js" defer></script>
     <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js" defer></script>
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js" defer></script>
-      <!-- add to document <head> -->
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
         <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
         <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
@@ -168,14 +165,38 @@
                                             <td><%= m.text %></td>
                                             <td><%= m.date %></td>
                                             <td> 
-                                                <form action="/comment/removecomment?idcomment=<%= m._id %>&idproduct=<%= n._id %>" method="POST">
+                                              <button  style="font-size: 10px;"class="btn btn-danger" data-toggle="modal" data-target="#exampleModal-<%= m._id %>">Delete</button>
+                                              <div style="top: 20%; border-radius: 25px; padding: 20px 10px;" class="modal fade" id="exampleModal-<%= m._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Confirm to Delete</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      Are you sure to delete this comment : <%= m.text %> ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <form action="/comment/removecomment?idcomment=<%= m._id %>&idproduct=<%= n._id %>" method="POST">
+                                                      <button type="submit" class="btn btn-danger">Confirm</button>
+                                                    </form>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                              
+                                                <!-- <form action="/comment/removecomment?idcomment=<%= m._id %>&idproduct=<%= n._id %>" method="POST">
                                                   <button style="font-size: 8px;" class="btn btn-danger delete" type="submit">Delete</button>
-                                                </form>
+                                                </form> -->
                                             </td>   
                                         </tr>
                                         <% } %>
                                         <% }) %>
                                     <% }) %>
+
                                 </tbody>
                             </table>
                             </div>
